@@ -1,2 +1,63 @@
 rules_version = '2';
-service cloud.firestore {match /databases/{database}/documents {match /{document=**} {allow read, write: if false;}}}
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function memberPath(familyId) {
+      return /databases/$(database)/documents/families/$(familyId)/members/$(request.auth.uid);
+    }
+
+    function activeMember(familyId) {
+      return signedIn()
+        && exists(memberPath(familyId))
+        && get(memberPath(familyId)).data.status == 'active'
+        && get(memberPath(familyId)).data.role in ['owner', 'helper', 'viewer'];
+    }
+
+    function isOwner(familyId) {
+      return activeMember(familyId)
+        && get(memberPath(familyId)).data.role == 'owner';
+    }
+
+    match /foodCatalog/{foodId} {
+      // Query callers must filter isActive == true. A rule is not a query filter.
+      allow get, list: if signedIn() && resource.data.isActive == true;
+      allow create, update, delete: if false;
+    }
+
+    match /families/{familyId} {
+      allow get, list: if activeMember(familyId);
+      allow create, update, delete: if false;
+
+      match /members/{uid} {
+        allow get, list: if activeMember(familyId)
+          && (request.auth.uid == uid || isOwner(familyId));
+        allow create, update, delete: if false;
+      }
+
+      match /profiles/{profileId} {
+        allow get, list: if activeMember(familyId);
+        allow create, update, delete: if false;
+      }
+      match /targets/{targetId} {
+        allow get, list: if activeMember(familyId);
+        allow create, update, delete: if false;
+      }
+      match /mealPlans/{planId} {
+        allow get, list: if activeMember(familyId);
+        allow create, update, delete: if false;
+      }
+      match /mealLogs/{logId} {
+        allow get, list: if activeMember(familyId);
+        allow create, update, delete: if false;
+      }
+      match /measurements/{measurementId} {
+        allow get, list: if activeMember(familyId);
+        allow create, update, delete: if false;
+      }
+    }
+    // Everything else is denied by default.
+  }
+}
