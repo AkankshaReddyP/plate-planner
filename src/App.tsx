@@ -1,0 +1,2 @@
+import { useState } from 'react';
+export default function App(){const [grams,setGrams]=useState(100);return <main><h1>Plate Planner</h1><p>Family nutrition planner — project scaffold</p><aside>Demo only. No medically validated food data or cloud storage is enabled.</aside><label htmlFor="grams">Demo portion (grams)</label><input id="grams" type="number" min="0" value={grams} onChange={e=>setGrams(Math.max(0,Number(e.target.value)||0))}/><p>Selected portion: {grams} g</p></main>}
