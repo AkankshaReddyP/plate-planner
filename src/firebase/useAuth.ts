@@ -36,26 +36,34 @@ export function useAuth() {
   useEffect(() => {
     if (!auth) return;
     let active = true;
-    const unsubscribe = onAuthStateChanged(auth, async user => {
-      if (!user) {
+    let authRevision = 0;
+    const unsubscribe = onAuthStateChanged(auth, async nextUser => {
+      const revision = ++authRevision;
+      if (!nextUser) {
         if (active) setState({ user: null, pending: false, error: null });
         return;
       }
+      if (active) setState({ user: null, pending: true, error: null });
       try {
-        await ensureAccount(user);
-        if (active) setState({ user, pending: false, error: null });
+        await ensureAccount(nextUser);
+        if (active && revision === authRevision) {
+          setState({ user: nextUser, pending: false, error: null });
+        }
       } catch (error) {
-        // Authentication can succeed while Firestore rule deployment is pending.
-        if (active) setState({
-          user,
-          pending: false,
-          error: error instanceof Error ? `Account setup: ${error.message}` : 'Account setup failed.',
-        });
+        // Firebase sign-in alone isn't enough: block application access if
+        // Firestore registration/verification has not succeeded.
+        if (active && revision === authRevision) {
+          setState({
+            user: null,
+            pending: false,
+            error: error instanceof Error ? `Account setup: ${error.message}` : 'Account setup failed.',
+          });
+        }
       }
     }, error => {
       if (active) setState({ user: null, pending: false, error: error.message });
     });
-    return () => { active = false; unsubscribe(); };
+    return () => { active = false; authRevision++; unsubscribe(); };
   }, []);
 
   async function login() {
