@@ -1,0 +1,38 @@
+name: Deploy Plate Planner to Firebase Hosting
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      VITE_FIREBASE_API_KEY: "AIzaSyDijl30Ce3vgZyKqaEjvk50n8kT9-Ho3Cw"
+      VITE_FIREBASE_AUTH_DOMAIN: "plate-planner-2bc28.firebaseapp.com"
+      VITE_FIREBASE_PROJECT_ID: "plate-planner-2bc28"
+      VITE_FIREBASE_APP_ID: "1:395839437565:web:b610dc3bf6a83839c15c94"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - name: Check Firebase deploy credentials
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PLATE_PLANNER_2BC28 }}
+        run: |
+          if [ -z "$FIREBASE_SERVICE_ACCOUNT" ]; then
+            echo "::error::Add repository Actions secret FIREBASE_SERVICE_ACCOUNT_PLATE_PLANNER_2BC28 before running deployment."
+            exit 1
+          fi
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - name: Deploy only static Hosting to live
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PLATE_PLANNER_2BC28 }}
+          projectId: plate-planner-2bc28
+          channelId: live
