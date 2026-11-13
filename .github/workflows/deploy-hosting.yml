@@ -17,12 +17,16 @@ jobs:
         with:
           node-version: '22'
           cache: npm
-      - name: Check Firebase deploy credentials
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Check Firebase deployment credentials
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PLATE_PLANNER_2BC28 }}
         run: |
           if [ -z "$FIREBASE_SERVICE_ACCOUNT" ]; then
-            echo "::error::Add repository Actions secret FIREBASE_SERVICE_ACCOUNT_PLATE_PLANNER_2BC28 before running deployment."
+            echo "::error::Missing GitHub Actions secret FIREBASE_SERVICE_ACCOUNT_PLATE_PLANNER_2BC28"
             exit 1
           fi
       - run: npm ci
@@ -30,7 +34,17 @@ jobs:
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
-      - name: Deploy only static Hosting to live
+      - name: Install Firestore rules test dependency
+        run: npm install --no-save --package-lock=false @firebase/rules-unit-testing
+      - name: Test security rules before deploying
+        run: npx --yes firebase-tools emulators:exec --only firestore --project demo-plate-planner "node --test tests/firestore.rules.test.mjs"
+      - name: Authorize Firestore Rules deployment
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PLATE_PLANNER_2BC28 }}
+      - name: Deploy tested Firestore security rules
+        run: npx --yes firebase-tools deploy --only firestore:rules --project plate-planner-2bc28 --non-interactive
+      - name: Deploy Hosting after rules succeed
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PLATE_PLANNER_2BC28 }}
