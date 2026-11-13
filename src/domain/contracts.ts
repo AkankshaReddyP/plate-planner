@@ -63,6 +63,20 @@ export interface FoodReference {
   readonly sourceReference?: string;
   readonly verified: boolean;
 }
+
+// Canonical Firestore reference document at foodCatalog/{foodId}.
+// Historical meal items use FoodReference snapshots instead of live lookups.
+export interface CatalogFood extends FoodReference {
+  readonly category: 'protein' | 'carbohydrate' | 'vegetable' | 'fruit' | 'dairy' | 'fat' | 'other';
+  readonly nameTe?: string;
+  readonly servingUnit: 'g';
+  readonly typicalServingG?: number;
+  readonly version: number;
+  readonly isActive: boolean;
+  readonly updatedAt: ISOInstant;
+  readonly updatedBy: string;
+}
+
 export interface MealItem {
   readonly food: FoodReference; // immutable snapshot; food ID alone is not sufficient
   readonly plannedGrams: number;
