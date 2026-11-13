@@ -14,6 +14,7 @@ const food = (db, id) => doc(db, 'foodCatalog', id);
 const family = (db, id) => doc(db, 'families', id);
 const plan = (db, id, entry='p1') => doc(db, 'families', id, 'mealPlans', entry);
 const member = (db, id, uid) => doc(db, 'families', id, 'members', uid);
+const account = (db, uid) => doc(db, 'users', uid);
 
 before(async () => {
   env = await initializeTestEnvironment({
@@ -29,16 +30,28 @@ before(async () => {
     await setDoc(food(db, 'hidden'), { isActive: false, name: 'Hidden food' });
     await setDoc(family(db, 'alpha'), { displayName: 'Alpha' });
     await setDoc(family(db, 'beta'), { displayName: 'Beta' });
-    await setDoc(member(db, 'alpha', 'ownerA'), { status: 'active', role: 'owner' });
-    await setDoc(member(db, 'alpha', 'helperA'), { status: 'active', role: 'helper' });
-    await setDoc(member(db, 'alpha', 'revokedA'), { status: 'revoked', role: 'helper' });
-    await setDoc(member(db, 'beta', 'ownerB'), { status: 'active', role: 'owner' });
+    await setDoc(member(db, 'alpha', 'adminA'), { status: 'active', role: 'admin' });
+    await setDoc(member(db, 'alpha', 'userA'), { status: 'active', role: 'user' });
+    await setDoc(member(db, 'alpha', 'revokedUserA'), { status: 'revoked', role: 'user' });
+    await setDoc(member(db, 'beta', 'adminB'), { status: 'active', role: 'admin' });
     await setDoc(plan(db, 'alpha'), { localDate: '2026-01-01', plannedTotals: {} });
     await setDoc(plan(db, 'beta'), { localDate: '2026-01-01', plannedTotals: {} });
   });
 });
 after(async () => {
   if (env) await env.cleanup();
+});
+
+test('new sign-ins may create only their own default user record', async () => {
+  const stamp = { role: 'user', uid: 'newUser', createdAt: (await import('firebase/firestore')).serverTimestamp() };
+  await assertSucceeds(setDoc(account(user('newUser'), 'newUser'), stamp));
+  const stored = await assertSucceeds(getDoc(account(user('newUser'), 'newUser')));
+  if (stored.data().role !== 'user') throw new Error('Account role must be user');
+  await assertFails(setDoc(account(user('attacker'), 'victim'), { role: 'user', uid: 'victim', createdAt: (await import('firebase/firestore')).serverTimestamp() }));
+  await assertFails(setDoc(account(user('elevate'), 'elevate'), { role: 'admin', uid: 'elevate', createdAt: (await import('firebase/firestore')).serverTimestamp() }));
+  await assertFails(updateDoc(account(user('newUser'), 'newUser'), { role: 'admin' }));
+  await assertFails(deleteDoc(account(user('newUser'), 'newUser')));
+  await assertFails(getDoc(account(user('stranger'), 'newUser')));
 });
 
 test('unauthenticated users cannot read reference foods or family records', async () => {
@@ -52,29 +65,29 @@ test('signed-in users read active food but not inactive food', async () => {
   await assertFails(getDocs(collection(user('stranger'), 'foodCatalog')));
 });
 test('members can read their family only', async () => {
-  await assertSucceeds(getDoc(family(user('helperA'), 'alpha')));
-  await assertSucceeds(getDoc(plan(user('helperA'), 'alpha')));
-  await assertFails(getDoc(family(user('helperA'), 'beta')));
-  await assertFails(getDoc(plan(user('helperA'), 'beta')));
-  await assertFails(getDoc(plan(user('ownerB'), 'alpha')));
+  await assertSucceeds(getDoc(family(user('userA'), 'alpha')));
+  await assertSucceeds(getDoc(plan(user('userA'), 'alpha')));
+  await assertFails(getDoc(family(user('userA'), 'beta')));
+  await assertFails(getDoc(plan(user('userA'), 'beta')));
+  await assertFails(getDoc(plan(user('adminB'), 'alpha')));
   await assertFails(getDoc(family(user('stranger'), 'alpha')));
 });
 test('revoked members cannot access records', async () => {
-  await assertFails(getDoc(plan(user('revokedA'), 'alpha')));
+  await assertFails(getDoc(plan(user('revokedUserA'), 'alpha')));
 });
-test('helpers can see own membership, not everyone else', async () => {
-  await assertSucceeds(getDoc(member(user('helperA'), 'alpha', 'helperA')));
-  await assertFails(getDoc(member(user('helperA'), 'alpha', 'ownerA')));
-  await assertSucceeds(getDoc(member(user('ownerA'), 'alpha', 'helperA')));
+test('users can see own membership, not everyone else', async () => {
+  await assertSucceeds(getDoc(member(user('userA'), 'alpha', 'userA')));
+  await assertFails(getDoc(member(user('userA'), 'alpha', 'adminA')));
+  await assertSucceeds(getDoc(member(user('adminA'), 'alpha', 'userA')));
 });
 test('no client can create food or elevate membership', async () => {
-  await assertFails(setDoc(food(user('ownerA'), 'fake'), { isActive: true }));
-  await assertFails(setDoc(member(user('ownerA'), 'alpha', 'stranger'), { role: 'owner', status: 'active' }));
-  await assertFails(updateDoc(member(user('helperA'), 'alpha', 'helperA'), { role: 'owner' }));
-  await assertFails(deleteDoc(member(user('ownerA'), 'alpha', 'helperA')));
+  await assertFails(setDoc(food(user('adminA'), 'fake'), { isActive: true }));
+  await assertFails(setDoc(member(user('adminA'), 'alpha', 'stranger'), { role: 'admin', status: 'active' }));
+  await assertFails(updateDoc(member(user('userA'), 'alpha', 'userA'), { role: 'admin' }));
+  await assertFails(deleteDoc(member(user('adminA'), 'alpha', 'userA')));
 });
 test('all client writes of family health data remain blocked', async () => {
-  await assertFails(setDoc(plan(user('ownerA'), 'alpha', 'new'), { localDate: '2026-01-02' }));
-  await assertFails(updateDoc(plan(user('ownerA'), 'alpha'), { localDate: '2026-01-03' }));
-  await assertFails(deleteDoc(plan(user('ownerA'), 'alpha')));
+  await assertFails(setDoc(plan(user('adminA'), 'alpha', 'new'), { localDate: '2026-01-02' }));
+  await assertFails(updateDoc(plan(user('adminA'), 'alpha'), { localDate: '2026-01-03' }));
+  await assertFails(deleteDoc(plan(user('adminA'), 'alpha')));
 });

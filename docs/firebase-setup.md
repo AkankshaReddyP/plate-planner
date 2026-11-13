@@ -19,13 +19,19 @@ For production `npm run build`, the same four Vite environment variables must be
 
 ## Family membership: deliberate bootstrap (no self-invites)
 
-The client **cannot create families or grant roles**. After the owner's Firebase Authentication user exists, a trusted project administrator must provision a family document and `families/{familyId}/members/{uid}` with `status: 'active', role: 'owner'` using Firebase Console or a deliberately reviewed Admin SDK script. Member IDs **must equal Firebase Auth UIDs**. Owner can view other membership records, but role changes and new users still require trusted provisioning. This prevents a user from promoting themselves.
+The client **cannot create families or grant roles**. After the admin's Firebase Authentication user exists, a trusted project administrator must provision a family document and `families/{familyId}/members/{uid}` with `status: 'active', role: 'admin'` using Firebase Console or a deliberately reviewed Admin SDK script. Member IDs **must equal Firebase Auth UIDs**. Admin can view other membership records, but role changes and new users still require trusted provisioning. This prevents a user from promoting themselves.
 
 No family medical data should be entered until rules are deployed and tested against the live project with test accounts. Do not place UIDs, private health information, or personal identifiers in the public GitHub repository.
 
+## Registration and two roles
+
+Every newly signed-in Google account gets a private `users/{authUid}` account record with **role `user` by default**. Its creation is restricted to its authenticated owner and an exact limited document shape; users cannot write `admin` or change their own role later. Admin promotion requires a trusted Firebase administrator using Console/Admin SDK, not client-side code.
+
+**Sign-in is not family membership.** No one obtains access to family health data just by registering. A trusted administrator must separately add `families/{familyId}/members/{uid}` with `status: 'active'` and role `user` or `admin`. Only two roles are valid; `admin` can inspect membership and will eventually manage catalog/users via explicitly authorized administrative workflows, while `user` will eventually plan meals and record consumption.
+
 ## Current permissions (v1 conservative)
 
-- Active authenticated members: read their own family metadata, member (own; owners may see other members), profiles, targets, plans, logs and measurements.
+- Active authenticated members: read their own family metadata, member (own; admins may see other members), profiles, targets, plans, logs and measurements.
 - Signed-in users: read **active** reference foods only.
 - Everyone using the client SDK: **cannot write any family record or catalog item yet**. Role-specific writes will be added in #8/#9 with validation and tests. Administrator via Firebase Console/Admin SDK bypasses rules: protect its credentials with Google Cloud IAM.
 - Unauthorized users: no access to private family paths. No cross-family sharing.

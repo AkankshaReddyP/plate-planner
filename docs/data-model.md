@@ -6,6 +6,7 @@
 
 ```text
 foodCatalog/{foodId}                     # shared read-only reference foods
+users/{authUid}                          # private sign-up account, default user
 families/{familyId}                      # private family namespace
   members/{authUid}
   profiles/{profileId}
@@ -33,7 +34,7 @@ Food quantities are **grams of edible portion** in a specified raw/cooked state.
 ### B. Private family and activity data
 
 - `families/{familyId}`: display name, creator, created date
-- `members/{authUid}`: owner/helper/viewer role, membership status and provenance; role grants cannot be self-assigned by the client
+- `members/{authUid}`: admin/user role, membership status and provenance; role grants cannot be self-assigned by the client
 - `profiles/{profileId}`: subject identification, timezone, optional health context, authorized account association
 - `targets/{targetVersionId}`: effective dates, per-day/per-meal targets, source and review provenance; preserve older versions
 - `mealPlans/{mealPlanId}`: date, meal type, selected foods, **planned** grams and nutrition totals, status, revisions
@@ -46,7 +47,7 @@ All families' private records live under their own family document. Query by pro
 
 ### Identity and access
 
-For v1, family owner may control family membership, helper may create plans/logs, viewer may read. A member's scope is their authorized family; for multi-subject families consider per-profile permissions before exposing sensitive individual profiles. Clients cannot grant themselves roles or unverified clinician approvals; server-side admin bootstrap must be designed in Issue #3. Existing Firestore rules **deny all operations** and must remain until rule tests pass.
+Exactly **two roles** exist: `admin` and `user`. Every newly authenticated account creates `users/{authUid}` with immutable `role: 'user'`; no client can assign `admin`. A trusted administrator must explicitly grant family membership under `families/{familyId}/members/{authUid}`. Family records remain inaccessible to newly signed-up users until that membership exists. Both active family roles can currently read permitted family records; admin can also read other member records. All client writes to family records and food catalog remain blocked until validated implementation.
 
 No real personal health history belongs in this public GitHub repository. Prefer making the repository private before a health-data pilot. CSV/PDF exports for doctors require deliberate user action; don't provide doctor database logins in v1.
 

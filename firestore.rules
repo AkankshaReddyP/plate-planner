@@ -13,12 +13,26 @@ service cloud.firestore {
       return signedIn()
         && exists(memberPath(familyId))
         && get(memberPath(familyId)).data.status == 'active'
-        && get(memberPath(familyId)).data.role in ['owner', 'helper', 'viewer'];
+        && get(memberPath(familyId)).data.role in ['admin', 'user'];
     }
 
-    function isOwner(familyId) {
+    function isAdmin(familyId) {
       return activeMember(familyId)
-        && get(memberPath(familyId)).data.role == 'owner';
+        && get(memberPath(familyId)).data.role == 'admin';
+    }
+
+    // A newly authenticated account can only create its own default user record.
+    // Admin elevation and all updates require a trusted server/admin process.
+    match /users/{uid} {
+      allow get: if signedIn() && request.auth.uid == uid;
+      allow list: if false;
+      allow create: if signedIn() && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly(['uid', 'role', 'createdAt'])
+        && request.resource.data.keys().hasAll(['uid', 'role', 'createdAt'])
+        && request.resource.data.uid == uid
+        && request.resource.data.role == 'user'
+        && request.resource.data.createdAt == request.time;
+      allow update, delete: if false;
     }
 
     match /foodCatalog/{foodId} {
@@ -33,7 +47,7 @@ service cloud.firestore {
 
       match /members/{uid} {
         allow get, list: if activeMember(familyId)
-          && (request.auth.uid == uid || isOwner(familyId));
+          && (request.auth.uid == uid || isAdmin(familyId));
         allow create, update, delete: if false;
       }
 
