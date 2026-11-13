@@ -8,9 +8,20 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
+          cache: npm
       - run: npm ci
       - run: npm run lint
       - run: npm run typecheck
       - run: npm test
       - run: npm run build
-
+      - name: Browser smoke test (Chromium)
+        run: |
+          npm run preview -- --host 127.0.0.1 > /tmp/plate-planner-preview.log 2>&1 &
+          for i in $(seq 1 30); do
+            if curl --fail --silent http://127.0.0.1:4173/ > /dev/null; then break; fi
+            sleep 1
+          done
+          curl --fail --silent http://127.0.0.1:4173/ > /dev/null
+          google-chrome --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --disable-background-networking --virtual-time-budget=5000 --dump-dom http://127.0.0.1:4173/ > /tmp/plate-planner-dom.html
+          grep -q 'Plate Planner' /tmp/plate-planner-dom.html
+          grep -q 'Selected portion:' /tmp/plate-planner-dom.html
