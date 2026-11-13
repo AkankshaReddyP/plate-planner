@@ -5,7 +5,9 @@
  */
 export type ISODate = string; // YYYY-MM-DD in member's local timezone
 export type ISOInstant = string; // e.g. 2026-11-13T20:00:00.000Z
-export type FamilyRole = 'owner' | 'helper' | 'viewer';
+export type FamilyRole = 'admin' | 'user';
+// New accounts always start as user. Admin promotion requires trusted provisioning.
+export interface Account { readonly uid: string; readonly role: FamilyRole; readonly createdAt: ISOInstant; }
 export type MealType = 'breakfast' | 'lunch' | 'dinner' | 'snack';
 export type MealPlanStatus = 'pending' | 'logged' | 'skipped';
 export type ApprovalStatus = 'draft' | 'clinician_reviewed';
