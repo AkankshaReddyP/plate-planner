@@ -24,8 +24,11 @@ jobs:
           curl --fail --silent http://127.0.0.1:4173/ > /dev/null
           google-chrome --headless --no-sandbox --disable-gpu --disable-dev-shm-usage --disable-background-networking --virtual-time-budget=5000 --dump-dom http://127.0.0.1:4173/ > /tmp/plate-planner-dom.html
           grep -q 'Plate Planner' /tmp/plate-planner-dom.html
-          grep -q 'Small choices.' /tmp/plate-planner-dom.html
-          grep -q 'Build a meal' /tmp/plate-planner-dom.html
+          grep -q 'Sign in to get started' /tmp/plate-planner-dom.html
+          grep -q 'Sign-in is not configured for this build' /tmp/plate-planner-dom.html
+          if grep -q 'Build a meal' /tmp/plate-planner-dom.html; then
+            echo 'Signed-out app exposed user features'; exit 1
+          fi
   firestore-rules:
     runs-on: ubuntu-latest
     steps:
