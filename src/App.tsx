@@ -73,7 +73,7 @@ export default function App() {
     (f.name + ' ' + f.subtitle + ' ' + f.category).toLowerCase().includes(query.toLowerCase().trim())
   ), [category, query]);
   const calculated = useMemo(() => totals(selected), [selected]);
-  const dayEntries = entries.filter(e => e.date === mealDate());
+  const dayEntries = entries.filter(e => e.date === mealDate);
   const dayNutrition = totals(dayEntries.flatMap(e => e.items));
   const savedNutrition = totals(entries.flatMap(e => e.items));
 
