@@ -58,7 +58,7 @@ function NutritionStrip({ value }: { value: Nutrition }) {
   </div>;
 }
 
-export default function App() {
+function SignedInApp({ user, logout }: { user: { displayName: string | null; email: string | null }; logout: () => Promise<void> }) {
   const [page, setPage] = useState<Page>('home');
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState<(typeof categories)[number]>('All');
@@ -67,7 +67,6 @@ export default function App() {
   const [selected, setSelected] = useState<Item[]>([]);
   const [entries, setEntries] = useState<Entry[]>([]);
   const [notice, setNotice] = useState('');
-  const { user, pending, error, login, logout } = useAuth();
   const filteredFoods = useMemo(() => foods.filter(f =>
     (category === 'All' || f.category === category) &&
     (f.name + ' ' + f.subtitle + ' ' + f.category).toLowerCase().includes(query.toLowerCase().trim())
@@ -156,11 +155,65 @@ export default function App() {
 
         {page === 'settings' && <>
           <div className="page-heading"><p className="eyebrow">YOUR ACCOUNT</p><h1>Settings</h1><p>Manage your sign-in and learn how this preview handles data.</p></div>
-          <article className="panel account-panel"><h3>Google account</h3>{!firebaseConfigured ? <p>Firebase is not configured for this build.</p> : pending ? <p>Checking sign-in…</p> : user ? <><p><strong>{user.displayName || 'Google user'}</strong><br />{user.email}</p><p className="fine-print">New accounts are created with the User role. Family access must be granted separately.</p><button type="button" className="secondary" onClick={() => void logout()}>Sign out</button></> : <><p>Sign in to register a User account.</p><button className="primary" type="button" onClick={() => void login()}>Sign in with Google</button></>}{error && <p className="error-message" role="alert">Authentication error: {error}</p>}</article>
+          <article className="panel account-panel"><h3>Google account</h3><p><strong>{user.displayName || 'Google user'}</strong><br />{user.email}</p><p className="fine-print">New accounts are created with the User role. Family access must be granted separately.</p><button type="button" className="secondary" onClick={() => void logout()}>Sign out</button></article>
           <article className="panel"><h3>Preview data</h3><p>Meals added here exist only in React memory. Refreshing or closing the page clears them. No food selections, meal plans, or history are uploaded to Firestore.</p><button type="button" className="secondary danger" onClick={() => { setEntries([]); setSelected([]); setNotice('Demo meals cleared from this session.'); }}>Clear demo meals</button></article>
         </>}
       </main>
       <nav className="bottom-nav" aria-label="Mobile navigation">{pages.filter(p => p.key !== 'insights').map(p => <button key={p.key} type="button" className={page === p.key ? 'active' : ''} aria-label={p.label} aria-current={page === p.key ? 'page' : undefined} onClick={() => navigate(p.key)}><span aria-hidden="true">{p.symbol}</span><small>{p.key === 'builder' ? 'Build' : p.label}</small></button>)}</nav>
     </div>
   </div>;
+}
+
+/** No user content or demo actions mount until authentication and account registration complete. */
+export default function App() {
+  const { user, pending, error, login, logout } = useAuth();
+
+  if (!firebaseConfigured) {
+    return <AuthLanding error="Sign-in is not configured for this build. Please contact the Plate Planner administrator." busy={false} login={login} configured={false} />;
+  }
+  if (pending) {
+    return <AuthLanding error={null} busy login={login} configured />;
+  }
+  if (!user) {
+    return <AuthLanding error={error} busy={false} login={login} configured />;
+  }
+  // Component unmount on logout discards browser-only meal state.
+  return <SignedInApp key={user.uid} user={user} logout={logout} />;
+}
+
+function AuthLanding({ error, busy, login, configured }: { error: string | null; busy: boolean; configured: boolean; login: () => Promise<void> }) {
+  return <main className="login-layout">
+    <section className="login-brand-panel" aria-label="Plate Planner introduction">
+      <div className="login-brand"><span className="login-brand-mark">✳</span><span>Plate Planner</span></div>
+      <div className="login-brand-content">
+        <p className="eyebrow">NOURISH YOUR EVERYDAY</p>
+        <h1>Good food.<br /><em>Good living.</em></h1>
+        <p>Explore foods, plan meals and make each portion count — all in one thoughtful place.</p>
+        <div className="login-illustration" aria-hidden="true">🥗</div>
+      </div>
+      <p className="login-brand-footer">A little planning goes a long way.</p>
+    </section>
+    <section className="login-auth-panel" aria-label="Sign in">
+      <div className="login-card">
+        <span className="login-welcome-icon" aria-hidden="true">✳</span>
+        <p className="eyebrow">WELCOME TO PLATE PLANNER</p>
+        <h2>Sign in to get started</h2>
+        <p className="login-help">Your nutrition planning space starts with a secure Google account.</p>
+        <button className="google-login" type="button" onClick={() => void login()} disabled={busy || !configured}>
+          <svg viewBox="0 0 48 48" width="21" height="21" aria-hidden="true">
+            <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+            <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.29 5.48-4.85 7.18l7.73 6C44.33 38.03 46.98 31.9 46.98 24.55z"/>
+            <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-3-.76-4.59s.28-3.14.76-4.59l-7.98-6.2C.92 16.46 0 20.12 0 24s.92 7.54 2.56 10.78l7.97-6.19z"/>
+            <path fill="#34A853" d="M24 48c6.48 0 11.92-2.13 15.82-5.8l-7.73-6c-2.15 1.45-4.92 2.3-8.09 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+          </svg>
+          {busy ? 'Checking your account…' : 'Continue with Google'}
+        </button>
+        {busy && <p className="login-status" role="status">Verifying your account securely…</p>}
+        {error && <p className="error-message login-error" role="alert">{error}</p>}
+        <div className="login-divider"><span>PRIVATE BY DESIGN</span></div>
+        <p className="login-privacy">You must sign in to use Plate Planner. New accounts begin with the User role; private family data requires separate authorization.</p>
+      </div>
+      <p className="login-copyright">Plate Planner · Your everyday nutrition companion</p>
+    </section>
+  </main>;
 }
