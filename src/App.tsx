@@ -108,9 +108,8 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
       <div className="sidebar-bottom"><div className="status-dot" /> Demo experience <small>Meals remain in this browser session</small></div>
     </aside>
     <div className="main-shell">
-      <header className="topbar"><div className="mobile-brand">✳ <strong>Plate Planner</strong></div><span className="topbar-subtitle">Your nutrition companion</span><div className="avatar" title={user?.email || 'Guest'}>{user?.displayName?.charAt(0).toUpperCase() || 'G'}</div></header>
+      <header className="topbar"><div className="mobile-brand">✳ <strong>Plate Planner</strong></div><span className="topbar-subtitle">Your nutrition companion</span><details className="profile-menu"><summary className="avatar" aria-label="Open profile menu" title={user.email || 'Your account'}>{user.displayName?.charAt(0).toUpperCase() || 'G'}</summary><div className="profile-dropdown"><div className="profile-identity"><strong>{user.displayName || 'Google user'}</strong>{user.email && <small>{user.email}</small>}</div><button className="profile-logout" type="button" onClick={() => void logout()}>Log out</button></div></details></header>
       <main className="content">
-        <div className="preview-banner"><span className="preview-pill">INTERACTIVE PREVIEW</span><span>Sample nutrition values only. Plans are stored in memory during this session—not in Firestore.</span></div>
         {notice && <div className="notice" role="status"><span>{notice}</span><button type="button" onClick={() => setNotice('')} aria-label="Dismiss message">×</button></div>}
 
         {page === 'home' && <>
