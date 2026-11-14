@@ -47,3 +47,24 @@
 .profile-identity small{font-size:11px;color:#87998b;margin-top:5px}
 .profile-logout{background:transparent;border:0;border-radius:8px;color:#a14e4e;font-size:13px;text-align:left;font-weight:700;padding:12px 9px;width:100%;margin-top:5px}
 .profile-logout:hover,.profile-logout:focus-visible{background:#fff1f0}
+
+/* Required onboarding: account owner can access application only after completing this step. */
+.onboarding-shell{min-height:100vh;background:#f5f8f2;padding:0 24px 65px}
+.onboarding-header{max-width:1050px;margin:0 auto;padding:27px 0;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.onboarding-header .login-brand{font-size:23px}
+.onboarding-card{max-width:720px;margin:35px auto 0;background:white;border:1px solid #e4ece1;border-radius:22px;box-shadow:0 16px 40px #253d3010;padding:45px 50px}
+.onboarding-card h1{font-size:clamp(38px,5vw,52px);margin:14px 0;color:#2c543c}
+.onboarding-card>p:not(.eyebrow){font-size:14px;color:#708572;max-width:540px}
+.onboarding-form{margin-top:26px}
+.onboarding-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}
+.onboarding-fields label{font-size:13px;font-weight:700;color:#3c5d43}
+.onboarding-fields input{display:block;width:100%;padding:14px;margin-top:8px;border-radius:10px;border:1px solid #cedecc;background:#fff;font-size:16px}
+.condition-fieldset{border:0;padding:0;margin:31px 0}
+.condition-fieldset legend{font-size:14px;color:#3c5d43;font-weight:700;padding:0}
+.condition-fieldset p{font-size:12px;color:#809486;margin:8px 0 16px}
+.condition-options{display:flex;flex-wrap:wrap;gap:10px}
+.condition-option{border:1px solid #dae7d8;border-radius:10px;padding:12px 14px;display:flex;align-items:center;gap:9px;font-size:13px;color:#58715b;cursor:pointer;background:#fff}
+.condition-option.chosen{background:#edf5e9;border-color:#83ad86;color:#315e3f}
+.condition-option input{accent-color:#356446;width:17px;height:17px;margin:0}
+.onboarding-form>.primary{margin-top:10px}
+@media(max-width:760px){.onboarding-shell{padding:0 16px 50px}.onboarding-header{padding:20px 0}.onboarding-card{padding:29px 22px;margin:15px auto 0}.onboarding-fields{grid-template-columns:1fr}.condition-option{flex:1 1 42%;min-width:125px}.onboarding-header .login-brand{font-size:20px}}
