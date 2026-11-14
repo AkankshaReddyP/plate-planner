@@ -33,3 +33,17 @@
 .login-privacy{font-size:12px;color:#88998d;line-height:1.8;text-align:center}
 .login-copyright{font-size:11px;color:#9caaa0;margin:35px 0 0}
 @media(max-width:850px){.login-layout{grid-template-columns:1fr}.login-brand-panel{min-height:290px;padding:24px 26px}.login-brand-content{padding:32px 0 18px;margin:0}.login-brand-content h1{font-size:52px;margin:10px 0}.login-brand-content>p:not(.eyebrow){font-size:13px;max-width:285px}.login-illustration{right:0;bottom:4px;font-size:95px}.login-brand-footer{display:none}.login-auth-panel{padding:30px 24px}.login-card{padding:8px 4px}.login-welcome-icon{margin-bottom:24px}.login-card h2{font-size:35px}.login-help{margin-bottom:26px}.login-divider{margin-top:27px}}
+
+/* Account dropdown in the signed-in header. */
+.profile-menu{position:relative;flex-shrink:0}
+.profile-menu>summary{list-style:none;cursor:pointer;user-select:none}
+.profile-menu>summary::-webkit-details-marker{display:none}
+.profile-menu>summary:hover,.profile-menu[open]>summary{background:#dae9d6}
+.profile-menu>summary:focus-visible{outline:3px solid #a5cba1;outline-offset:3px}
+.profile-dropdown{position:absolute;z-index:30;top:calc(100% + 12px);right:0;width:min(280px,calc(100vw - 32px));border:1px solid #e1e8df;border-radius:13px;background:#fff;box-shadow:0 14px 36px #273d2a20;padding:12px}
+.profile-identity{padding:8px 9px 13px;border-bottom:1px solid #edf0e9;overflow-wrap:anywhere}
+.profile-identity strong,.profile-identity small{display:block}
+.profile-identity strong{font-size:13px;color:#365941}
+.profile-identity small{font-size:11px;color:#87998b;margin-top:5px}
+.profile-logout{background:transparent;border:0;border-radius:8px;color:#a14e4e;font-size:13px;text-align:left;font-weight:700;padding:12px 9px;width:100%;margin-top:5px}
+.profile-logout:hover,.profile-logout:focus-visible{background:#fff1f0}
