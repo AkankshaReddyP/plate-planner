@@ -3,6 +3,7 @@ import { firebaseConfigured } from './firebase/client';
 import { useAuth } from './firebase/useAuth';
 import { OnboardingGate, useProfileConditions } from './firebase/OnboardingGate';
 import { guideSteps, inStep, foodGuidance, conditionSummary } from './domain/mealGuidance';
+import { categoryProgress } from './domain/categoryProgress';
 
 type Page = 'home' | 'foods' | 'builder' | 'history' | 'insights' | 'settings';
 type MealType = 'Breakfast' | 'Lunch' | 'Dinner' | 'Snack';
@@ -80,6 +81,7 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
   const dayEntries = entries.filter(e => e.date === mealDate);
   const dayNutrition = totals(dayEntries.flatMap(e => e.items));
   const savedNutrition = totals(entries.flatMap(e => e.items));
+  const mealProgress = useMemo(() => categoryProgress(selected, foods), [selected]);
   const currentGuide = guideSteps[guideStep];
   const stepFoods = foods.filter(f => inStep(f, currentGuide.key))
     .sort((a, b) => foodGuidance(a, conditions).priority - foodGuidance(b, conditions).priority);
@@ -148,8 +150,18 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
             </article>
             <article className="panel guided-panel">
               <p className="eyebrow">GUIDED FOOD SELECTION</p>
+              <div className="meal-progress" aria-label="Guided meal completion">
+                <div className="meal-progress-head">
+                  <strong>Build your plate</strong>
+                  <span aria-live="polite">{mealProgress.percent}% complete</span>
+                </div>
+                <div className="meal-progress-track" role="progressbar" aria-label="Food category completion" aria-valuemin={0} aria-valuemax={100} aria-valuenow={mealProgress.percent} aria-valuetext={`${mealProgress.completed} of ${mealProgress.total} food groups selected`}>
+                  <div className="meal-progress-fill" style={{ width: mealProgress.percent + '%' }} />
+                </div>
+                <p className="meal-progress-caption">{mealProgress.completed} of {mealProgress.total} food groups selected. Each group counts once, regardless of quantity.</p>
+              </div>
               <div className="guide-steps" aria-label="Meal selection order">
-                {guideSteps.map((step, index) => <button key={step.key} type="button" className={'guide-step ' + (guideStep === index ? 'current' : '')} aria-current={guideStep === index ? 'step' : undefined} onClick={() => {setGuideStep(index);setShowAllChoices(false);}}><strong>{index + 1}</strong><span>{step.title}</span></button>)}
+                {guideSteps.map((step, index) => <button key={step.key} type="button" className={'guide-step ' + (guideStep === index ? 'current' : '') + (mealProgress.checked[index] ? ' complete' : '')} aria-current={guideStep === index ? 'step' : undefined} onClick={() => {setGuideStep(index);setShowAllChoices(false);}}><strong>{mealProgress.checked[index] ? '✓' : index + 1}</strong><span>{step.title}</span></button>)}
               </div>
               <h3>{currentGuide.title}</h3><p>{currentGuide.hint} Food sequence is optional and does not replace balanced nutrition.</p>
               {conditionSummary(conditions).map(t => <p key={t} className="guide-note">{t}</p>)}
