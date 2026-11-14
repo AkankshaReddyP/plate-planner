@@ -18,7 +18,7 @@ export type CatalogFood = {
 export type FoodCatalogState = { foods: CatalogFood[]; loading: boolean; error: string | null };
 const zero: FoodNutrients = { kcal: 0, protein: 0, carbs: 0, fibre: 0, fat: 0 };
 const categories = new Set<FoodCategory>(['Protein', 'Grain', 'Vegetable', 'Fruit', 'Dairy']);
-const keys: (keyof FoodNutrients)[] = ['kcal','protein','carbs','fibre','fat'];
+const keys: (keyof FoodNutrients)[] = ['kcal','protein','carbs','fat'];
 const statuses = new Set(['sample','verified','pending']);
 
 function parseSource(value: unknown): CatalogFood['nutritionSource'] {
@@ -39,17 +39,25 @@ export function parseFoodDoc(id: string, raw: Record<string, unknown>): CatalogF
   const status = raw.nutritionStatus as CatalogFood['nutritionStatus'];
   const rawValues = raw.values && typeof raw.values === 'object' ? raw.values as Record<string, unknown> : null;
   // Never display a pending food as 0 kcal; it is explicitly ineligible for meal calculations.
+  const source = parseSource(raw.nutritionSource);
   if (status !== 'pending' && (!rawValues || !keys.every(key => typeof rawValues[key] === 'number'
     && Number.isFinite(rawValues[key]) && (rawValues[key] as number) >= 0))) return null;
+  if (status !== 'pending' && source?.fibreMethod === 'total'
+    && (!rawValues || typeof rawValues.fibre !== 'number'
+      || !Number.isFinite(rawValues.fibre) || rawValues.fibre < 0)) return null;
   return {
     id, name: raw.name.trim(),
     subtitle: typeof raw.subtitle === 'string' ? raw.subtitle : 'Recipe varies',
     category: raw.category as FoodCategory,
-    values: status === 'pending' ? { ...zero } : Object.fromEntries(keys.map(k => [k, rawValues![k]])) as FoodNutrients,
+    // Only documented total dietary fibre enters meal calculations.
+    values: status === 'pending' ? { ...zero } : {
+      ...(Object.fromEntries(keys.map(k => [k, rawValues![k]])) as Omit<FoodNutrients, 'fibre'>),
+      fibre: source?.fibreMethod === 'total' ? rawValues!.fibre as number : 0,
+    },
     nutritionStatus: status,
     cuisine: typeof raw.cuisine === 'string' ? raw.cuisine : 'Other',
     aliases: Array.isArray(raw.aliases) ? raw.aliases.filter((x): x is string => typeof x === 'string') : [],
-    nutritionSource: parseSource(raw.nutritionSource),
+    nutritionSource: source,
   };
 }
 
