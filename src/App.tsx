@@ -67,6 +67,7 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
   const [notice, setNotice] = useState('');
   const [guideStep, setGuideStep] = useState(0);
   const [showAllChoices, setShowAllChoices] = useState(false);
+  const [builderSearch, setBuilderSearch] = useState('');
   const [mealTargets, setMealTargets] = useState<NutritionTargets>({ ...EXAMPLE_MEAL_TARGETS });
   const conditions = useProfileConditions();
   const filteredFoods = useMemo(() => foods.filter(f =>
@@ -86,9 +87,18 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
   const mealProgress = useMemo(() => categoryProgress(selected, usableFoods), [selected, usableFoods]);
   const recommendedPortions = useMemo(() => suggestWholeMealPortions(selected, usableFoods, mealTargets), [selected, usableFoods, mealTargets]);
   const currentGuide = guideSteps[guideStep];
-  const stepFoods = usableFoods.filter(f => inStep(f, currentGuide.key))
-    .sort((a, b) => foodGuidance(a, conditions).priority - foodGuidance(b, conditions).priority);
-  const guidedChoices = showAllChoices ? stepFoods : stepFoods.filter(f => foodGuidance(f, conditions).priority < 3);
+  // Visibility must not depend on nutrition verification. Pending foods are
+  // discoverable, but cannot be selected or used to calculate invented macros.
+  const stepFoods = foods.filter(f => inStep(f, currentGuide.key))
+    .sort((a, b) => Number(a.nutritionStatus === 'pending') - Number(b.nutritionStatus === 'pending')
+      || foodGuidance(a, conditions).priority - foodGuidance(b, conditions).priority
+      || a.name.localeCompare(b.name));
+  const normalizedBuilderSearch = builderSearch.toLowerCase().trim();
+  const guidedChoices = stepFoods.filter(f =>
+    (showAllChoices || normalizedBuilderSearch.length > 0 || foodGuidance(f, conditions).priority < 3) &&
+    (normalizedBuilderSearch.length === 0 ||
+      (f.name + ' ' + f.cuisine + ' ' + f.aliases.join(' ') + ' ' + (f.foodGroup ?? '')).toLowerCase().includes(normalizedBuilderSearch))
+  );
 
   function navigate(next: Page) { setPage(next); setNotice(''); window.scrollTo?.(0, 0); }
   function applySuggestedPortions(items: Item[], goals = mealTargets): Item[] {
@@ -215,22 +225,27 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
               </div>
               {foodsLoading && <p role="status">Loading foods…</p>}
               {foodsError && <p role="alert" className="error-message">{foodsError}</p>}
-              {!foodsLoading && stepFoods.length === 0 && <p className="fine-print">No foods with usable nutrient information are available in this step yet. New South Indian dishes appear in the catalog while their nutrition data is reviewed.</p>}
+              {!foodsLoading && stepFoods.length === 0 && <p className="fine-print">No foods are available in this step yet. Check the Firestore catalog seed.</p>}
+              <label className="compact-builder-search"><span aria-hidden="true">⌕</span><input type="search" value={builderSearch} onChange={e => setBuilderSearch(e.target.value)} placeholder="Search chana, sprouts, curries..." aria-label="Search foods in this meal step"/></label>
+              {!foodsLoading && guidedChoices.length === 0 && stepFoods.length > 0 && <p className="fine-print">No matching foods in this step. Try another name or category.</p>}
+              {stepFoods.some(f => f.nutritionStatus === 'pending') && <p className="compact-pending-explainer">Foods labelled “Nutrition pending” are visible for browsing, but cannot be added to nutrient calculations yet.</p>}}
               <div className="visual-food-grid" aria-label={currentGuide.title}>
                 {guidedChoices.map(f => {
+                  const pending = f.nutritionStatus === 'pending';
                   const chosen = selected.find(i => i.id === f.id);
-                  const suggestedGrams = chosen
+                  const suggestedGrams = pending ? 0 : chosen
                     ? recommendedPortions.get(f.id) ?? chosen.grams
                     : suggestWholeMealPortions([...selected, { id: f.id, grams: 100, edited: false }], usableFoods, mealTargets).get(f.id) ?? 100;
                   const unit = countUnitFor(f.id);
                   const suggested = unit ? `${suggestedCount(f.id, suggestedGrams)} ${unit.plural}` : `${suggestedGrams} g`;
                   const count = unit && chosen ? chosen.grams / unit.gramsPerItem : 0;
-                  return <div key={f.id} className={'visual-food-card ' + (chosen ? 'is-selected' : '')}>
-                    <button type="button" className="visual-food-main" aria-pressed={!!chosen}
+                  return <div key={f.id} className={'visual-food-card ' + (chosen ? 'is-selected' : '') + (pending ? ' nutrition-pending' : '')}>
+                    <button type="button" className="visual-food-main" aria-pressed={!!chosen} disabled={pending}
+                      title={pending ? 'Nutrition data is being reviewed; this food cannot be added to a calculated meal yet.' : undefined}
                       onClick={() => chosen ? removeFood(f.id) : addFood(f.id)}>
                       <span className="visual-food-illustration" aria-hidden="true">{foodEmoji[f.id] ?? '🍽️'}</span>
-                      <span className="visual-food-info"><strong>{f.name}</strong><small>Suggested {suggested}</small>{f.nutritionSource && <small>Source-based recipe estimate</small>}{fibreMethod(f) !== 'total' && <small>Dietary fibre unverified</small>}</span>
-                      <span className={'visual-food-check ' + (chosen ? 'checked' : '')}>{chosen ? '✓' : '+'}</span>
+                      <span className="visual-food-info"><strong>{f.name}</strong>{pending ? <small className="pending-status">Nutrition pending · browse only</small> : <><small>Suggested {suggested}</small>{f.nutritionSource && <small>Source-based recipe estimate</small>}{fibreMethod(f) !== 'total' && <small>Dietary fibre unverified</small>}</>}</span>
+                      <span className={'visual-food-check ' + (chosen ? 'checked' : '')}>{pending ? '·' : chosen ? '✓' : '+'}</span>
                     </button>
                     {chosen && <div className="visual-food-amount" onClick={event => event.stopPropagation()}>
                       <span className="visual-amount-label">{unit ? 'How many?' : 'Portion'}</span>
@@ -251,7 +266,7 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
                   </div>;
                 })}
               </div>
-              {stepFoods.length > guidedChoices.length && <button type="button" className="text-action compact-show-all" onClick={() => setShowAllChoices(true)}>Show more choices</button>}
+              {!showAllChoices && !normalizedBuilderSearch && stepFoods.length > guidedChoices.length && <button type="button" className="text-action compact-show-all" onClick={() => setShowAllChoices(true)}>Show all food choices</button>}
               {conditionSummary(conditions).length > 0 && <details className="compact-guidance"><summary>Food guidance for your profile</summary>{conditionSummary(conditions).map(t => <p key={t}>{t}</p>)}</details>}
               <div className="compact-step-footer">
                 <button type="button" className="secondary" onClick={() => setGuideStep(i => Math.max(0, i - 1))} disabled={guideStep === 0}>← Back</button>
