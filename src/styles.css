@@ -68,3 +68,14 @@
 .condition-option input{accent-color:#356446;width:17px;height:17px;margin:0}
 .onboarding-form>.primary{margin-top:10px}
 @media(max-width:760px){.onboarding-shell{padding:0 16px 50px}.onboarding-header{padding:20px 0}.onboarding-card{padding:29px 22px;margin:15px auto 0}.onboarding-fields{grid-template-columns:1fr}.condition-option{flex:1 1 42%;min-width:125px}.onboarding-header .login-brand{font-size:20px}}
+
+/* Height and weight unit selectors for onboarding */
+.measurement-block{min-width:0}
+.measurement-heading{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px;font-size:13px;font-weight:700;color:#3c5d43}
+.unit-switch{display:inline-flex;gap:3px;padding:4px;background:#eef3eb;border-radius:10px;flex-shrink:0}
+.unit-switch button{border:0;background:transparent;color:#6b826d;border-radius:7px;padding:7px 11px;font-size:12px;font-weight:700}
+.unit-switch button.selected{background:#fff;color:#315d41;box-shadow:0 1px 4px #283d281c}
+.unit-switch button:focus-visible{outline:2px solid #467a4f;outline-offset:2px}
+.measurement-block>label,.height-split label{display:block}
+.height-split{display:grid;grid-template-columns:1fr 1fr;gap:10px;min-width:0}
+@media(max-width:760px){.measurement-heading{margin-top:6px}}
