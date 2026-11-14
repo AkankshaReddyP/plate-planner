@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { firebaseConfigured } from './firebase/client';
 import { useFoodCatalog, type CatalogFood } from './domain/foodCatalog';
+import { fibreCoverage, fibreMethod } from './domain/fibreQuality';
 import { useAuth } from './firebase/useAuth';
 import { OnboardingGate, useProfileConditions } from './firebase/OnboardingGate';
 import { guideSteps, inStep, foodGuidance, conditionSummary } from './domain/mealGuidance';
@@ -36,17 +37,17 @@ function totals(items: Item[], lookup: Map<string, Food>): Nutrition {
       kcal: total.kcal + f.values.kcal * ratio,
       protein: total.protein + f.values.protein * ratio,
       carbs: total.carbs + f.values.carbs * ratio,
-      fibre: total.fibre + f.values.fibre * ratio,
+      fibre: total.fibre + (fibreMethod(f) === 'total' ? f.values.fibre * ratio : 0),
       fat: total.fat + f.values.fat * ratio,
     };
   }, { ...zero });
 }
-function NutritionStrip({ value }: { value: Nutrition }) {
+function NutritionStrip({ value, fibreComplete = true }: { value: Nutrition; fibreComplete?: boolean }) {
   return <div className="nutrient-strip" aria-label="Nutrition totals">
     <div><strong>{format(value.kcal, 0)}</strong><span>kcal</span></div>
     <div><strong>{format(value.protein)} g</strong><span>Protein</span></div>
     <div><strong>{format(value.carbs)} g</strong><span>Carbs</span></div>
-    <div><strong>{format(value.fibre)} g</strong><span>Fibre</span></div>
+    <div><strong>{fibreComplete ? format(value.fibre) + ' g' : '—'}</strong><span>Fibre</span></div>
   </div>;
 }
 
@@ -71,9 +72,14 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
     (f.name + ' ' + f.subtitle + ' ' + f.category + ' ' + f.aliases.join(' ')).toLowerCase().includes(query.toLowerCase().trim())
   ), [category, query]);
   const calculated = useMemo(() => totals(selected, lookup), [selected, lookup]);
+  const selectedFibreCoverage = useMemo(() => fibreCoverage(selected, foods), [selected, foods]);
   const dayEntries = entries.filter(e => e.date === mealDate);
-  const dayNutrition = totals(dayEntries.flatMap(e => e.items), lookup);
-  const savedNutrition = totals(entries.flatMap(e => e.items), lookup);
+  const dayItems = dayEntries.flatMap(e => e.items);
+  const dayNutrition = totals(dayItems, lookup);
+  const dayFibreCoverage = fibreCoverage(dayItems, foods);
+  const savedItems = entries.flatMap(e => e.items);
+  const savedNutrition = totals(savedItems, lookup);
+
   const mealProgress = useMemo(() => categoryProgress(selected, usableFoods), [selected, usableFoods]);
   const recommendedPortions = useMemo(() => suggestWholeMealPortions(selected, usableFoods, mealTargets), [selected, usableFoods, mealTargets]);
   const currentGuide = guideSteps[guideStep];
@@ -183,14 +189,14 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
                 <div className="compact-nutrient-grid">
                   {nutrientKeys.map(key => <div className="compact-nutrient-card" key={key}>
                     <label htmlFor={'nutrient-target-' + key}>{nutrientLabels[key]} <span>target</span></label>
-                    <div className="compact-nutrient-value"><strong>{format(calculated[key], key === 'kcal' ? 0 : 1)}</strong><span>/</span>
+                    <div className="compact-nutrient-value"><strong>{key === 'fibre' && !selectedFibreCoverage.complete ? '—' : format(calculated[key], key === 'kcal' ? 0 : 1)}</strong><span>/</span>
                       <input id={'nutrient-target-' + key} type="number" step={key === 'kcal' ? '25' : '1'} min="1"
                         value={mealTargets[key]} onChange={e => changeMealTarget(key, Number(e.target.value))}
                         aria-label={nutrientLabels[key] + ' example target'}/><span>{nutrientUnits[key]}</span></div>
-                    <div className="compact-mini-track"><div style={{width: Math.min(100, calculated[key] / mealTargets[key] * 100) + '%'}}/></div>
+                    <div className="compact-mini-track"><div style={{width: (key === 'fibre' && !selectedFibreCoverage.complete ? 0 : Math.min(100, calculated[key] / mealTargets[key] * 100)) + '%'}}/></div>
                   </div>)}
                 </div>
-                <p className="compact-goals-caption">These are illustrative meal references, not individualized nutrition requirements. Sample and research-recipe data may vary. Some research recipes measure crude fibre—not total dietary fibre. No diagnosis-based limit is inferred.</p>
+                <p className="compact-goals-caption">These are illustrative meal references, not individualized nutrition requirements. Fibre is compared only when every selected food has documented total dietary fibre. Crude or unknown fibre is never treated as zero or used to optimize portions.</p>
               </div>
               <div className="compact-progress-head"><strong>Food selection</strong><span aria-live="polite">{mealProgress.percent}% complete</span></div>
               <div className="meal-progress-track" role="progressbar" aria-label="Food group selection progress" aria-valuemin={0} aria-valuemax={100} aria-valuenow={mealProgress.percent} aria-valuetext={`${mealProgress.completed} of 3 food groups selected`}>
@@ -219,7 +225,7 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
                     <button type="button" className="visual-food-main" aria-pressed={!!chosen}
                       onClick={() => chosen ? removeFood(f.id) : addFood(f.id)}>
                       <span className="visual-food-illustration" aria-hidden="true">{foodEmoji[f.id] ?? '🍽️'}</span>
-                      <span className="visual-food-info"><strong>{f.name}</strong><small>Suggested {suggested}</small>{f.nutritionSource && <small>Research recipe estimate</small>}</span>
+                      <span className="visual-food-info"><strong>{f.name}</strong><small>Suggested {suggested}</small>{f.nutritionSource && <small>Research recipe estimate</small>}{fibreMethod(f) !== 'total' && <small>Dietary fibre unverified</small>}</span>
                       <span className={'visual-food-check ' + (chosen ? 'checked' : '')}>{chosen ? '✓' : '+'}</span>
                     </button>
                     {chosen && <div className="visual-food-amount" onClick={event => event.stopPropagation()}>
@@ -251,7 +257,7 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
             <aside className="panel compact-meal-summary" aria-label="Live meal summary">
               <div className="compact-summary-title"><h3>Meal summary</h3><span>{selected.length} foods</span></div>
               <div className="compact-calories"><strong>{format(calculated.kcal, 0)}</strong><span>kcal estimated</span></div>
-              <div className="compact-macros"><span>Protein <strong>{format(calculated.protein)} g</strong></span><span>Carbs <strong>{format(calculated.carbs)} g</strong></span><span>Fibre <strong>{format(calculated.fibre)} g</strong></span><span>Fat <strong>{format(calculated.fat)} g</strong></span></div>
+              <div className="compact-macros"><span>Protein <strong>{format(calculated.protein)} g</strong></span><span>Carbs <strong>{format(calculated.carbs)} g</strong></span><span>Fibre <strong>{selectedFibreCoverage.complete ? format(calculated.fibre) + ' g' : 'Not available'}</strong></span><span>Fat <strong>{format(calculated.fat)} g</strong></span></div>
               {selected.length > 0 && <details className="compact-selection-details"><summary>Selected foods ({selected.length})</summary><ul>{selected.map(item => <li key={item.id}>{lookup.get(item.id)?.name}: {foodQuantityLabel(item.id, item.grams)}</li>)}</ul></details>}
               <button className="primary full" type="button" disabled={!selected.some(i => i.grams > 0)} onClick={saveDemo}>Add to demo history →</button>
               <p className="fine-print">Portions and nutrition are illustrative, not a medical prescription. Demo meals aren't saved to Firestore.</p>
@@ -267,7 +273,7 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
         {page === 'insights' && <>
           <div className="page-heading"><p className="eyebrow">YOUR PROGRESS</p><h1>Nutrition insights</h1><p>Simple summaries of meals added during this session—not medical guidance.</p></div>
           <div className="summary-grid"><article className="mini-card"><span className="card-icon green">◷</span><span className="stat-big">{entries.length}</span><strong>Demo entries</strong><small>Not persisted</small></article><article className="mini-card"><span className="card-icon orange">◈</span><span className="stat-big">{format(savedNutrition.kcal, 0)}</span><strong>Total sample kcal</strong><small>Across current session</small></article><article className="mini-card"><span className="card-icon purple">✳</span><span className="stat-big">{format(savedNutrition.protein)}</span><strong>Protein (g)</strong><small>Across current session</small></article></div>
-          <article className="panel"><h3>Selected date breakdown</h3><label className="date-inline">Choose date<input type="date" value={mealDate} onChange={e => setMealDate(e.target.value)} /></label><NutritionStrip value={dayNutrition}/><p className="fine-print">{dayEntries.length} demo meal{dayEntries.length === 1 ? '' : 's'} on this date. Unlogged meals are unknown, not zero intake.</p></article>
+          <article className="panel"><h3>Selected date breakdown</h3><label className="date-inline">Choose date<input type="date" value={mealDate} onChange={e => setMealDate(e.target.value)} /></label><NutritionStrip value={dayNutrition} fibreComplete={dayFibreCoverage.complete}/><p className="fine-print">{dayEntries.length} demo meal{dayEntries.length === 1 ? '' : 's'} on this date. Unlogged meals are unknown, not zero intake.</p></article>
         </>}
 
         {page === 'settings' && <>
