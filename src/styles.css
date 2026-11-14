@@ -213,3 +213,10 @@
 @media(max-width:760px){.visual-food-grid{max-height:34vh;min-height:160px;gap:8px}.visual-food-main{min-height:76px}.visual-food-amount{flex-wrap:wrap}}
 @media(max-width:410px){.visual-food-grid{grid-template-columns:1fr}.visual-food-card{border-radius:13px}.visual-food-main{min-height:66px}.visual-food-illustration{width:44px;height:44px}.visual-food-amount{flex-wrap:nowrap}}
 @media(prefers-reduced-motion:reduce){.visual-food-card{transition:none}.visual-food-card:hover{transform:none}}
+
+/* Keep regional dish filters compact even with many added Andhra entries. */
+.food-group-filter{display:flex;align-items:center;gap:10px;min-width:0;margin:4px 0 15px}
+.food-group-filter .chips{margin:0;flex:1;flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;scrollbar-width:thin}
+.food-group-filter .chip{flex-shrink:0}
+.food-group-label{font-weight:700;font-size:11px;color:#56755d;white-space:nowrap}
+@media(max-width:590px){.food-group-filter{display:block}.food-group-label{display:block;margin-bottom:8px}}

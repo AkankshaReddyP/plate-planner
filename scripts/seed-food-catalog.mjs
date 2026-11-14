@@ -11,6 +11,7 @@ import { stdout } from 'node:process';
 import { RESEARCHED_DISHES, canApplyResearchUpdate, canMigrateLegacyCrude } from './researched-south-indian-foods.mjs';
 import { INDB_RECIPES, canApplyINDBUpdate } from './indb-south-indian-recipes.mjs';
 import { REMAINING_DISHES, mayUpgradePending } from './remaining-south-indian-recipes.mjs';
+import { ANDHRA_EXPANSION, expansionCounts } from './andhra-expansion-foods.mjs';
 
 initializeApp({ credential: applicationDefault(), projectId: 'plate-planner-2bc28' });
 const db = getFirestore();
@@ -164,3 +165,16 @@ for(const dish of REMAINING_DISHES){
   else remainingPreserved++;
 }
 stdout.write(`Final 15 recipe entries: ${remainingCreated} created, ${remainingUpgraded} pending upgraded, ${remainingPreserved} existing reviewed/edited preserved. Source-specific macro estimates only; total dietary fibre remains unverified.\n`);
+
+let andhraCreated=0,andhraExisting=0;
+for(const food of ANDHRA_EXPANSION){
+  const ref=db.collection('foodCatalog').doc(food.id);
+  try {
+    await ref.create(food);
+    andhraCreated++;
+  } catch(error) {
+    if(error?.code===6 || error?.code==='already-exists') andhraExisting++;
+    else throw error;
+  }
+}
+stdout.write(`Andhra/regional expansion: ${andhraCreated} new; ${andhraExisting} existing retained; ${ANDHRA_EXPANSION.length} seed dishes. Categories: ${JSON.stringify(expansionCounts)}. All new dishes nutrition-pending.\n`);

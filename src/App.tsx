@@ -18,6 +18,7 @@ type Entry = { id: number; meal: MealType; date: string; items: Item[]; totals: 
 
 const zero: Nutrition = { kcal: 0, protein: 0, carbs: 0, fibre: 0, fat: 0 };
 const categories = ['All', 'Protein', 'Grain', 'Vegetable', 'Fruit', 'Dairy'] as const;
+const foodGroups = ['All', 'Curry', 'Pappu', 'Chutney', 'Roti', 'Ragi', 'Quinoa', 'Millet', 'Tiffin'] as const;
 const pages: { key: Page; label: string; symbol: string }[] = [
   { key: 'home', label: 'Home', symbol: '⌂' },
   { key: 'foods', label: 'Foods', symbol: '◈' },
@@ -58,6 +59,7 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
   const [page, setPage] = useState<Page>('home');
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState<(typeof categories)[number]>('All');
+  const [foodGroup, setFoodGroup] = useState<(typeof foodGroups)[number]>('All');
   const [meal, setMeal] = useState<MealType>('Lunch');
   const [mealDate, setMealDate] = useState(today);
   const [selected, setSelected] = useState<Item[]>([]);
@@ -69,8 +71,9 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
   const conditions = useProfileConditions();
   const filteredFoods = useMemo(() => foods.filter(f =>
     (category === 'All' || f.category === category) &&
-    (f.name + ' ' + f.subtitle + ' ' + f.category + ' ' + f.aliases.join(' ')).toLowerCase().includes(query.toLowerCase().trim())
-  ), [category, query]);
+    (foodGroup === 'All' || f.foodGroup === foodGroup) &&
+    (f.name + ' ' + f.subtitle + ' ' + f.category + ' ' + f.cuisine + ' ' + (f.foodGroup ?? '') + ' ' + f.aliases.join(' ')).toLowerCase().includes(query.toLowerCase().trim())
+  ), [category, foodGroup, query]);
   const calculated = useMemo(() => totals(selected, lookup), [selected, lookup]);
   const selectedFibreCoverage = useMemo(() => fibreCoverage(selected, foods), [selected, foods]);
   const dayEntries = entries.filter(e => e.date === mealDate);
@@ -167,6 +170,7 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
           <div className="page-heading"><p className="eyebrow">REFERENCE LIBRARY</p><h1>Explore foods</h1><p>Get to know what goes on your plate. Nutrients shown per 100 g.</p></div>
           <div className="toolbar"><label className="searchbox"><span aria-hidden="true">⌕</span><input value={query} onChange={e => setQuery(e.target.value)} placeholder="Search rice, dal, fruit..." aria-label="Search foods" /></label><span className="muted">{filteredFoods.length} results</span></div>
           <div className="chips" aria-label="Food categories">{categories.map(c => <button type="button" key={c} aria-pressed={category === c} className={'chip ' + (category === c ? 'selected' : '')} onClick={() => setCategory(c)}>{c}</button>)}</div>
+          <div className="food-group-filter"><span className="food-group-label">Explore dishes</span><div className="chips" aria-label="Dish types">{foodGroups.map(g => <button type="button" key={g} aria-pressed={foodGroup === g} className={'chip ' + (foodGroup === g ? 'selected' : '')} onClick={() => setFoodGroup(g)}>{g}</button>)}</div></div>
           {foodsLoading && <p role="status">Loading food catalog…</p>}{foodsError && <p role="alert" className="error-message">{foodsError}</p>}
           <div className="food-grid">{filteredFoods.map(f => <article className="food-card" key={f.id}><div className="food-card-top"><span className="food-symbol">{f.category === 'Fruit' ? '🍎' : f.category === 'Vegetable' ? '🥬' : f.category === 'Protein' ? '🥚' : f.category === 'Dairy' ? '🥛' : '🍚'}</span><span className="category-label">{f.category}</span></div><h3>{f.name}</h3><p>{f.subtitle}</p>{f.nutritionSource && <a className="food-source-link" href={f.nutritionSource.url} target="_blank" rel="noreferrer">Research source ↗</a>}{f.reportedFibreG !== undefined && <p className="fine-print">Source-reported fibre: {format(f.reportedFibreG)} g/100g (method not confirmed)</p>}{f.crudeFibreG !== undefined && <p className="fine-print">Crude fibre: {format(f.crudeFibreG)} g/100g (not total dietary fibre)</p>}<div className="food-macros">{f.nutritionStatus === 'pending' ? <span><strong>Nutrition pending</strong></span> : <><span><strong>{format(f.values.kcal, 0)}</strong> kcal</span><span><strong>{format(f.values.protein)}</strong> g protein</span></>}</div><button type="button" className="secondary full" disabled={f.nutritionStatus === 'pending'} onClick={() => { addFood(f.id); navigate('builder'); }}>{f.nutritionStatus === 'pending' ? 'Nutrition verification needed' : '+ Add to meal'}</button></article>)}</div>
           {!foodsLoading && !filteredFoods.length && <div className="empty-state">{foods.length === 0 ? 'No active foods found. Seed the catalog from the trusted deployment workflow.' : 'No matching foods. Try another category or search term.'}</div>}
