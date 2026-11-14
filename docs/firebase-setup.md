@@ -89,3 +89,16 @@ INDB methods: https://www.anuvaad.org.in/methodology/ and its open-access resear
 The pending 15 existing South Indian food IDs and the evidence needed to review them are tracked in `data/south-indian-recipe-review-queue.json`. These remain discoverable with **nutrition pending**, not eligible for macro-optimized meal portions, until their source-recipe values can be directly inspected. Do not manufacture missing macros to increase coverage.
 
 Deploy remains a manual GitHub Actions run on `main`; code merge alone does **not** populate Firestore. The privileged seed may insert missing records and upgrade only active pending records with no pre-existing nutrient values. It never overwrites reviewed data. A completed deploy should be inspected in the Firebase Console and checked against a test user before clinical recommendations are considered.
+
+## Final 15 South Indian recipe estimates
+
+The 15 IDs previously tracked in `data/south-indian-recipe-review-queue.json` now have **named recipe-level macro estimates** stored in `scripts/remaining-south-indian-recipes.mjs`. Each entry records a direct source URL, 100g prepared portion basis, specific named variant, and limitations. Sources include:
+- INDB / Anuvaad: semolina rava dosa and okra fry (https://www.anuvaad.org.in/nutrition-fact/semolina-dosa-suji-rava-dosa/).
+- Khaana: upma, thengai sadam, ragi mudde, tomato pappu, beans/cabbage poriyal, egg bhurji, Chettinad chicken curry, Kerala meen curry, bottle-gourd kootu and a **gongura-style pachadi using amaranth substitute**. Khaana macro values are rounded whole-g per 100g recipe estimates calculated from ingredients via USDA FoodData Central; cooking yields, oil and substitutions can change results.
+- Healthify public entries: palakura pappu and **pesarapappu curry**. The latter is converted from an explicitly listed 150g serving into per-100g values. The original ingredient recipe is unavailable publicly; these are *lower confidence* sample estimates.
+
+A food with a vague catalog name has been relabeled to its **specific reference variant**, not silently assigned generic nutrition. For example `chicken_curry` becomes Chettinad chicken curry, `fish_curry` becomes Kerala meen curry and `vegetable_kootu` becomes bottle-gourd kootu. Source variant and notes are retained for future audit.
+
+The queue's `remaining` list is now **empty for macro-data sourcing**, but **total dietary fibre is still not confirmed** for these recipes. Source-reported fibre is preserved separately, not scored as a verified total-dietary-fibre value. All 15 entries remain `nutritionStatus='sample'`, not `verified`. They can be used for **illustrative** calorie, protein, carbohydrate and fat planning, **not clinical portion guidance or disease-specific restrictions**.
+
+Run the manual Firebase deployment workflow on `main` to apply the create/upgrade seed, then verify Firestore documents. The PR merge itself does not write to production. The seed only upgrades active pending records with no existing nutrient fields and never overwrites user-reviewed or customized items.
