@@ -13,6 +13,7 @@ export type CatalogFood = {
   nutritionStatus: 'sample' | 'verified' | 'pending';
   cuisine: string;
   aliases: string[];
+  nutritionSource?: {title: string; url: string; basis: string; fibreMethod?: string; variant?: string};
 };
 export type FoodCatalogState = { foods: CatalogFood[]; loading: boolean; error: string | null };
 const zero: FoodNutrients = { kcal: 0, protein: 0, carbs: 0, fibre: 0, fat: 0 };
@@ -20,6 +21,17 @@ const categories = new Set<FoodCategory>(['Protein', 'Grain', 'Vegetable', 'Frui
 const keys: (keyof FoodNutrients)[] = ['kcal','protein','carbs','fibre','fat'];
 const statuses = new Set(['sample','verified','pending']);
 
+function parseSource(value: unknown): CatalogFood['nutritionSource'] {
+  if (!value || typeof value !== 'object') return undefined;
+  const data = value as Record<string, unknown>;
+  if (typeof data.title !== 'string' || typeof data.url !== 'string'
+    || typeof data.basis !== 'string' || !data.url.startsWith('https://')) return undefined;
+  return {
+    title: data.title, url: data.url, basis: data.basis,
+    fibreMethod: typeof data.fibreMethod === 'string' ? data.fibreMethod : undefined,
+    variant: typeof data.variant === 'string' ? data.variant : undefined,
+  };
+}
 export function parseFoodDoc(id: string, raw: Record<string, unknown>): CatalogFood | null {
   if (typeof raw.name !== 'string' || !raw.name.trim()) return null;
   if (!categories.has(raw.category as FoodCategory) || !statuses.has(raw.nutritionStatus as string)) return null;
@@ -37,6 +49,7 @@ export function parseFoodDoc(id: string, raw: Record<string, unknown>): CatalogF
     nutritionStatus: status,
     cuisine: typeof raw.cuisine === 'string' ? raw.cuisine : 'Other',
     aliases: Array.isArray(raw.aliases) ? raw.aliases.filter((x): x is string => typeof x === 'string') : [],
+    nutritionSource: parseSource(raw.nutritionSource),
   };
 }
 

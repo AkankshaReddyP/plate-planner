@@ -2,6 +2,9 @@
 export type CountUnit = { singular: string; plural: string; gramsPerItem: number };
 const countUnits: Record<string, CountUnit> = {
   egg: { singular: 'egg', plural: 'eggs', gramsPerItem: 50 },
+  // Counts represent the published laboratory recipe, NOT universal serving weights.
+  idli: { singular: 'idli', plural: 'idlis', gramsPerItem: 40 },
+  plain_dosa: { singular: 'dosa', plural: 'dosas', gramsPerItem: 203 },
 };
 export function countUnitFor(foodId: string): CountUnit | null {
   return countUnits[foodId] ?? null;

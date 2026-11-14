@@ -2,12 +2,13 @@
  * Idempotent, privileged seed for /foodCatalog.
  * Run only via trusted GitHub deployment service account (never in browser).
  * Existing documents are never overwritten.
- * South Indian recipes deliberately have NO nutrient values until a verified
- * recipe/serving and source are attached. Do not guess food macros for health use.
+ * Unreviewed South Indian names remain pending. A limited set of recipe-specific
+ * research measurements is added with attribution; never guess missing data.
  */
 import { initializeApp, applicationDefault } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
 import { stdout } from 'node:process';
+import { RESEARCHED_DISHES, canApplyResearchUpdate } from './researched-south-indian-foods.mjs';
 
 initializeApp({ credential: applicationDefault(), projectId: 'plate-planner-2bc28' });
 const db = getFirestore();
@@ -86,3 +87,28 @@ for (const {id,data} of docs) {
   }
 }
 stdout.write(`Food catalog seed: ${created} created; ${existing} previously existing; ${docs.length} total seed entries. Pending dishes have no numeric nutrient values.\n`);
+
+let researchCreated=0, researchUpgraded=0, researchPreserved=0;
+for (const research of RESEARCHED_DISHES) {
+  const ref = db.collection('foodCatalog').doc(research.id);
+  const result = await db.runTransaction(async tx => {
+    const snap = await tx.get(ref);
+    if (!snap.exists) {
+      tx.create(ref, research);
+      return 'created';
+    }
+    if (canApplyResearchUpdate(snap.data())) {
+      tx.update(ref, {
+        name: research.name, subtitle: research.subtitle,
+        values: research.values, nutritionStatus: research.nutritionStatus,
+        nutritionSource: research.nutritionSource,
+      });
+      return 'upgraded';
+    }
+    return 'preserved';
+  });
+  if (result === 'created') researchCreated++;
+  if (result === 'upgraded') researchUpgraded++;
+  if (result === 'preserved') researchPreserved++;
+}
+stdout.write(`Research recipes: ${researchCreated} new, ${researchUpgraded} pending records upgraded, ${researchPreserved} existing reviewed/edited records preserved.\n`);
