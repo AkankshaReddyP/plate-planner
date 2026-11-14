@@ -110,3 +110,19 @@ The seed also includes 59 additional food-name records in `scripts/andhra-expans
 These **59 names are create-only and nutrition-pending**. The code intentionally has no invented numbers for calories, carbohydrate, fat, protein or total dietary fibre. They appear in Firestore's food library once the manual deployment runs but are disabled for portion recommendations until actual prepared-recipe values can be reviewed and assigned a source, serving basis and measurement method. Note that some chutneys, pickles and curries may have considerable salt or oil, depending on preparation; diagnosis-specific restrictions cannot be inferred from a dish's name.
 
 Examples are grounded in Andhra state and national cultural references: https://kadapa.ap.gov.in/importance/local/ ; https://kadapa.ap.gov.in/culinary-delight/raagi-rotte-sajja-rotte-jonna-rotte/ ; https://www.ncert.nic.in/pdf/publication/otherpublications/Unity_cultural.pdf . These sources establish dish names and tradition, not nutrient values. For nutrition review use independently verified prepared-recipe studies or ingredient-based yield calculations with auditable sources; never substitute raw ragi/quinoa flour figures for cooked balls, rotis or upma.
+
+## Expanded protein-food catalog
+
+The trusted create-only seed includes 74 **additional protein-containing food entries** in `scripts/protein-foods.mjs`. These cover:
+
+- **Legumes (26):** kabuli/white chana, kala/black chana, sprouted chana, chole, chana dal, toor, moong, urad, masoor, rajma, cowpeas/alasandalu, horse gram/ulavalu, sprouts, and prepared curry alternatives.
+- **Soy (7):** rehydrated soy chunks/meal maker, tofu, tempeh, soybeans, edamame, and cooked preparations.
+- **Dairy protein (7):** paneer, paneer bhurji/curry, Greek yogurt, hung curd, cottage cheese, toned milk.
+- **Eggs (5):** whites, omelette, scramble, egg curry, fried egg.
+- **Meat (9):** chicken, turkey, goat/mutton, lamb, beef, with distinct cooked/grilled and Andhra curry entries.
+- **Seafood (10):** rohu, catla, tilapia, salmon, tuna, sardines, prawns/royyalu, crab, fried fish.
+- **Nuts & seeds (10):** roasted peanuts, almonds, pistachios, pumpkin, sunflower, sesame, hemp, chia, flax, peanut butter.
+
+The Foods page provides corresponding horizontally scrollable filters, and searchable Indian/Telugu/English aliases. These are **protein-containing foods, not all equivalent high-protein/low-carbohydrate choices**: legumes can contain substantial carbohydrate and fibre, nuts/seeds often provide considerable fat, and preparations vary with oil/water/salt. Some foods contain major allergens (peanuts, soy, dairy, eggs, shellfish, fish, tree nuts, sesame). No clinical restrictions or allergy claims are made from self-reported diagnosis.
+
+All 74 entries are **nutritionStatus: pending**, intentionally without invented macronutrients. They are discoverable only and cannot drive portion recommendations until preparation-specific nutrient data, proper per-100g basis and method/source metadata are reviewed. Do not misinterpret dry legumes or raw soy-chunk composition as boiled/rehydrated prepared foods. Production requires manually running the configured GitHub Hosting deployment on `main`; a PR merge does not populate Firestore. Existing reviewed catalog records are not overwritten.
