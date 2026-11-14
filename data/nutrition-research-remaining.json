@@ -1,36 +1,22 @@
 {
   "schemaVersion": 1,
   "asOf": "2026-11-13",
-  "purpose": "Trace all nutrition-pending entries without guessing from food names. Every completed profile needs a match for actual preparation state, per-100g basis and known fibre method.",
-  "priority": "First direct prepared USDA food matches, then named cooked Indian recipes with ingredient quantities and cooked yields.",
+  "purpose": "Trace nutrition-pending entries without guessing from names. Completed profiles require exact preparation, 100g basis and source; fibre method must be confirmed separately.",
   "totalNewCatalogEntries": 133,
-  "nutritionProfilesAdded": 22,
-  "stillPending": 111,
+  "nutritionProfilesAdded": 26,
+  "stillPending": 107,
   "remaining": [
-    {
-      "id": "gutti_vankaya_kura",
-      "name": "Gutti vankaya kura (stuffed brinjal)",
-      "source": "Andhra expansion",
-      "status": "pending",
-      "requires": [
-        "exact food or recipe and preparation",
-        "100g edible/cooked basis",
-        "source URL",
-        "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
-      ]
-    },
     {
       "id": "vankaya_kura",
       "name": "Vankaya kura (brinjal curry)",
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -39,11 +25,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -52,11 +38,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -65,11 +51,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -78,11 +64,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -91,11 +77,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -104,11 +90,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -117,11 +103,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -130,11 +116,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -143,11 +129,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -156,11 +142,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -169,11 +155,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -182,11 +168,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -195,11 +181,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -208,11 +194,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -221,24 +207,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
-      ]
-    },
-    {
-      "id": "dosakaya_pappu",
-      "name": "Dosakaya pappu (yellow cucumber dal)",
-      "source": "Andhra expansion",
-      "status": "pending",
-      "requires": [
-        "exact food or recipe and preparation",
-        "100g edible/cooked basis",
-        "source URL",
-        "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -247,11 +220,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -260,11 +233,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -273,11 +246,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -286,11 +259,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -299,11 +272,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -312,11 +285,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -325,11 +298,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -338,11 +311,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -351,11 +324,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -364,11 +337,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -377,11 +350,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -390,11 +363,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -403,11 +376,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -416,11 +389,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -429,11 +402,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -442,11 +415,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -455,11 +428,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -468,11 +441,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -481,11 +454,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -494,11 +467,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -507,24 +480,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
-      ]
-    },
-    {
-      "id": "chapati",
-      "name": "Chapati (whole-wheat flatbread)",
-      "source": "Andhra expansion",
-      "status": "pending",
-      "requires": [
-        "exact food or recipe and preparation",
-        "100g edible/cooked basis",
-        "source URL",
-        "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -533,24 +493,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
-      ]
-    },
-    {
-      "id": "ragi_sangati",
-      "name": "Ragi sangati (ragi-rice balls)",
-      "source": "Andhra expansion",
-      "status": "pending",
-      "requires": [
-        "exact food or recipe and preparation",
-        "100g edible/cooked basis",
-        "source URL",
-        "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -559,11 +506,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -572,11 +519,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -585,11 +532,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -598,11 +545,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -611,11 +558,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -624,11 +571,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -637,11 +584,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -650,11 +597,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -663,11 +610,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -676,11 +623,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -689,11 +636,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -702,11 +649,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -715,11 +662,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -728,11 +675,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -741,11 +688,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -754,11 +701,11 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -767,11 +714,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -780,11 +727,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -793,11 +740,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -806,11 +753,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -819,11 +766,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -832,11 +779,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -845,11 +792,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -858,11 +805,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -871,11 +818,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -884,11 +831,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -897,11 +844,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -910,11 +857,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -923,11 +870,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -936,11 +883,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -949,11 +896,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -962,11 +909,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -975,11 +922,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -988,11 +935,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1001,11 +948,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1014,11 +961,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1027,11 +974,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1040,11 +987,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1053,11 +1000,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1066,11 +1013,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1079,11 +1026,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1092,11 +1039,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1105,11 +1052,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1118,11 +1065,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1131,11 +1078,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1144,11 +1091,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1157,11 +1104,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1170,11 +1117,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1183,11 +1130,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1196,11 +1143,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1209,11 +1156,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1222,11 +1169,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1235,11 +1182,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1248,11 +1195,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1261,11 +1208,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1274,11 +1221,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1287,11 +1234,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1300,11 +1247,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1313,11 +1260,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1326,11 +1273,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1339,11 +1286,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1352,11 +1299,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1365,11 +1312,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1378,11 +1325,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1391,11 +1338,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1404,11 +1351,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1417,11 +1364,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1430,11 +1377,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     },
     {
@@ -1443,11 +1390,11 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "exact food or recipe and preparation",
+        "matching food or documented cooked recipe",
         "100g edible/cooked basis",
-        "source URL",
+        "source and version",
         "kcal protein carbs fat",
-        "fibre method (total dietary vs crude vs unknown)"
+        "fibre analytical method"
       ]
     }
   ]
