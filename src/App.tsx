@@ -83,12 +83,10 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
   const dayNutrition = totals(dayEntries.flatMap(e => e.items));
   const savedNutrition = totals(entries.flatMap(e => e.items));
   const mealProgress = useMemo(() => categoryProgress(selected, foods), [selected]);
-  const recommended = useMemo(() => categorySuggestions(selected.map(i => i.id), foods), [selected]);
   const currentGuide = guideSteps[guideStep];
   const stepFoods = foods.filter(f => inStep(f, currentGuide.key))
     .sort((a, b) => foodGuidance(a, conditions).priority - foodGuidance(b, conditions).priority);
   const guidedChoices = showAllChoices ? stepFoods : stepFoods.filter(f => foodGuidance(f, conditions).priority < 3);
-  const stepSelected = selected.some(i => inStep(lookup.get(i.id)!, currentGuide.key) && i.grams > 0);
 
   function navigate(next: Page) { setPage(next); setNotice(''); window.scrollTo?.(0, 0); }
   function addFood(id: string) {
@@ -172,45 +170,58 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
         </>}
 
         {page === 'builder' && <>
-          <div className="page-heading"><p className="eyebrow">YOUR PLATE</p><h1>Build your meal</h1><p>Pick foods, adjust grams, and see your estimated nutrition update instantly.</p></div>
-          <div className="two-col builder-layout"><div>
-            <article className="panel">
-              <div className="panel-heading"><h3>Meal details</h3></div>
-              <div className="form-row"><label>Meal type<select value={meal} onChange={e => setMeal(e.target.value as MealType)}><option>Breakfast</option><option>Lunch</option><option>Dinner</option><option>Snack</option></select></label><label>Date<input type="date" value={mealDate} onChange={e => setMealDate(e.target.value)} /></label></div>
-            </article>
-            <article className="panel guided-panel">
-              <p className="eyebrow">GUIDED FOOD SELECTION</p>
-              <div className="meal-progress" aria-label="Guided meal completion">
-                <div className="meal-progress-head">
-                  <strong>Build your plate</strong>
-                  <span aria-live="polite">{mealProgress.percent}% complete</span>
-                </div>
-                <div className="meal-progress-track" role="progressbar" aria-label="Food category completion" aria-valuemin={0} aria-valuemax={100} aria-valuenow={mealProgress.percent} aria-valuetext={`${mealProgress.completed} of ${mealProgress.total} food groups selected`}>
-                  <div className="meal-progress-fill" style={{ width: mealProgress.percent + '%' }} />
-                </div>
-                <p className="meal-progress-caption">{mealProgress.completed} of {mealProgress.total} food groups selected. Each group counts once, regardless of quantity.</p>
+          <div className="compact-builder-heading">
+            <div><p className="eyebrow">YOUR PLATE</p><h1>Build a meal</h1></div>
+            <div className="compact-meal-controls">
+              <label className="sr-only" htmlFor="compact-meal-type">Meal type</label>
+              <select id="compact-meal-type" value={meal} onChange={e => setMeal(e.target.value as MealType)}><option>Breakfast</option><option>Lunch</option><option>Dinner</option><option>Snack</option></select>
+              <label className="sr-only" htmlFor="compact-meal-date">Meal date</label>
+              <input id="compact-meal-date" type="date" value={mealDate} onChange={e => setMealDate(e.target.value)} />
+            </div>
+          </div>
+          <div className="compact-builder-grid">
+            <section className="panel compact-picker" aria-label="Select meal foods">
+              <div className="compact-progress-head"><strong>Your plate</strong><span aria-live="polite">{mealProgress.percent}% complete</span></div>
+              <div className="meal-progress-track" role="progressbar" aria-label="Food group selection progress" aria-valuemin={0} aria-valuemax={100} aria-valuenow={mealProgress.percent} aria-valuetext={`${mealProgress.completed} of 3 food groups selected`}>
+                <div className="meal-progress-fill" style={{ width: mealProgress.percent + '%' }} />
               </div>
-              <div className="guide-steps" aria-label="Meal selection order">
-                {guideSteps.map((step, index) => <button key={step.key} type="button" className={'guide-step ' + (guideStep === index ? 'current' : '') + (mealProgress.checked[index] ? ' complete' : '')} aria-current={guideStep === index ? 'step' : undefined} onClick={() => {setGuideStep(index);setShowAllChoices(false);}}><strong>{mealProgress.checked[index] ? '✓' : index + 1}</strong><span>{step.title}</span></button>)}
+              <div className="compact-step-tabs" aria-label="Food selection steps">
+                {guideSteps.map((step, index) => <button key={step.key} type="button" className={'compact-step ' + (guideStep === index ? 'active' : '')} aria-current={guideStep === index ? 'step' : undefined} onClick={() => {setGuideStep(index);setShowAllChoices(false);}}><span className="compact-step-number">{mealProgress.checked[index] ? '✓' : index + 1}</span><span>{index === 0 ? 'Fibre' : index === 1 ? 'Protein' : 'Carbs'}</span></button>)}
               </div>
-              <h3>{currentGuide.title}</h3><p>{currentGuide.hint} Food sequence is optional and does not replace balanced nutrition.</p>
-              {conditionSummary(conditions).map(t => <p key={t} className="guide-note">{t}</p>)}
-              <div className="guided-foods">
-                {guidedChoices.map(f => <div className="guided-food" key={f.id}>
-                  <div><strong>{f.name}</strong><small>{format(f.values.carbs)} g carbs · {format(f.values.fibre)} g fibre per 100 g</small><small className="suggested-portion">Suggested if added: {categorySuggestions([...selected.map(i => i.id), f.id], foods).get(f.id)?.grams ?? 100} g</small>
-                    {foodGuidance(f, conditions).note && <small className="guidance-label">{foodGuidance(f, conditions).note}</small>}</div>
-                  <button type="button" className="secondary" onClick={() => addFood(f.id)}>{selected.some(i => i.id === f.id) ? 'Added ✓' : '+ Add'}</button>
-                </div>)}
+              <div className="compact-step-intro">
+                <div><p className="eyebrow">STEP {guideStep + 1} OF 3</p><h2>{currentGuide.title}</h2></div>
+                <span className="compact-step-hint">{selected.filter(i => { const f = lookup.get(i.id);return !!f && inStep(f, currentGuide.key);}).length} selected</span>
               </div>
-              {stepFoods.length > guidedChoices.length && <button type="button" className="text-action" onClick={() => setShowAllChoices(true)}>Show all food options (with guidance)</button>}
-              <div className="guide-actions"><button type="button" className="secondary" disabled={guideStep === 0} onClick={() => setGuideStep(i => Math.max(0, i - 1))}>← Previous</button>
-                {guideStep < 2 && <button type="button" className="primary" onClick={() => { setGuideStep(i => Math.min(2, i + 1)); setShowAllChoices(false);}}>{stepSelected ? 'Next step →' : 'Skip / next →'}</button>}</div>
-            </article>
-            <article className="panel"><div className="panel-heading"><div><h3>Foods on your plate</h3><p>{selected.length} selected</p></div><button type="button" className="text-action" onClick={() => navigate('foods')}>+ Browse foods</button></div>
-              <p className="fine-print">Starting quantities are illustrative and automatically share the food-group step when you add multiple foods. Manually edited amounts are preserved. This is not an individualized medical portion recommendation.</p>
-              {selected.length ? <div className="selected-list">{selected.map(i => { const f = lookup.get(i.id); if (!f) return null;return <div className="selected-row" key={i.id}><div><strong>{f.name}</strong><small>{format(f.values.kcal * i.grams / 100, 0)} kcal estimated</small><small className="suggested-portion">Suggested starting amount: {recommended.get(i.id)?.grams ?? 100} g{ i.edited ? ' · customized' : ' · applied'}</small><button type="button" className="text-action portion-reset" onClick={() => resetToSuggestion(i.id)}>Use suggested amount</button></div><div className="amount-control"><label className="sr-only" htmlFor={'portion-' + i.id}>Grams of {f.name}</label><input id={'portion-' + i.id} type="number" min="0" max="2000" step="10" value={i.grams} onChange={e => setGrams(i.id, Number(e.target.value))} /><span>g</span><button type="button" onClick={() => removeFood(i.id)} aria-label={'Remove ' + f.name}>×</button></div></div>; })}</div> : <div className="empty-state"><span className="empty-art">🥙</span><strong>Start with a food you enjoy</strong><p>Add foods from the library to begin building your meal.</p><button className="secondary" type="button" onClick={() => navigate('foods')}>Browse foods</button></div>}
-            </article></div>
-            <div><article className="panel summary-panel"><p className="eyebrow">LIVE ESTIMATE</p><h3>Meal nutrition</h3><NutritionStrip value={calculated} /><div className="total-line"><span>Fat</span><strong>{format(calculated.fat)} g</strong></div><div className="total-line"><span>Items</span><strong>{selected.length}</strong></div><button className="primary full" type="button" onClick={saveDemo} disabled={!selected.some(i => i.grams > 0)}>Add to demo history →</button><p className="fine-print">Sample values. This action only saves in your browser's current session. It does not record actual consumption or save to the cloud.</p></article></div>
+              <div className="compact-food-options" aria-label={currentGuide.title}>
+                {guidedChoices.map(f => {
+                  const chosen = selected.find(i => i.id === f.id);
+                  const suggestion = categorySuggestions([...selected.map(i => i.id), f.id], foods).get(f.id)?.grams ?? 100;
+                  return <div key={f.id} className={'compact-food-option ' + (chosen ? 'picked' : '')}>
+                    <div className="compact-food-details"><strong>{f.name}</strong><small>{format(f.values.kcal, 0)} kcal / 100 g · Suggested {suggestion} g</small></div>
+                    {chosen ? <div className="compact-portion">
+                      <label className="sr-only" htmlFor={'compact-grams-' + f.id}>{f.name} portion in grams</label>
+                      <input id={'compact-grams-' + f.id} type="number" min="0" max="2000" step="5" value={chosen.grams} onChange={e => setGrams(f.id, Number(e.target.value))}/>
+                      <span>g</span>
+                      <button type="button" className="compact-remove" onClick={() => removeFood(f.id)} aria-label={'Remove ' + f.name}>×</button>
+                    </div> : <button type="button" className="compact-add" onClick={() => addFood(f.id)}>+ Add</button>}
+                  </div>;
+                })}
+              </div>
+              {stepFoods.length > guidedChoices.length && <button type="button" className="text-action compact-show-all" onClick={() => setShowAllChoices(true)}>Show more choices</button>}
+              {conditionSummary(conditions).length > 0 && <details className="compact-guidance"><summary>Food guidance for your profile</summary>{conditionSummary(conditions).map(t => <p key={t}>{t}</p>)}</details>}
+              <div className="compact-step-footer">
+                <button type="button" className="secondary" onClick={() => setGuideStep(i => Math.max(0, i - 1))} disabled={guideStep === 0}>← Back</button>
+                {guideStep < 2 ? <button className="primary" type="button" onClick={() => { setGuideStep(i => Math.min(2,i+1));setShowAllChoices(false);}}>Next: {guideStep === 0 ? 'Protein' : 'Carbs'} →</button> : <span className="compact-finish">All steps shown ✓</span>}
+              </div>
+            </section>
+            <aside className="panel compact-meal-summary" aria-label="Live meal summary">
+              <div className="compact-summary-title"><h3>Meal summary</h3><span>{selected.length} foods</span></div>
+              <div className="compact-calories"><strong>{format(calculated.kcal, 0)}</strong><span>kcal estimated</span></div>
+              <div className="compact-macros"><span>Protein <strong>{format(calculated.protein)} g</strong></span><span>Carbs <strong>{format(calculated.carbs)} g</strong></span><span>Fibre <strong>{format(calculated.fibre)} g</strong></span><span>Fat <strong>{format(calculated.fat)} g</strong></span></div>
+              {selected.length > 0 && <details className="compact-selection-details"><summary>Selected foods ({selected.length})</summary><ul>{selected.map(item => <li key={item.id}>{lookup.get(item.id)?.name}: {format(item.grams,0)} g</li>)}</ul></details>}
+              <button className="primary full" type="button" disabled={!selected.some(i => i.grams > 0)} onClick={saveDemo}>Add to demo history →</button>
+              <p className="fine-print">Portions and nutrition are illustrative, not a medical prescription. Demo meals aren't saved to Firestore.</p>
+            </aside>
           </div>
         </>}
 
