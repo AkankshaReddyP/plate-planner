@@ -228,7 +228,7 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
               {!foodsLoading && stepFoods.length === 0 && <p className="fine-print">No foods are available in this step yet. Check the Firestore catalog seed.</p>}
               <label className="compact-builder-search"><span aria-hidden="true">⌕</span><input type="search" value={builderSearch} onChange={e => setBuilderSearch(e.target.value)} placeholder="Search chana, sprouts, curries..." aria-label="Search foods in this meal step"/></label>
               {!foodsLoading && guidedChoices.length === 0 && stepFoods.length > 0 && <p className="fine-print">No matching foods in this step. Try another name or category.</p>}
-              {stepFoods.some(f => f.nutritionStatus === 'pending') && <p className="compact-pending-explainer">Foods labelled “Nutrition pending” are visible for browsing, but cannot be added to nutrient calculations yet.</p>}}
+              {stepFoods.some(f => f.nutritionStatus === 'pending') && <p className="compact-pending-explainer">Foods labelled “Nutrition pending” are visible for browsing, but cannot be added to nutrient calculations yet.</p>}
               <div className="visual-food-grid" aria-label={currentGuide.title}>
                 {guidedChoices.map(f => {
                   const pending = f.nutritionStatus === 'pending';
