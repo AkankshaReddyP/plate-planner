@@ -17,7 +17,7 @@ describe('guided meal categories', () => {
 describe('condition-aware choices', () => {
   it('prioritizes higher-fibre grains in diabetes without prohibiting refined grain', () => {
     expect(foodGuidance(roti, ['Diabetes']).priority).toBeLessThan(foodGuidance(rice, ['Diabetes']).priority);
-    expect(foodGuidance(rice, ['Diabetes']).note).toMatch(/portion/);
+    expect(foodGuidance(rice, ['Diabetes']).note).toMatch(/smaller serving/);
   });
   it('does not misclassify vegetables as inflammatory arthritis triggers', () => {
     expect(foodGuidance(spinach, ['Arthritis']).priority).toBe(0);
