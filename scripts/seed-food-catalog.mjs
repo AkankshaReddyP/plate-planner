@@ -12,6 +12,7 @@ import { RESEARCHED_DISHES, canApplyResearchUpdate, canMigrateLegacyCrude } from
 import { INDB_RECIPES, canApplyINDBUpdate } from './indb-south-indian-recipes.mjs';
 import { REMAINING_DISHES, mayUpgradePending } from './remaining-south-indian-recipes.mjs';
 import { ANDHRA_EXPANSION, expansionCounts } from './andhra-expansion-foods.mjs';
+import { PROTEIN_FOODS, proteinCounts } from './protein-foods.mjs';
 
 initializeApp({ credential: applicationDefault(), projectId: 'plate-planner-2bc28' });
 const db = getFirestore();
@@ -178,3 +179,16 @@ for(const food of ANDHRA_EXPANSION){
   }
 }
 stdout.write(`Andhra/regional expansion: ${andhraCreated} new; ${andhraExisting} existing retained; ${ANDHRA_EXPANSION.length} seed dishes. Categories: ${JSON.stringify(expansionCounts)}. All new dishes nutrition-pending.\n`);
+
+let proteinsCreated=0,proteinsExisting=0;
+for(const food of PROTEIN_FOODS){
+  const ref=db.collection('foodCatalog').doc(food.id);
+  try{
+    await ref.create(food);
+    proteinsCreated++;
+  }catch(error){
+    if(error?.code===6 || error?.code==='already-exists') proteinsExisting++;
+    else throw error;
+  }
+}
+stdout.write(`Protein collection: ${proteinsCreated} new, ${proteinsExisting} previously present, ${PROTEIN_FOODS.length} source-pending reference foods. Types: ${JSON.stringify(proteinCounts)}.\n`);

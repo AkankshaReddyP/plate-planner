@@ -18,7 +18,7 @@ type Entry = { id: number; meal: MealType; date: string; items: Item[]; totals: 
 
 const zero: Nutrition = { kcal: 0, protein: 0, carbs: 0, fibre: 0, fat: 0 };
 const categories = ['All', 'Protein', 'Grain', 'Vegetable', 'Fruit', 'Dairy'] as const;
-const foodGroups = ['All', 'Curry', 'Pappu', 'Chutney', 'Roti', 'Ragi', 'Quinoa', 'Millet', 'Tiffin'] as const;
+const foodGroups = ['All', 'Legumes', 'Soy', 'Dairy protein', 'Eggs', 'Meat', 'Seafood', 'Nuts & seeds', 'Curry', 'Pappu', 'Chutney', 'Roti', 'Ragi', 'Quinoa', 'Millet', 'Tiffin'] as const;
 const pages: { key: Page; label: string; symbol: string }[] = [
   { key: 'home', label: 'Home', symbol: '⌂' },
   { key: 'foods', label: 'Foods', symbol: '◈' },
@@ -168,7 +168,7 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
 
         {page === 'foods' && <>
           <div className="page-heading"><p className="eyebrow">REFERENCE LIBRARY</p><h1>Explore foods</h1><p>Get to know what goes on your plate. Nutrients shown per 100 g.</p></div>
-          <div className="toolbar"><label className="searchbox"><span aria-hidden="true">⌕</span><input value={query} onChange={e => setQuery(e.target.value)} placeholder="Search rice, dal, fruit..." aria-label="Search foods" /></label><span className="muted">{filteredFoods.length} results</span></div>
+          <div className="toolbar"><label className="searchbox"><span aria-hidden="true">⌕</span><input value={query} onChange={e => setQuery(e.target.value)} placeholder="Search chana, dal, tofu, eggs, fish..." aria-label="Search foods" /></label><span className="muted">{filteredFoods.length} results</span></div>
           <div className="chips" aria-label="Food categories">{categories.map(c => <button type="button" key={c} aria-pressed={category === c} className={'chip ' + (category === c ? 'selected' : '')} onClick={() => setCategory(c)}>{c}</button>)}</div>
           <div className="food-group-filter"><span className="food-group-label">Explore dishes</span><div className="chips" aria-label="Dish types">{foodGroups.map(g => <button type="button" key={g} aria-pressed={foodGroup === g} className={'chip ' + (foodGroup === g ? 'selected' : '')} onClick={() => setFoodGroup(g)}>{g}</button>)}</div></div>
           {foodsLoading && <p role="status">Loading food catalog…</p>}{foodsError && <p role="alert" className="error-message">{foodsError}</p>}
