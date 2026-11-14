@@ -162,7 +162,7 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
           <div className="toolbar"><label className="searchbox"><span aria-hidden="true">⌕</span><input value={query} onChange={e => setQuery(e.target.value)} placeholder="Search rice, dal, fruit..." aria-label="Search foods" /></label><span className="muted">{filteredFoods.length} results</span></div>
           <div className="chips" aria-label="Food categories">{categories.map(c => <button type="button" key={c} aria-pressed={category === c} className={'chip ' + (category === c ? 'selected' : '')} onClick={() => setCategory(c)}>{c}</button>)}</div>
           {foodsLoading && <p role="status">Loading food catalog…</p>}{foodsError && <p role="alert" className="error-message">{foodsError}</p>}
-          <div className="food-grid">{filteredFoods.map(f => <article className="food-card" key={f.id}><div className="food-card-top"><span className="food-symbol">{f.category === 'Fruit' ? '🍎' : f.category === 'Vegetable' ? '🥬' : f.category === 'Protein' ? '🥚' : f.category === 'Dairy' ? '🥛' : '🍚'}</span><span className="category-label">{f.category}</span></div><h3>{f.name}</h3><p>{f.subtitle}</p><div className="food-macros">{f.nutritionStatus === 'pending' ? <span><strong>Nutrition pending</strong></span> : <><span><strong>{format(f.values.kcal, 0)}</strong> kcal</span><span><strong>{format(f.values.protein)}</strong> g protein</span></>}</div><button type="button" className="secondary full" disabled={f.nutritionStatus === 'pending'} onClick={() => { addFood(f.id); navigate('builder'); }}>{f.nutritionStatus === 'pending' ? 'Nutrition verification needed' : '+ Add to meal'}</button></article>)}</div>
+          <div className="food-grid">{filteredFoods.map(f => <article className="food-card" key={f.id}><div className="food-card-top"><span className="food-symbol">{f.category === 'Fruit' ? '🍎' : f.category === 'Vegetable' ? '🥬' : f.category === 'Protein' ? '🥚' : f.category === 'Dairy' ? '🥛' : '🍚'}</span><span className="category-label">{f.category}</span></div><h3>{f.name}</h3><p>{f.subtitle}</p>{f.nutritionSource && <a className="food-source-link" href={f.nutritionSource.url} target="_blank" rel="noreferrer">Research source ↗</a>}<div className="food-macros">{f.nutritionStatus === 'pending' ? <span><strong>Nutrition pending</strong></span> : <><span><strong>{format(f.values.kcal, 0)}</strong> kcal</span><span><strong>{format(f.values.protein)}</strong> g protein</span></>}</div><button type="button" className="secondary full" disabled={f.nutritionStatus === 'pending'} onClick={() => { addFood(f.id); navigate('builder'); }}>{f.nutritionStatus === 'pending' ? 'Nutrition verification needed' : '+ Add to meal'}</button></article>)}</div>
           {!foodsLoading && !filteredFoods.length && <div className="empty-state">{foods.length === 0 ? 'No active foods found. Seed the catalog from the trusted deployment workflow.' : 'No matching foods. Try another category or search term.'}</div>}
         </>}
 
@@ -190,7 +190,7 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
                     <div className="compact-mini-track"><div style={{width: Math.min(100, calculated[key] / mealTargets[key] * 100) + '%'}}/></div>
                   </div>)}
                 </div>
-                <p className="compact-goals-caption">These are illustrative meal references, not individualized nutrition requirements. Sample food data is used; no diagnosis-based limit is inferred.</p>
+                <p className="compact-goals-caption">These are illustrative meal references, not individualized nutrition requirements. Sample and research-recipe data may vary. Some research recipes measure crude fibre—not total dietary fibre. No diagnosis-based limit is inferred.</p>
               </div>
               <div className="compact-progress-head"><strong>Food selection</strong><span aria-live="polite">{mealProgress.percent}% complete</span></div>
               <div className="meal-progress-track" role="progressbar" aria-label="Food group selection progress" aria-valuemin={0} aria-valuemax={100} aria-valuenow={mealProgress.percent} aria-valuetext={`${mealProgress.completed} of 3 food groups selected`}>
@@ -219,7 +219,7 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
                     <button type="button" className="visual-food-main" aria-pressed={!!chosen}
                       onClick={() => chosen ? removeFood(f.id) : addFood(f.id)}>
                       <span className="visual-food-illustration" aria-hidden="true">{foodEmoji[f.id] ?? '🍽️'}</span>
-                      <span className="visual-food-info"><strong>{f.name}</strong><small>Suggested {suggested}</small></span>
+                      <span className="visual-food-info"><strong>{f.name}</strong><small>Suggested {suggested}</small>{f.nutritionSource && <small>Research recipe estimate</small>}</span>
                       <span className={'visual-food-check ' + (chosen ? 'checked' : '')}>{chosen ? '✓' : '+'}</span>
                     </button>
                     {chosen && <div className="visual-food-amount" onClick={event => event.stopPropagation()}>
