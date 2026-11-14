@@ -220,3 +220,14 @@
 .food-group-filter .chip{flex-shrink:0}
 .food-group-label{font-weight:700;font-size:11px;color:#56755d;white-space:nowrap}
 @media(max-width:590px){.food-group-filter{display:block}.food-group-label{display:block;margin-bottom:8px}}
+
+/* Pending foods remain visible/searchable without claiming usable nutrition. */
+.compact-builder-search{display:flex;align-items:center;gap:9px;margin:0 0 10px;padding:9px 12px;border:1px solid #dce7da;border-radius:11px;background:#fff;color:#63856c}
+.compact-builder-search input{border:0;outline:0;width:100%;min-width:0;background:transparent;font-size:12px;color:#345742}
+.compact-builder-search:focus-within{outline:2px solid #81af8c;outline-offset:1px}
+.compact-pending-explainer{font-size:10px!important;color:#6b7f72!important;line-height:1.4!important;margin:0 0 9px!important}
+.visual-food-card.nutrition-pending{background:#fafbf9;border-style:dashed;border-color:#d1ddd2}
+.visual-food-card.nutrition-pending:hover{transform:none;box-shadow:0 3px 10px rgba(37,80,45,.035)}
+.visual-food-card.nutrition-pending .visual-food-main{cursor:not-allowed;opacity:.78}
+.visual-food-card.nutrition-pending .visual-food-check{font-size:14px;color:#a1afa1;border-color:#d1ddd2}
+.visual-food-info .pending-status{color:#87734a;font-weight:600}
