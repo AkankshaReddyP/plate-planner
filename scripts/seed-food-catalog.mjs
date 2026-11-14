@@ -13,6 +13,7 @@ import { INDB_RECIPES, canApplyINDBUpdate } from './indb-south-indian-recipes.mj
 import { REMAINING_DISHES, mayUpgradePending } from './remaining-south-indian-recipes.mjs';
 import { ANDHRA_EXPANSION, expansionCounts } from './andhra-expansion-foods.mjs';
 import { PROTEIN_FOODS, proteinCounts } from './protein-foods.mjs';
+import { USDA_MATCHED_FOODS, canEnrichPending } from './usda-matched-foods.mjs';
 
 initializeApp({ credential: applicationDefault(), projectId: 'plate-planner-2bc28' });
 const db = getFirestore();
@@ -192,3 +193,23 @@ for(const food of PROTEIN_FOODS){
   }
 }
 stdout.write(`Protein collection: ${proteinsCreated} new, ${proteinsExisting} previously present, ${PROTEIN_FOODS.length} source-pending reference foods. Types: ${JSON.stringify(proteinCounts)}.\n`);
+
+let matchedUpgraded=0,matchedPreserved=0,matchedMissing=0;
+for(const research of USDA_MATCHED_FOODS){
+  const ref=db.collection('foodCatalog').doc(research.id);
+  const result=await db.runTransaction(async tx=>{
+    const snap=await tx.get(ref);
+    if(!snap.exists) return 'missing';
+    if(!canEnrichPending(snap.data())) return 'preserved';
+    tx.update(ref,{
+      name:research.name,subtitle:research.subtitle,
+      values:research.values,nutritionStatus:research.nutritionStatus,
+      nutritionSource:research.nutritionSource,
+    });
+    return 'upgraded';
+  });
+  if(result==='upgraded')matchedUpgraded++;
+  else if(result==='missing')matchedMissing++;
+  else matchedPreserved++;
+}
+stdout.write(`USDA exact matches: ${matchedUpgraded} pending foods upgraded, ${matchedPreserved} preexisting completed/customized preserved, ${matchedMissing} missing canonical records (not invented).\n`);
