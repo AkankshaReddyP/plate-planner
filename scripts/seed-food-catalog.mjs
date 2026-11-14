@@ -14,6 +14,7 @@ import { REMAINING_DISHES, mayUpgradePending } from './remaining-south-indian-re
 import { ANDHRA_EXPANSION, expansionCounts } from './andhra-expansion-foods.mjs';
 import { PROTEIN_FOODS, proteinCounts } from './protein-foods.mjs';
 import { USDA_MATCHED_FOODS, canEnrichPending } from './usda-matched-foods.mjs';
+import { NAMED_PREPARED_RECIPES, canEnrichNamedRecipe } from './named-prepared-recipes.mjs';
 
 initializeApp({ credential: applicationDefault(), projectId: 'plate-planner-2bc28' });
 const db = getFirestore();
@@ -213,3 +214,24 @@ for(const research of USDA_MATCHED_FOODS){
   else matchedPreserved++;
 }
 stdout.write(`USDA exact matches: ${matchedUpgraded} pending foods upgraded, ${matchedPreserved} preexisting completed/customized preserved, ${matchedMissing} missing canonical records (not invented).\n`);
+
+let namedUpgraded=0,namedPreserved=0,namedMissing=0;
+for(const food of NAMED_PREPARED_RECIPES){
+  const ref=db.collection('foodCatalog').doc(food.id);
+  const result=await db.runTransaction(async tx=>{
+    const snap=await tx.get(ref);
+    if(!snap.exists) return 'missing';
+    if(!canEnrichNamedRecipe(snap.data())) return 'preserved';
+    tx.update(ref,{
+      name:food.name,subtitle:food.subtitle,
+      values:food.values,reportedFibreG:food.reportedFibreG,
+      nutritionStatus:food.nutritionStatus,
+      nutritionSource:food.nutritionSource,
+    });
+    return 'upgraded';
+  });
+  if(result==='upgraded')namedUpgraded++;
+  else if(result==='missing')namedMissing++;
+  else namedPreserved++;
+}
+stdout.write(`Named cooked recipes: ${namedUpgraded} pending records upgraded; ${namedPreserved} previously reviewed/customized preserved; ${namedMissing} missing IDs. Source fibre method remains unverified.\n`);
