@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import { firebaseConfigured } from './firebase/client';
+import { useFoodCatalog, type CatalogFood } from './domain/foodCatalog';
 import { useAuth } from './firebase/useAuth';
 import { OnboardingGate, useProfileConditions } from './firebase/OnboardingGate';
 import { guideSteps, inStep, foodGuidance, conditionSummary } from './domain/mealGuidance';
@@ -9,25 +10,11 @@ import { EXAMPLE_MEAL_TARGETS, suggestWholeMealPortions, nutrientKeys, nutrientL
 
 type Page = 'home' | 'foods' | 'builder' | 'history' | 'insights' | 'settings';
 type MealType = 'Breakfast' | 'Lunch' | 'Dinner' | 'Snack';
-type Category = 'Protein' | 'Grain' | 'Vegetable' | 'Fruit' | 'Dairy';
 type Nutrition = { kcal: number; protein: number; carbs: number; fibre: number; fat: number };
-type Food = { id: string; name: string; subtitle: string; category: Category; values: Nutrition };
+type Food = CatalogFood;
 type Item = { id: string; grams: number; edited?: boolean };
 type Entry = { id: number; meal: MealType; date: string; items: Item[]; totals: Nutrition };
 
-const foods: Food[] = [
-  { id: 'rice', name: 'Cooked white rice', subtitle: 'Cooked • sample data', category: 'Grain', values: { kcal: 130, protein: 2.7, carbs: 28.2, fibre: 0.4, fat: 0.3 } },
-  { id: 'roti', name: 'Whole-wheat roti', subtitle: 'Prepared • sample data', category: 'Grain', values: { kcal: 297, protein: 9.6, carbs: 46.4, fibre: 7.1, fat: 8.1 } },
-  { id: 'dal', name: 'Cooked toor dal', subtitle: 'Cooked • sample data', category: 'Protein', values: { kcal: 116, protein: 7.2, carbs: 20.3, fibre: 5.8, fat: 0.4 } },
-  { id: 'egg', name: 'Boiled egg', subtitle: 'Prepared • sample data', category: 'Protein', values: { kcal: 155, protein: 12.6, carbs: 1.1, fibre: 0, fat: 10.6 } },
-  { id: 'chicken', name: 'Cooked chicken breast', subtitle: 'Cooked • sample data', category: 'Protein', values: { kcal: 165, protein: 31, carbs: 0, fibre: 0, fat: 3.6 } },
-  { id: 'curd', name: 'Plain curd', subtitle: 'Ready to eat • sample data', category: 'Dairy', values: { kcal: 61, protein: 3.5, carbs: 4.7, fibre: 0, fat: 3.3 } },
-  { id: 'spinach', name: 'Cooked spinach', subtitle: 'Cooked • sample data', category: 'Vegetable', values: { kcal: 23, protein: 3, carbs: 3.8, fibre: 2.4, fat: 0.3 } },
-  { id: 'carrot', name: 'Raw carrot', subtitle: 'Raw • sample data', category: 'Vegetable', values: { kcal: 41, protein: 0.9, carbs: 9.6, fibre: 2.8, fat: 0.2 } },
-  { id: 'banana', name: 'Banana', subtitle: 'Raw • sample data', category: 'Fruit', values: { kcal: 89, protein: 1.1, carbs: 22.8, fibre: 2.6, fat: 0.3 } },
-  { id: 'apple', name: 'Apple', subtitle: 'Raw • sample data', category: 'Fruit', values: { kcal: 52, protein: 0.3, carbs: 13.8, fibre: 2.4, fat: 0.2 } },
-];
-const lookup = new Map(foods.map(food => [food.id, food]));
 const zero: Nutrition = { kcal: 0, protein: 0, carbs: 0, fibre: 0, fat: 0 };
 const categories = ['All', 'Protein', 'Grain', 'Vegetable', 'Fruit', 'Dairy'] as const;
 const pages: { key: Page; label: string; symbol: string }[] = [
@@ -40,10 +27,10 @@ const pages: { key: Page; label: string; symbol: string }[] = [
 ];
 const today = () => new Date().toLocaleDateString('en-CA');
 const format = (n: number, decimals = 1) => Number(n.toFixed(decimals)).toLocaleString('en-US', { maximumFractionDigits: decimals });
-function totals(items: Item[]): Nutrition {
+function totals(items: Item[], lookup: Map<string, Food>): Nutrition {
   return items.reduce((total, item) => {
     const f = lookup.get(item.id);
-    if (!f) return total;
+    if (!f || f.nutritionStatus === 'pending') return total;
     const ratio = item.grams / 100;
     return {
       kcal: total.kcal + f.values.kcal * ratio,
@@ -64,6 +51,9 @@ function NutritionStrip({ value }: { value: Nutrition }) {
 }
 
 function SignedInApp({ user, logout }: { user: { displayName: string | null; email: string | null }; logout: () => Promise<void> }) {
+  const { foods, loading: foodsLoading, error: foodsError } = useFoodCatalog();
+  const lookup = useMemo(() => new Map(foods.map(f => [f.id, f])), [foods]);
+  const usableFoods = useMemo(() => foods.filter(f => f.nutritionStatus !== 'pending'), [foods]);
   const [page, setPage] = useState<Page>('home');
   const [query, setQuery] = useState('');
   const [category, setCategory] = useState<(typeof categories)[number]>('All');
@@ -78,22 +68,22 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
   const conditions = useProfileConditions();
   const filteredFoods = useMemo(() => foods.filter(f =>
     (category === 'All' || f.category === category) &&
-    (f.name + ' ' + f.subtitle + ' ' + f.category).toLowerCase().includes(query.toLowerCase().trim())
+    (f.name + ' ' + f.subtitle + ' ' + f.category + ' ' + f.aliases.join(' ')).toLowerCase().includes(query.toLowerCase().trim())
   ), [category, query]);
-  const calculated = useMemo(() => totals(selected), [selected]);
+  const calculated = useMemo(() => totals(selected, lookup), [selected, lookup]);
   const dayEntries = entries.filter(e => e.date === mealDate);
-  const dayNutrition = totals(dayEntries.flatMap(e => e.items));
-  const savedNutrition = totals(entries.flatMap(e => e.items));
-  const mealProgress = useMemo(() => categoryProgress(selected, foods), [selected]);
-  const recommendedPortions = useMemo(() => suggestWholeMealPortions(selected, foods, mealTargets), [selected, mealTargets]);
+  const dayNutrition = totals(dayEntries.flatMap(e => e.items), lookup);
+  const savedNutrition = totals(entries.flatMap(e => e.items), lookup);
+  const mealProgress = useMemo(() => categoryProgress(selected, usableFoods), [selected, usableFoods]);
+  const recommendedPortions = useMemo(() => suggestWholeMealPortions(selected, usableFoods, mealTargets), [selected, usableFoods, mealTargets]);
   const currentGuide = guideSteps[guideStep];
-  const stepFoods = foods.filter(f => inStep(f, currentGuide.key))
+  const stepFoods = usableFoods.filter(f => inStep(f, currentGuide.key))
     .sort((a, b) => foodGuidance(a, conditions).priority - foodGuidance(b, conditions).priority);
   const guidedChoices = showAllChoices ? stepFoods : stepFoods.filter(f => foodGuidance(f, conditions).priority < 3);
 
   function navigate(next: Page) { setPage(next); setNotice(''); window.scrollTo?.(0, 0); }
   function applySuggestedPortions(items: Item[], goals = mealTargets): Item[] {
-    const suggestions = suggestWholeMealPortions(items, foods, goals);
+    const suggestions = suggestWholeMealPortions(items, usableFoods, goals);
     return items.map(item => item.edited ? item : {
       ...item, grams: countUnitFor(item.id)
         ? (countToGrams(item.id, suggestedCount(item.id, suggestions.get(item.id) ?? item.grams) ?? 1) ?? item.grams)
@@ -101,7 +91,7 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
     });
   }
   function addFood(id: string) {
-    if (!lookup.has(id)) return;
+    if (!lookup.has(id) || lookup.get(id)?.nutritionStatus === 'pending') return;
     setSelected(current => {
       if (current.some(item => item.id === id)) return current;
       const next: Item[] = [...current, { id, grams: 100, edited: false }];
@@ -133,7 +123,7 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
   function saveDemo() {
     if (!selected.length || !selected.some(i => i.grams > 0)) return;
     const items = selected.filter(i => i.grams > 0).map(i => ({ ...i }));
-    setEntries(current => [{ id: Date.now(), meal, date: mealDate, items, totals: totals(items) }, ...current]);
+    setEntries(current => [{ id: Date.now(), meal, date: mealDate, items, totals: totals(items, lookup) }, ...current]);
     setSelected([]);
     setGuideStep(0);
     setNotice('Added to this browser session. Nothing was saved to Firestore.');
@@ -163,7 +153,7 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
         {page === 'home' && <>
           <div className="hero"><div><p className="eyebrow">YOUR DAILY OVERVIEW</p><h1>Small choices.<br /><em>Better days.</em></h1><p>Explore foods, build a balanced plate, and understand your meal portions—one step at a time.</p><button type="button" className="primary" onClick={() => navigate('builder')}>Build a meal <span>→</span></button></div><div className="hero-art" aria-hidden="true"><span className="plate">🥗</span><span className="orbit orbit-one">🥕</span><span className="orbit orbit-two">🍋</span><span className="orbit orbit-three">🥦</span></div></div>
           <div className="section-heading"><div><p className="eyebrow">QUICK GLANCE</p><h2>Today at a glance</h2></div><span className="muted">{new Date().toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' })}</span></div>
-          <div className="summary-grid"><article className="mini-card"><span className="card-icon green">◷</span><span className="stat-big">{entries.filter(e => e.date === today()).length}</span><strong>Demo meals logged</strong><small>In this browser session</small></article><article className="mini-card"><span className="card-icon orange">◈</span><span className="stat-big">{format(totals(entries.filter(e => e.date === today()).flatMap(e => e.items)).kcal, 0)}</span><strong>Demo kcal logged</strong><small>Calculated from sample foods</small></article><article className="mini-card"><span className="card-icon purple">✳</span><span className="stat-big">{foods.length}</span><strong>Foods to explore</strong><small>Sample reference foods</small></article></div>
+          <div className="summary-grid"><article className="mini-card"><span className="card-icon green">◷</span><span className="stat-big">{entries.filter(e => e.date === today()).length}</span><strong>Demo meals logged</strong><small>In this browser session</small></article><article className="mini-card"><span className="card-icon orange">◈</span><span className="stat-big">{format(totals(entries.filter(e => e.date === today()).flatMap(e => e.items), lookup).kcal, 0)}</span><strong>Demo kcal logged</strong><small>Calculated from sample foods</small></article><article className="mini-card"><span className="card-icon purple">✳</span><span className="stat-big">{foods.length}</span><strong>Foods to explore</strong><small>Live Firestore catalog</small></article></div>
           <div className="two-col"><article className="panel"><div className="panel-heading"><div><p className="eyebrow">GET STARTED</p><h3>Explore your food library</h3></div><span className="round-icon">↗</span></div><p>Search everyday foods, compare portions, and add ingredients to a new meal.</p><button className="text-action" type="button" onClick={() => navigate('foods')}>Browse foods →</button></article><article className="panel"><div className="panel-heading"><div><p className="eyebrow">KEEP TRACK</p><h3>Your recent meals</h3></div><span className="round-icon">◷</span></div>{entries.length ? <><p>{entries[0].meal} · {entries[0].items.length} foods · {format(entries[0].totals.kcal, 0)} kcal</p><button className="text-action" type="button" onClick={() => navigate('history')}>View history →</button></> : <><p>Meals you add in the builder will appear here for this session.</p><button className="text-action" type="button" onClick={() => navigate('builder')}>Create your first meal →</button></>}</article></div>
         </>}
 
@@ -171,8 +161,9 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
           <div className="page-heading"><p className="eyebrow">REFERENCE LIBRARY</p><h1>Explore foods</h1><p>Get to know what goes on your plate. Nutrients shown per 100 g.</p></div>
           <div className="toolbar"><label className="searchbox"><span aria-hidden="true">⌕</span><input value={query} onChange={e => setQuery(e.target.value)} placeholder="Search rice, dal, fruit..." aria-label="Search foods" /></label><span className="muted">{filteredFoods.length} results</span></div>
           <div className="chips" aria-label="Food categories">{categories.map(c => <button type="button" key={c} aria-pressed={category === c} className={'chip ' + (category === c ? 'selected' : '')} onClick={() => setCategory(c)}>{c}</button>)}</div>
-          <div className="food-grid">{filteredFoods.map(f => <article className="food-card" key={f.id}><div className="food-card-top"><span className="food-symbol">{f.category === 'Fruit' ? '🍎' : f.category === 'Vegetable' ? '🥬' : f.category === 'Protein' ? '🥚' : f.category === 'Dairy' ? '🥛' : '🍚'}</span><span className="category-label">{f.category}</span></div><h3>{f.name}</h3><p>{f.subtitle}</p><div className="food-macros"><span><strong>{format(f.values.kcal, 0)}</strong> kcal</span><span><strong>{format(f.values.protein)}</strong> g protein</span></div><button type="button" className="secondary full" onClick={() => { addFood(f.id); navigate('builder'); }}>+ Add to meal</button></article>)}</div>
-          {!filteredFoods.length && <div className="empty-state">No matching foods. Try a different category or search term.</div>}
+          {foodsLoading && <p role="status">Loading food catalog…</p>}{foodsError && <p role="alert" className="error-message">{foodsError}</p>}
+          <div className="food-grid">{filteredFoods.map(f => <article className="food-card" key={f.id}><div className="food-card-top"><span className="food-symbol">{f.category === 'Fruit' ? '🍎' : f.category === 'Vegetable' ? '🥬' : f.category === 'Protein' ? '🥚' : f.category === 'Dairy' ? '🥛' : '🍚'}</span><span className="category-label">{f.category}</span></div><h3>{f.name}</h3><p>{f.subtitle}</p><div className="food-macros">{f.nutritionStatus === 'pending' ? <span><strong>Nutrition pending</strong></span> : <><span><strong>{format(f.values.kcal, 0)}</strong> kcal</span><span><strong>{format(f.values.protein)}</strong> g protein</span></>}</div><button type="button" className="secondary full" disabled={f.nutritionStatus === 'pending'} onClick={() => { addFood(f.id); navigate('builder'); }}>{f.nutritionStatus === 'pending' ? 'Nutrition verification needed' : '+ Add to meal'}</button></article>)}</div>
+          {!foodsLoading && !filteredFoods.length && <div className="empty-state">{foods.length === 0 ? 'No active foods found. Seed the catalog from the trusted deployment workflow.' : 'No matching foods. Try another category or search term.'}</div>}
         </>}
 
         {page === 'builder' && <>
@@ -212,12 +203,15 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
                 <div><p className="eyebrow">STEP {guideStep + 1} OF 3</p><h2>{currentGuide.title}</h2></div>
                 <span className="compact-step-hint">{selected.filter(i => { const f = lookup.get(i.id);return !!f && inStep(f, currentGuide.key);}).length} selected</span>
               </div>
+              {foodsLoading && <p role="status">Loading foods…</p>}
+              {foodsError && <p role="alert" className="error-message">{foodsError}</p>}
+              {!foodsLoading && stepFoods.length === 0 && <p className="fine-print">No foods with usable nutrient information are available in this step yet. New South Indian dishes appear in the catalog while their nutrition data is reviewed.</p>}
               <div className="visual-food-grid" aria-label={currentGuide.title}>
                 {guidedChoices.map(f => {
                   const chosen = selected.find(i => i.id === f.id);
                   const suggestedGrams = chosen
                     ? recommendedPortions.get(f.id) ?? chosen.grams
-                    : suggestWholeMealPortions([...selected, { id: f.id, grams: 100, edited: false }], foods, mealTargets).get(f.id) ?? 100;
+                    : suggestWholeMealPortions([...selected, { id: f.id, grams: 100, edited: false }], usableFoods, mealTargets).get(f.id) ?? 100;
                   const unit = countUnitFor(f.id);
                   const suggested = unit ? `${suggestedCount(f.id, suggestedGrams)} ${unit.plural}` : `${suggestedGrams} g`;
                   const count = unit && chosen ? chosen.grams / unit.gramsPerItem : 0;

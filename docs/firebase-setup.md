@@ -57,3 +57,13 @@ The user experience is locked until the signed-in account completes a private on
 Only the signed-in user can read or create/update their own onboarding document; other accounts (including app admins) cannot access it through the web SDK. Firestore rules validate allowed keys, numeric ranges, condition choices and server timestamp and prohibit deletion. App-managed family records remain separate. Do not put medical details into publicly visible account documents or the repository. This onboarding asks for self-reported context, not a clinical assessment.
 
 The app will show an error/retry state if Firestore cannot be reached. Onboarding does not use local-only completion flags that could bypass the requirement.
+
+## Firestore food catalog and South Indian seed
+
+The signed-in app now reads active `foodCatalog` documents from Firestore with a live query filtered by `isActive == true`. It no longer supplies the former hardcoded 10-food array in production. Unauthenticated access and client catalog modifications remain forbidden by `firestore.rules`.
+
+The manual GitHub Hosting deployment workflow creates absent reference-food documents using the trusted service account **after Firestore rules tests and deployment**, and before publishing Hosting. This is idempotent: existing documents are never overwritten. It seeds 10 legacy **illustrative** numeric foods and South Indian names such as idli, dosa, sambar, rasam, upma, pongal, pappu and poriyal. To publish the catalog and UI, run `.github/workflows/deploy-hosting.yml` on `main` using the configured service-account secret.
+
+South Indian recipe records intentionally have `nutritionStatus: 'pending'` and **no nutrient totals**. They're discoverable in the Foods library but cannot be added to the nutrition-optimizing meal builder until a review provides food-specific **per-100g edible-portion** calories, protein, carbs, fat, fibre and a named primary recipe/source. Recipe variants, water and oil alter values; false precision could mislead users managing medical conditions. A record is usable after a trusted administrator adds validated numeric `values` and changes `nutritionStatus` to `verified` (or explicitly `sample` for non-clinical illustrative entries). Do not allow client-side upgrades of this status.
+
+Every catalog document includes a primary browsing `category`, which is not a claim that the dish only contains that macronutrient. Mixed dishes span several nutrient groups. Count-based serving conversions likewise require a reviewed edible gram equivalence; the initial boiled egg uses 50 g per egg only as a clearly approximate sample value.
