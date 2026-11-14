@@ -20,7 +20,9 @@ const recipe = (id, name, kcal, protein, carbs, fat, fibre, detail) => ({
   id, name, category:'Grain', cuisine:'South Indian', isActive:true,
   aliases: [], nutritionStatus:'sample',
   subtitle:'Research recipe · per 100g cooked · fibre is crude',
-  values:{kcal,protein,carbs,fat,fibre},
+  // Crude fibre remains separate: it is not total dietary fibre.
+  values:{kcal,protein,carbs,fat},
+  crudeFibreG:fibre,
   nutritionSource:{...RESEARCH_SOURCE, variant:detail},
 });
 export const RESEARCHED_DISHES = [
