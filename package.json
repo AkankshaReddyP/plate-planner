@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
-    "test": "vitest run src/ && node --test tests/researched-foods.test.mjs tests/indb-foods.test.mjs tests/remaining-foods.test.mjs tests/andhra-expansion.test.mjs tests/protein-foods.test.mjs",
+    "test": "vitest run src/ && node --test tests/researched-foods.test.mjs tests/indb-foods.test.mjs tests/remaining-foods.test.mjs tests/andhra-expansion.test.mjs tests/protein-foods.test.mjs tests/usda-matched-foods.test.mjs tests/named-prepared-recipes.test.mjs",
     "lint": "eslint .",
     "typecheck": "tsc -b",
     "preview": "vite preview"

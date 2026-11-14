@@ -1,0 +1,1388 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-11-13",
+  "purpose": "Pending catalogue entries are not automatically assigned nutrient values without preparation and traceable per-100g basis.",
+  "totalNewCatalogEntries": 133,
+  "nutritionProfilesAdded": 27,
+  "stillPending": 106,
+  "remaining": [
+    {
+      "id": "vankaya_kura",
+      "name": "Vankaya kura (brinjal curry)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "dondakaya_fry",
+      "name": "Dondakaya fry (ivy gourd)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "dondakaya_kura",
+      "name": "Dondakaya kura (ivy gourd curry)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "beerakaya_kura",
+      "name": "Beerakaya kura (ridge gourd)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "sorakaya_kura",
+      "name": "Sorakaya kura (bottle gourd)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "dosakaya_kura",
+      "name": "Dosakaya kura (yellow cucumber)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "aratikaya_vepudu",
+      "name": "Aratikaya vepudu (raw banana fry)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "bangaladumpa_kura",
+      "name": "Bangaladumpa kura (potato curry)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "munagakaya_kura",
+      "name": "Munagakaya kura (drumstick curry)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "thotakura_fry",
+      "name": "Thotakura fry (amaranth leaves)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "chikkudukaya_kura",
+      "name": "Chikkudukaya kura (broad beans)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "bendakaya_pulusu",
+      "name": "Bendakaya pulusu (tamarind okra stew)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "gummadikaya_pulusu",
+      "name": "Gummadikaya pulusu (pumpkin stew)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "majiga_pulusu",
+      "name": "Majjiga pulusu (spiced buttermilk curry)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "gongura_pappu",
+      "name": "Gongura pappu (sorrel dal)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "chintakaya_pappu",
+      "name": "Chintakaya pappu (tamarind dal)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "beerakaya_pappu",
+      "name": "Beerakaya pappu (ridge gourd dal)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "thotakura_pappu",
+      "name": "Thotakura pappu (amaranth dal)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "mudda_pappu",
+      "name": "Mudda pappu (plain cooked dal)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "ulavacharu",
+      "name": "Ulavacharu (horse gram stew)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "pachi_pulusu",
+      "name": "Pachi pulusu (uncooked tamarind broth)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "tomato_charu",
+      "name": "Tomato charu (tomato rasam)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "gongura_pachadi",
+      "name": "Gongura pachadi (sorrel chutney)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "dosakaya_pachadi",
+      "name": "Dosakaya pachadi (cucumber chutney)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "beerakaya_pachadi",
+      "name": "Beerakaya pachadi (ridge gourd chutney)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "allam_pachadi",
+      "name": "Allam pachadi (ginger chutney)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "avakaya",
+      "name": "Avakaya (mango pickle)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "kandi_podi",
+      "name": "Kandi podi (toor dal spice powder)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "andhra_kodi_kura",
+      "name": "Andhra kodi kura (chicken curry)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "natu_kodi_pulusu",
+      "name": "Natu kodi pulusu (country chicken stew)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "gongura_mutton",
+      "name": "Gongura mutton curry",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "chepala_pulusu",
+      "name": "Chepala pulusu (tamarind fish curry)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "royyala_iguru",
+      "name": "Royyala iguru (prawn curry)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "guddu_pulusu",
+      "name": "Guddu pulusu (egg tamarind curry)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "jonna_rotte",
+      "name": "Jonna rotte (sorghum flatbread)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "sajja_rotte",
+      "name": "Sajja rotte (pearl millet flatbread)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "ragi_rotte",
+      "name": "Ragi rotte (finger millet flatbread)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "mixed_millet_roti",
+      "name": "Mixed millet roti",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "ragi_java",
+      "name": "Ragi java (finger millet porridge)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "ragi_dosa_andhra",
+      "name": "Andhra-style ragi dosa",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "ragi_idli_andhra",
+      "name": "Andhra-style ragi idli",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "ragi_upma",
+      "name": "Ragi upma",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "ragi_adai",
+      "name": "Ragi adai (millet flatbread)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "korra_annam",
+      "name": "Korra annam (cooked foxtail millet)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "quinoa_vegetable_upma",
+      "name": "Vegetable quinoa upma",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "quinoa_pesarattu",
+      "name": "Quinoa pesarattu",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "quinoa_khichdi",
+      "name": "Quinoa khichdi with dal",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "quinoa_vegetable_pulao",
+      "name": "Quinoa vegetable pulao",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "quinoa_curdrice",
+      "name": "Quinoa curd rice",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "erra_karam_dosa",
+      "name": "Erra karam dosa (red chutney dosa)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "guddu_dosa",
+      "name": "Guddu dosa (egg dosa)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "alasanda_vada",
+      "name": "Alasanda vada (black-eyed pea fritters)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "pulagam",
+      "name": "Pulagam (rice-dal preparation)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "bobbatlu",
+      "name": "Bobbatlu (sweet lentil flatbread)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "kala_chana_cooked",
+      "name": "Kala chana (boiled black chickpeas)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "kala_chana_sprouted",
+      "name": "Sprouted kala chana",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "chana_masala",
+      "name": "Chana masala (chole curry)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "chana_sundal",
+      "name": "Chana sundal (tempered chickpeas)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "chana_dal_cooked",
+      "name": "Cooked chana dal (split Bengal gram)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "chana_dal_curry",
+      "name": "Chana dal curry",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "toor_dal_cooked",
+      "name": "Cooked toor dal (pigeon pea)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "moong_dal_cooked",
+      "name": "Cooked yellow moong dal",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "whole_green_moong_cooked",
+      "name": "Boiled green moong (whole)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "green_moong_sprouts",
+      "name": "Green moong sprouts",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "moong_sprouts_curry",
+      "name": "Moong sprouts curry",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "urad_dal_cooked",
+      "name": "Cooked urad dal",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "whole_urad_cooked",
+      "name": "Whole black gram (boiled)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "masoor_dal_cooked",
+      "name": "Cooked masoor dal",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "rajma_curry",
+      "name": "Rajma masala (kidney bean curry)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "lobia_cooked",
+      "name": "Boiled lobia (black-eyed peas)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "alasanda_kura",
+      "name": "Alasanda kura (cowpea curry)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "horsegram_cooked",
+      "name": "Boiled horse gram",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "moth_bean_cooked",
+      "name": "Cooked moth beans",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "double_beans_cooked",
+      "name": "Boiled double beans",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "field_beans_cooked",
+      "name": "Boiled field beans",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "batani_kura",
+      "name": "Batani kura (green peas curry)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "mixed_dal_cooked",
+      "name": "Mixed lentil dal",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "soy_chunks_rehydrated",
+      "name": "Soya chunks (rehydrated, cooked)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "soya_chunks_curry",
+      "name": "Soya chunks curry",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "tofu_bhurji",
+      "name": "Tofu bhurji",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "tempeh_plain",
+      "name": "Tempeh (plain)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "paneer_plain",
+      "name": "Paneer (plain)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "paneer_bhurji",
+      "name": "Paneer bhurji",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "paneer_curry",
+      "name": "Paneer curry",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "hung_curd_plain",
+      "name": "Hung curd (plain)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "milk_toned",
+      "name": "Toned milk",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "egg_whites_boiled",
+      "name": "Boiled egg whites",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "egg_omelette",
+      "name": "Egg omelette",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "egg_scramble",
+      "name": "Scrambled eggs",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "egg_curry_tomato",
+      "name": "Egg curry (tomato gravy)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "egg_half_fry",
+      "name": "Egg half fry",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "chicken_thigh_cooked",
+      "name": "Chicken thigh (cooked)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "chicken_65",
+      "name": "Chicken 65",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "chicken_roast",
+      "name": "Andhra chicken roast",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "mutton_curry_andhra",
+      "name": "Andhra mutton curry",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "goat_meat_cooked",
+      "name": "Goat meat (cooked)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "lamb_cooked",
+      "name": "Lamb (cooked)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "lean_beef_cooked",
+      "name": "Lean beef (cooked)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "fish_rohu_cooked",
+      "name": "Rohu fish (cooked)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "fish_catla_cooked",
+      "name": "Catla fish (cooked)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "fish_tuna_cooked",
+      "name": "Tuna (cooked)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "fish_sardines_cooked",
+      "name": "Sardines (cooked)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "prawns_cooked",
+      "name": "Prawns / shrimp (cooked)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "prawn_fry_andhra",
+      "name": "Andhra royyala vepudu (prawn fry)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "fish_fry_andhra",
+      "name": "Andhra fish fry",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    },
+    {
+      "id": "peanut_butter",
+      "name": "Unsweetened peanut butter",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
+        "kcal protein carbs fat",
+        "fibre analytical method"
+      ]
+    }
+  ]
+}
