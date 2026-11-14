@@ -4,8 +4,8 @@ import { USDA_MATCHED_FOODS, canEnrichPending } from '../scripts/usda-matched-fo
 import { PROTEIN_FOODS } from '../scripts/protein-foods.mjs';
 import { ANDHRA_EXPANSION } from '../scripts/andhra-expansion-foods.mjs';
 
-test('20 source-backed records have complete per-100g macros and total fibre',()=>{
-  assert.equal(USDA_MATCHED_FOODS.length,20);
+test('22 source-backed records have complete per-100g macros and total fibre',()=>{
+  assert.equal(USDA_MATCHED_FOODS.length,22);
   assert.equal(new Set(USDA_MATCHED_FOODS.map(x=>x.id)).size,20);
   const canonical=new Set([...PROTEIN_FOODS,...ANDHRA_EXPANSION].map(x=>x.id));
   for(const food of USDA_MATCHED_FOODS){
