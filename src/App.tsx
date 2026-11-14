@@ -4,6 +4,7 @@ import { useAuth } from './firebase/useAuth';
 import { OnboardingGate, useProfileConditions } from './firebase/OnboardingGate';
 import { guideSteps, inStep, foodGuidance, conditionSummary } from './domain/mealGuidance';
 import { categoryProgress } from './domain/categoryProgress';
+import { countToGrams, countUnitFor, suggestedCount, foodQuantityLabel, foodEmoji } from './domain/foodPortions';
 import { EXAMPLE_MEAL_TARGETS, suggestWholeMealPortions, nutrientKeys, nutrientLabels, nutrientUnits, type NutrientKey, type NutritionTargets } from './domain/wholeMealPortions';
 
 type Page = 'home' | 'foods' | 'builder' | 'history' | 'insights' | 'settings';
@@ -94,7 +95,9 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
   function applySuggestedPortions(items: Item[], goals = mealTargets): Item[] {
     const suggestions = suggestWholeMealPortions(items, foods, goals);
     return items.map(item => item.edited ? item : {
-      ...item, grams: suggestions.get(item.id) ?? item.grams,
+      ...item, grams: countUnitFor(item.id)
+        ? (countToGrams(item.id, suggestedCount(item.id, suggestions.get(item.id) ?? item.grams) ?? 1) ?? item.grams)
+        : suggestions.get(item.id) ?? item.grams,
     });
   }
   function addFood(id: string) {
@@ -114,6 +117,11 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
       item.id === id ? {
         ...item, grams: Number.isFinite(grams) ? Math.min(2000, Math.max(0, grams)) : 0, edited: true,
       } : item)));
+  }
+  function setCount(id: string, count: number) {
+    const grams = countToGrams(id, count);
+    if (grams === null) return;
+    setGrams(id, grams);
   }
   function changeMealTarget(key: NutrientKey, value: number) {
     const maximum: NutritionTargets = { kcal: 2500, protein: 150, carbs: 300, fat: 120, fibre: 40 };
@@ -204,20 +212,38 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
                 <div><p className="eyebrow">STEP {guideStep + 1} OF 3</p><h2>{currentGuide.title}</h2></div>
                 <span className="compact-step-hint">{selected.filter(i => { const f = lookup.get(i.id);return !!f && inStep(f, currentGuide.key);}).length} selected</span>
               </div>
-              <div className="compact-food-options" aria-label={currentGuide.title}>
+              <div className="visual-food-grid" aria-label={currentGuide.title}>
                 {guidedChoices.map(f => {
                   const chosen = selected.find(i => i.id === f.id);
-                  const suggestion = chosen
+                  const suggestedGrams = chosen
                     ? recommendedPortions.get(f.id) ?? chosen.grams
                     : suggestWholeMealPortions([...selected, { id: f.id, grams: 100, edited: false }], foods, mealTargets).get(f.id) ?? 100;
-                  return <div key={f.id} className={'compact-food-option ' + (chosen ? 'picked' : '')}>
-                    <div className="compact-food-details"><strong>{f.name}</strong><small>{format(f.values.kcal, 0)} kcal / 100 g · Suggested {suggestion} g</small></div>
-                    {chosen ? <div className="compact-portion">
-                      <label className="sr-only" htmlFor={'compact-grams-' + f.id}>{f.name} portion in grams</label>
-                      <input id={'compact-grams-' + f.id} type="number" min="0" max="2000" step="5" value={chosen.grams} onChange={e => setGrams(f.id, Number(e.target.value))}/>
-                      <span>g</span>
-                      <button type="button" className="compact-remove" onClick={() => removeFood(f.id)} aria-label={'Remove ' + f.name}>×</button>
-                    </div> : <button type="button" className="compact-add" onClick={() => addFood(f.id)}>+ Add</button>}
+                  const unit = countUnitFor(f.id);
+                  const suggested = unit ? `${suggestedCount(f.id, suggestedGrams)} ${unit.plural}` : `${suggestedGrams} g`;
+                  const count = unit && chosen ? chosen.grams / unit.gramsPerItem : 0;
+                  return <div key={f.id} className={'visual-food-card ' + (chosen ? 'is-selected' : '')}>
+                    <button type="button" className="visual-food-main" aria-pressed={!!chosen}
+                      onClick={() => chosen ? removeFood(f.id) : addFood(f.id)}>
+                      <span className="visual-food-illustration" aria-hidden="true">{foodEmoji[f.id] ?? '🍽️'}</span>
+                      <span className="visual-food-info"><strong>{f.name}</strong><small>Suggested {suggested}</small></span>
+                      <span className={'visual-food-check ' + (chosen ? 'checked' : '')}>{chosen ? '✓' : '+'}</span>
+                    </button>
+                    {chosen && <div className="visual-food-amount" onClick={event => event.stopPropagation()}>
+                      <span className="visual-amount-label">{unit ? 'How many?' : 'Portion'}</span>
+                      <div className="visual-quantity-controls">
+                        {unit ? <>
+                          <button type="button" aria-label={'Decrease ' + f.name + ' count'} disabled={count <= 0} onClick={() => setCount(f.id, Math.max(0, count - 1))}>−</button>
+                          <label className="sr-only" htmlFor={'food-count-' + f.id}>{f.name} count</label>
+                          <input id={'food-count-' + f.id} type="number" min="0" max="40" step="1" value={count} onChange={e => setCount(f.id, Number(e.target.value))} />
+                          <span>{count === 1 ? unit.singular : unit.plural}</span>
+                          <button type="button" aria-label={'Increase ' + f.name + ' count'} disabled={count >= 40} onClick={() => setCount(f.id, count + 1)}>+</button>
+                        </> : <>
+                          <label className="sr-only" htmlFor={'visual-grams-' + f.id}>{f.name} grams</label>
+                          <input id={'visual-grams-' + f.id} type="number" min="0" max="2000" step="5" value={chosen.grams} onChange={e => setGrams(f.id, Number(e.target.value))} />
+                          <span>g</span>
+                        </>}
+                      </div>
+                    </div>}
                   </div>;
                 })}
               </div>
@@ -232,7 +258,7 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
               <div className="compact-summary-title"><h3>Meal summary</h3><span>{selected.length} foods</span></div>
               <div className="compact-calories"><strong>{format(calculated.kcal, 0)}</strong><span>kcal estimated</span></div>
               <div className="compact-macros"><span>Protein <strong>{format(calculated.protein)} g</strong></span><span>Carbs <strong>{format(calculated.carbs)} g</strong></span><span>Fibre <strong>{format(calculated.fibre)} g</strong></span><span>Fat <strong>{format(calculated.fat)} g</strong></span></div>
-              {selected.length > 0 && <details className="compact-selection-details"><summary>Selected foods ({selected.length})</summary><ul>{selected.map(item => <li key={item.id}>{lookup.get(item.id)?.name}: {format(item.grams,0)} g</li>)}</ul></details>}
+              {selected.length > 0 && <details className="compact-selection-details"><summary>Selected foods ({selected.length})</summary><ul>{selected.map(item => <li key={item.id}>{lookup.get(item.id)?.name}: {foodQuantityLabel(item.id, item.grams)}</li>)}</ul></details>}
               <button className="primary full" type="button" disabled={!selected.some(i => i.grams > 0)} onClick={saveDemo}>Add to demo history →</button>
               <p className="fine-print">Portions and nutrition are illustrative, not a medical prescription. Demo meals aren't saved to Firestore.</p>
             </aside>
@@ -241,7 +267,7 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
 
         {page === 'history' && <>
           <div className="page-heading"><p className="eyebrow">YOUR JOURNEY</p><h1>Meal history</h1><p>Meals added during this browser session. These are demos, not verified consumption records.</p></div>
-          {entries.length ? <div className="history-list">{entries.map(entry => <article className="panel history-entry" key={entry.id}><div><span className="eyebrow">{entry.date} · {entry.meal}</span><h3>{entry.items.map(i => lookup.get(i.id)?.name).filter(Boolean).join(', ')}</h3><p>{entry.items.map(i => `${lookup.get(i.id)?.name}: ${format(i.grams, 0)} g`).join(' • ')}</p></div><div className="history-end"><strong>{format(entry.totals.kcal, 0)} kcal</strong><button type="button" className="secondary" onClick={() => repeatEntry(entry)}>Edit as new meal</button><button type="button" className="text-action danger" onClick={() => setEntries(list => list.filter(e => e.id !== entry.id))}>Remove</button></div></article>)}</div> : <div className="empty-state tall"><span className="empty-art">📔</span><h3>No demo meals yet</h3><p>Build a meal and add it to this session to see it here.</p><button className="primary" type="button" onClick={() => navigate('builder')}>Build a meal →</button></div>}
+          {entries.length ? <div className="history-list">{entries.map(entry => <article className="panel history-entry" key={entry.id}><div><span className="eyebrow">{entry.date} · {entry.meal}</span><h3>{entry.items.map(i => lookup.get(i.id)?.name).filter(Boolean).join(', ')}</h3><p>{entry.items.map(i => `${lookup.get(i.id)?.name}: ${foodQuantityLabel(i.id, i.grams)}`).join(' • ')}</p></div><div className="history-end"><strong>{format(entry.totals.kcal, 0)} kcal</strong><button type="button" className="secondary" onClick={() => repeatEntry(entry)}>Edit as new meal</button><button type="button" className="text-action danger" onClick={() => setEntries(list => list.filter(e => e.id !== entry.id))}>Remove</button></div></article>)}</div> : <div className="empty-state tall"><span className="empty-art">📔</span><h3>No demo meals yet</h3><p>Build a meal and add it to this session to see it here.</p><button className="primary" type="button" onClick={() => navigate('builder')}>Build a meal →</button></div>}
         </>}
 
         {page === 'insights' && <>
