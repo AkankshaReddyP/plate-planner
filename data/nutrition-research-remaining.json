@@ -1,0 +1,1480 @@
+{
+  "schemaVersion": 1,
+  "asOf": "2026-11-13",
+  "purpose": "Keep an auditable queue: never change nutritionStatus based only on food name. Every macro profile requires direct prepared-food match or an explicitly defined recipe and cooked-yield calculation.",
+  "priority": "Exact USDA SR Legacy prepared-food matches; then documented cooked Andhra recipes; then ingredient recipe yield calculations.",
+  "totalNewCatalogEntries": 133,
+  "nutritionProfilesAdded": 20,
+  "stillPending": 113,
+  "remaining": [
+    {
+      "id": "gutti_vankaya_kura",
+      "name": "Gutti vankaya kura (stuffed brinjal)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "vankaya_kura",
+      "name": "Vankaya kura (brinjal curry)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "dondakaya_fry",
+      "name": "Dondakaya fry (ivy gourd)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "dondakaya_kura",
+      "name": "Dondakaya kura (ivy gourd curry)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "beerakaya_kura",
+      "name": "Beerakaya kura (ridge gourd)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "sorakaya_kura",
+      "name": "Sorakaya kura (bottle gourd)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "dosakaya_kura",
+      "name": "Dosakaya kura (yellow cucumber)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "aratikaya_vepudu",
+      "name": "Aratikaya vepudu (raw banana fry)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "bangaladumpa_kura",
+      "name": "Bangaladumpa kura (potato curry)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "munagakaya_kura",
+      "name": "Munagakaya kura (drumstick curry)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "thotakura_fry",
+      "name": "Thotakura fry (amaranth leaves)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "chikkudukaya_kura",
+      "name": "Chikkudukaya kura (broad beans)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "bendakaya_pulusu",
+      "name": "Bendakaya pulusu (tamarind okra stew)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "gummadikaya_pulusu",
+      "name": "Gummadikaya pulusu (pumpkin stew)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "majiga_pulusu",
+      "name": "Majjiga pulusu (spiced buttermilk curry)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "gongura_pappu",
+      "name": "Gongura pappu (sorrel dal)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "chintakaya_pappu",
+      "name": "Chintakaya pappu (tamarind dal)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "dosakaya_pappu",
+      "name": "Dosakaya pappu (yellow cucumber dal)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "beerakaya_pappu",
+      "name": "Beerakaya pappu (ridge gourd dal)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "thotakura_pappu",
+      "name": "Thotakura pappu (amaranth dal)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "mudda_pappu",
+      "name": "Mudda pappu (plain cooked dal)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "ulavacharu",
+      "name": "Ulavacharu (horse gram stew)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "pachi_pulusu",
+      "name": "Pachi pulusu (uncooked tamarind broth)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "tomato_charu",
+      "name": "Tomato charu (tomato rasam)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "gongura_pachadi",
+      "name": "Gongura pachadi (sorrel chutney)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "dosakaya_pachadi",
+      "name": "Dosakaya pachadi (cucumber chutney)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "beerakaya_pachadi",
+      "name": "Beerakaya pachadi (ridge gourd chutney)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "allam_pachadi",
+      "name": "Allam pachadi (ginger chutney)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "avakaya",
+      "name": "Avakaya (mango pickle)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "kandi_podi",
+      "name": "Kandi podi (toor dal spice powder)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "andhra_kodi_kura",
+      "name": "Andhra kodi kura (chicken curry)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "natu_kodi_pulusu",
+      "name": "Natu kodi pulusu (country chicken stew)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "gongura_mutton",
+      "name": "Gongura mutton curry",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "chepala_pulusu",
+      "name": "Chepala pulusu (tamarind fish curry)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "royyala_iguru",
+      "name": "Royyala iguru (prawn curry)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "guddu_pulusu",
+      "name": "Guddu pulusu (egg tamarind curry)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "jonna_rotte",
+      "name": "Jonna rotte (sorghum flatbread)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "sajja_rotte",
+      "name": "Sajja rotte (pearl millet flatbread)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "ragi_rotte",
+      "name": "Ragi rotte (finger millet flatbread)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "chapati",
+      "name": "Chapati (whole-wheat flatbread)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "mixed_millet_roti",
+      "name": "Mixed millet roti",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "ragi_sangati",
+      "name": "Ragi sangati (ragi-rice balls)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "ragi_java",
+      "name": "Ragi java (finger millet porridge)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "ragi_dosa_andhra",
+      "name": "Andhra-style ragi dosa",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "ragi_idli_andhra",
+      "name": "Andhra-style ragi idli",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "ragi_upma",
+      "name": "Ragi upma",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "ragi_adai",
+      "name": "Ragi adai (millet flatbread)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "korra_annam",
+      "name": "Korra annam (cooked foxtail millet)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "quinoa_vegetable_upma",
+      "name": "Vegetable quinoa upma",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "quinoa_pesarattu",
+      "name": "Quinoa pesarattu",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "quinoa_khichdi",
+      "name": "Quinoa khichdi with dal",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "quinoa_vegetable_pulao",
+      "name": "Quinoa vegetable pulao",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "quinoa_curdrice",
+      "name": "Quinoa curd rice",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "erra_karam_dosa",
+      "name": "Erra karam dosa (red chutney dosa)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "guddu_dosa",
+      "name": "Guddu dosa (egg dosa)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "alasanda_vada",
+      "name": "Alasanda vada (black-eyed pea fritters)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "pulagam",
+      "name": "Pulagam (rice-dal preparation)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "bobbatlu",
+      "name": "Bobbatlu (sweet lentil flatbread)",
+      "source": "Andhra expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "kala_chana_cooked",
+      "name": "Kala chana (boiled black chickpeas)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "kala_chana_sprouted",
+      "name": "Sprouted kala chana",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "chana_masala",
+      "name": "Chana masala (chole curry)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "chana_sundal",
+      "name": "Chana sundal (tempered chickpeas)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "chana_dal_cooked",
+      "name": "Cooked chana dal (split Bengal gram)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "chana_dal_curry",
+      "name": "Chana dal curry",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "toor_dal_cooked",
+      "name": "Cooked toor dal (pigeon pea)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "moong_dal_cooked",
+      "name": "Cooked yellow moong dal",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "whole_green_moong_cooked",
+      "name": "Boiled green moong (whole)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "green_moong_sprouts",
+      "name": "Green moong sprouts",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "moong_sprouts_curry",
+      "name": "Moong sprouts curry",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "urad_dal_cooked",
+      "name": "Cooked urad dal",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "whole_urad_cooked",
+      "name": "Whole black gram (boiled)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "masoor_dal_cooked",
+      "name": "Cooked masoor dal",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "rajma_curry",
+      "name": "Rajma masala (kidney bean curry)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "lobia_cooked",
+      "name": "Boiled lobia (black-eyed peas)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "alasanda_kura",
+      "name": "Alasanda kura (cowpea curry)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "horsegram_cooked",
+      "name": "Boiled horse gram",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "moth_bean_cooked",
+      "name": "Cooked moth beans",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "double_beans_cooked",
+      "name": "Boiled double beans",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "field_beans_cooked",
+      "name": "Boiled field beans",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "batani_kura",
+      "name": "Batani kura (green peas curry)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "mixed_dal_cooked",
+      "name": "Mixed lentil dal",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "soy_chunks_rehydrated",
+      "name": "Soya chunks (rehydrated, cooked)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "soya_chunks_curry",
+      "name": "Soya chunks curry",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "tofu_bhurji",
+      "name": "Tofu bhurji",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "tempeh_plain",
+      "name": "Tempeh (plain)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "paneer_plain",
+      "name": "Paneer (plain)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "paneer_bhurji",
+      "name": "Paneer bhurji",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "paneer_curry",
+      "name": "Paneer curry",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "hung_curd_plain",
+      "name": "Hung curd (plain)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "milk_toned",
+      "name": "Toned milk",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "egg_whites_boiled",
+      "name": "Boiled egg whites",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "egg_omelette",
+      "name": "Egg omelette",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "egg_scramble",
+      "name": "Scrambled eggs",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "egg_curry_tomato",
+      "name": "Egg curry (tomato gravy)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "egg_half_fry",
+      "name": "Egg half fry",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "chicken_thigh_cooked",
+      "name": "Chicken thigh (cooked)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "chicken_65",
+      "name": "Chicken 65",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "chicken_roast",
+      "name": "Andhra chicken roast",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "mutton_curry_andhra",
+      "name": "Andhra mutton curry",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "goat_meat_cooked",
+      "name": "Goat meat (cooked)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "lamb_cooked",
+      "name": "Lamb (cooked)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "lean_beef_cooked",
+      "name": "Lean beef (cooked)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "fish_rohu_cooked",
+      "name": "Rohu fish (cooked)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "fish_catla_cooked",
+      "name": "Catla fish (cooked)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "fish_tilapia_cooked",
+      "name": "Tilapia (cooked)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "fish_tuna_cooked",
+      "name": "Tuna (cooked)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "fish_sardines_cooked",
+      "name": "Sardines (cooked)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "prawns_cooked",
+      "name": "Prawns / shrimp (cooked)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "prawn_fry_andhra",
+      "name": "Andhra royyala vepudu (prawn fry)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "crab_cooked",
+      "name": "Crab (cooked)",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "fish_fry_andhra",
+      "name": "Andhra fish fry",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "peanuts_roasted",
+      "name": "Roasted peanuts",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    },
+    {
+      "id": "peanut_butter",
+      "name": "Unsweetened peanut butter",
+      "source": "Protein expansion",
+      "status": "pending",
+      "requires": [
+        "precise matching food or prepared recipe",
+        "100g cooked/edible basis",
+        "source URL and version",
+        "kcal, protein, carbohydrate, fat",
+        "total dietary fibre method and value or explicitly unknown"
+      ]
+    }
+  ]
+}
