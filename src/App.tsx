@@ -4,13 +4,14 @@ import { useAuth } from './firebase/useAuth';
 import { OnboardingGate, useProfileConditions } from './firebase/OnboardingGate';
 import { guideSteps, inStep, foodGuidance, conditionSummary } from './domain/mealGuidance';
 import { categoryProgress } from './domain/categoryProgress';
+import { categorySuggestions } from './domain/portionSuggestions';
 
 type Page = 'home' | 'foods' | 'builder' | 'history' | 'insights' | 'settings';
 type MealType = 'Breakfast' | 'Lunch' | 'Dinner' | 'Snack';
 type Category = 'Protein' | 'Grain' | 'Vegetable' | 'Fruit' | 'Dairy';
 type Nutrition = { kcal: number; protein: number; carbs: number; fibre: number; fat: number };
 type Food = { id: string; name: string; subtitle: string; category: Category; values: Nutrition };
-type Item = { id: string; grams: number };
+type Item = { id: string; grams: number; edited?: boolean };
 type Entry = { id: number; meal: MealType; date: string; items: Item[]; totals: Nutrition };
 
 const foods: Food[] = [
@@ -82,6 +83,7 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
   const dayNutrition = totals(dayEntries.flatMap(e => e.items));
   const savedNutrition = totals(entries.flatMap(e => e.items));
   const mealProgress = useMemo(() => categoryProgress(selected, foods), [selected]);
+  const recommended = useMemo(() => categorySuggestions(selected.map(i => i.id), foods), [selected]);
   const currentGuide = guideSteps[guideStep];
   const stepFoods = foods.filter(f => inStep(f, currentGuide.key))
     .sort((a, b) => foodGuidance(a, conditions).priority - foodGuidance(b, conditions).priority);
@@ -90,11 +92,39 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
 
   function navigate(next: Page) { setPage(next); setNotice(''); window.scrollTo?.(0, 0); }
   function addFood(id: string) {
-    setSelected(current => current.some(item => item.id === id) ? current : [...current, { id, grams: 100 }]);
-    setNotice(`${lookup.get(id)?.name ?? 'Food'} added to your meal`);
+    if (!lookup.has(id)) return;
+    setSelected(current => {
+      if (current.some(item => item.id === id)) return current;
+      const ids = [...current.map(item => item.id), id];
+      const suggestions = categorySuggestions(ids, foods);
+      return [
+        ...current.map(item => item.edited ? item : {
+          ...item, grams: suggestions.get(item.id)?.grams ?? item.grams,
+        }),
+        { id, grams: suggestions.get(id)?.grams ?? 100, edited: false },
+      ];
+    });
+    setNotice(`${lookup.get(id)?.name ?? 'Food'} added with an editable sample portion`);
+  }
+  function removeFood(id: string) {
+    setSelected(current => {
+      const remaining = current.filter(item => item.id !== id);
+      const suggestions = categorySuggestions(remaining.map(item => item.id), foods);
+      return remaining.map(item => item.edited ? item : {
+        ...item, grams: suggestions.get(item.id)?.grams ?? item.grams,
+      });
+    });
   }
   function setGrams(id: string, grams: number) {
-    setSelected(items => items.map(i => i.id === id ? { ...i, grams: Number.isFinite(grams) ? Math.min(2000, Math.max(0, grams)) : 0 } : i));
+    setSelected(items => items.map(i => i.id === id ? { ...i, grams: Number.isFinite(grams) ? Math.min(2000, Math.max(0, grams)) : 0, edited: true } : i));
+  }
+  function resetToSuggestion(id: string) {
+    setSelected(items => {
+      const portions = categorySuggestions(items.map(item => item.id), foods);
+      return items.map(item => item.id === id ? {
+        ...item, grams: portions.get(id)?.grams ?? item.grams, edited: false,
+      } : item);
+    });
   }
   function saveDemo() {
     if (!selected.length || !selected.some(i => i.grams > 0)) return;
@@ -167,7 +197,7 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
               {conditionSummary(conditions).map(t => <p key={t} className="guide-note">{t}</p>)}
               <div className="guided-foods">
                 {guidedChoices.map(f => <div className="guided-food" key={f.id}>
-                  <div><strong>{f.name}</strong><small>{format(f.values.carbs)} g carbs · {format(f.values.fibre)} g fibre per 100 g</small>
+                  <div><strong>{f.name}</strong><small>{format(f.values.carbs)} g carbs · {format(f.values.fibre)} g fibre per 100 g</small><small className="suggested-portion">Suggested if added: {categorySuggestions([...selected.map(i => i.id), f.id], foods).get(f.id)?.grams ?? 100} g</small>
                     {foodGuidance(f, conditions).note && <small className="guidance-label">{foodGuidance(f, conditions).note}</small>}</div>
                   <button type="button" className="secondary" onClick={() => addFood(f.id)}>{selected.some(i => i.id === f.id) ? 'Added ✓' : '+ Add'}</button>
                 </div>)}
@@ -177,7 +207,8 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
                 {guideStep < 2 && <button type="button" className="primary" onClick={() => { setGuideStep(i => Math.min(2, i + 1)); setShowAllChoices(false);}}>{stepSelected ? 'Next step →' : 'Skip / next →'}</button>}</div>
             </article>
             <article className="panel"><div className="panel-heading"><div><h3>Foods on your plate</h3><p>{selected.length} selected</p></div><button type="button" className="text-action" onClick={() => navigate('foods')}>+ Browse foods</button></div>
-              {selected.length ? <div className="selected-list">{selected.map(i => { const f = lookup.get(i.id); if (!f) return null;return <div className="selected-row" key={i.id}><div><strong>{f.name}</strong><small>{format(f.values.kcal * i.grams / 100, 0)} kcal estimated</small></div><div className="amount-control"><label className="sr-only" htmlFor={'portion-' + i.id}>Grams of {f.name}</label><input id={'portion-' + i.id} type="number" min="0" max="2000" step="10" value={i.grams} onChange={e => setGrams(i.id, Number(e.target.value))} /><span>g</span><button type="button" onClick={() => setSelected(items => items.filter(x => x.id !== i.id))} aria-label={'Remove ' + f.name}>×</button></div></div>; })}</div> : <div className="empty-state"><span className="empty-art">🥙</span><strong>Start with a food you enjoy</strong><p>Add foods from the library to begin building your meal.</p><button className="secondary" type="button" onClick={() => navigate('foods')}>Browse foods</button></div>}
+              <p className="fine-print">Starting quantities are illustrative and automatically share the food-group step when you add multiple foods. Manually edited amounts are preserved. This is not an individualized medical portion recommendation.</p>
+              {selected.length ? <div className="selected-list">{selected.map(i => { const f = lookup.get(i.id); if (!f) return null;return <div className="selected-row" key={i.id}><div><strong>{f.name}</strong><small>{format(f.values.kcal * i.grams / 100, 0)} kcal estimated</small><small className="suggested-portion">Suggested starting amount: {recommended.get(i.id)?.grams ?? 100} g{ i.edited ? ' · customized' : ' · applied'}</small><button type="button" className="text-action portion-reset" onClick={() => resetToSuggestion(i.id)}>Use suggested amount</button></div><div className="amount-control"><label className="sr-only" htmlFor={'portion-' + i.id}>Grams of {f.name}</label><input id={'portion-' + i.id} type="number" min="0" max="2000" step="10" value={i.grams} onChange={e => setGrams(i.id, Number(e.target.value))} /><span>g</span><button type="button" onClick={() => removeFood(i.id)} aria-label={'Remove ' + f.name}>×</button></div></div>; })}</div> : <div className="empty-state"><span className="empty-art">🥙</span><strong>Start with a food you enjoy</strong><p>Add foods from the library to begin building your meal.</p><button className="secondary" type="button" onClick={() => navigate('foods')}>Browse foods</button></div>}
             </article></div>
             <div><article className="panel summary-panel"><p className="eyebrow">LIVE ESTIMATE</p><h3>Meal nutrition</h3><NutritionStrip value={calculated} /><div className="total-line"><span>Fat</span><strong>{format(calculated.fat)} g</strong></div><div className="total-line"><span>Items</span><strong>{selected.length}</strong></div><button className="primary full" type="button" onClick={saveDemo} disabled={!selected.some(i => i.grams > 0)}>Add to demo history →</button><p className="fine-print">Sample values. This action only saves in your browser's current session. It does not record actual consumption or save to the cloud.</p></article></div>
           </div>
