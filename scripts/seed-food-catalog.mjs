@@ -7,6 +7,7 @@
  */
 import { initializeApp, applicationDefault } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
+import { stdout } from 'node:process';
 
 initializeApp({ credential: applicationDefault(), projectId: 'plate-planner-2bc28' });
 const db = getFirestore();
@@ -84,4 +85,4 @@ for (const {id,data} of docs) {
     else throw error;
   }
 }
-process.stdout.write(`Food catalog seed: ${created} created; ${existing} previously existing; ${docs.length} total seed entries. Pending dishes have no numeric nutrient values.\n`);
+stdout.write(`Food catalog seed: ${created} created; ${existing} previously existing; ${docs.length} total seed entries. Pending dishes have no numeric nutrient values.\n`);
