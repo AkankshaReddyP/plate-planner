@@ -49,3 +49,11 @@ firebase emulators:exec --only firestore --project demo-plate-planner "node --te
 Java 21 or later may be needed depending on the installed Firestore emulator. Firebase CLI downloads the emulator on first use. Do not seed real medical records in tests.
 
 The web UI currently only shows the sign-in status; catalog loading and persistence are future issues.
+
+## Required onboarding (after sign-in)
+
+The user experience is locked until the signed-in account completes a private onboarding record at `users/{uid}/private/onboarding`. It captures height in centimeters, weight in kilograms and a response about health conditions (including `None` and `Prefer not to share`). The profile uses server timestamps and the latest saved record is checked on every sign-in, not only the first registration. If incomplete, unavailable or not accessible, the dashboard and meal workflows remain hidden until completion is saved successfully.
+
+Only the signed-in user can read or create/update their own onboarding document; other accounts (including app admins) cannot access it through the web SDK. Firestore rules validate allowed keys, numeric ranges, condition choices and server timestamp and prohibit deletion. App-managed family records remain separate. Do not put medical details into publicly visible account documents or the repository. This onboarding asks for self-reported context, not a clinical assessment.
+
+The app will show an error/retry state if Firestore cannot be reached. Onboarding does not use local-only completion flags that could bypass the requirement.
