@@ -10,7 +10,6 @@ import { EXAMPLE_MEAL_TARGETS, suggestWholeMealPortions, nutrientKeys, nutrientL
 
 type Page = 'home' | 'foods' | 'builder' | 'history' | 'insights' | 'settings';
 type MealType = 'Breakfast' | 'Lunch' | 'Dinner' | 'Snack';
-type Category = 'Protein' | 'Grain' | 'Vegetable' | 'Fruit' | 'Dairy';
 type Nutrition = { kcal: number; protein: number; carbs: number; fibre: number; fat: number };
 type Food = CatalogFood;
 type Item = { id: string; grams: number; edited?: boolean };
