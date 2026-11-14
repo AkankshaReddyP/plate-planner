@@ -43,3 +43,13 @@ export const canApplyResearchUpdate = existing => !!existing
   && existing.isActive === true
   && existing.nutritionStatus === 'pending'
   && (existing.values === undefined || existing.values === null);
+
+export const canMigrateLegacyCrude = (existing, research) => !!existing
+  && existing.isActive === true
+  && existing.nutritionStatus === 'sample'
+  && existing.nutritionSource?.url === RESEARCH_SOURCE.url
+  && existing.nutritionSource?.fibreMethod === 'crude'
+  && existing.nutritionSource?.variant === research.nutritionSource.variant
+  && Number.isFinite(existing.values?.fibre)
+  && existing.crudeFibreG === undefined
+  && ['kcal','protein','carbs','fat'].every(k => existing.values?.[k] === research.values[k]);
