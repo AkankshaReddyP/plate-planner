@@ -6,7 +6,7 @@ import { ANDHRA_EXPANSION } from '../scripts/andhra-expansion-foods.mjs';
 
 test('23 source-backed records have complete per-100g macros and total fibre',()=>{
   assert.equal(USDA_MATCHED_FOODS.length,23);
-  assert.equal(new Set(USDA_MATCHED_FOODS.map(x=>x.id)).size,20);
+  assert.equal(new Set(USDA_MATCHED_FOODS.map(x=>x.id)).size,23);
   const canonical=new Set([...PROTEIN_FOODS,...ANDHRA_EXPANSION].map(x=>x.id));
   for(const food of USDA_MATCHED_FOODS){
     assert.ok(canonical.has(food.id),'not seeded as a canonical food: '+food.id);
