@@ -62,6 +62,10 @@ export const USDA_MATCHED_FOODS=[
     'https://allthenutrients.com/foods/fish-salmon-atlantic-farmed-cooked-dry-heat/','Fish, salmon, Atlantic, farmed, cooked, dry heat'),
   food('turkey_breast_cooked','Turkey breast (whole, meat only, roasted)',147,30.1,0,2.08,0,
     'https://batchbase.com.au/usda-foods/171496','Turkey, whole, breast, meat only, cooked roasted',171496),
+  food('fish_tilapia_cooked','Tilapia (cooked, dry heat)',128,26.1,0,2.65,0,
+    'https://allthenutrients.com/foods/fish-tilapia-cooked-dry-heat/','Fish, tilapia, cooked, dry heat'),
+  food('crab_cooked','Alaska king crab (cooked, moist heat)',97,19.4,0,1.54,0,
+    'https://allthenutrients.com/compare/fish-tilapia-cooked-dry-heat/vs/crustaceans-crab-alaska-king-cooked-moist-heat/','Alaska king crab, cooked, moist heat'),
 ];
 export function canEnrichPending(existing){
   return !!existing && existing.isActive===true
