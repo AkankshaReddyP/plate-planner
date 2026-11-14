@@ -1,7 +1,8 @@
 import { useMemo, useState } from 'react';
 import { firebaseConfigured } from './firebase/client';
 import { useAuth } from './firebase/useAuth';
-import { OnboardingGate } from './firebase/OnboardingGate';
+import { OnboardingGate, useProfileConditions } from './firebase/OnboardingGate';
+import { guideSteps, inStep, foodGuidance, conditionSummary } from './domain/mealGuidance';
 
 type Page = 'home' | 'foods' | 'builder' | 'history' | 'insights' | 'settings';
 type MealType = 'Breakfast' | 'Lunch' | 'Dinner' | 'Snack';
@@ -68,6 +69,9 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
   const [selected, setSelected] = useState<Item[]>([]);
   const [entries, setEntries] = useState<Entry[]>([]);
   const [notice, setNotice] = useState('');
+  const [guideStep, setGuideStep] = useState(0);
+  const [showAllChoices, setShowAllChoices] = useState(false);
+  const conditions = useProfileConditions();
   const filteredFoods = useMemo(() => foods.filter(f =>
     (category === 'All' || f.category === category) &&
     (f.name + ' ' + f.subtitle + ' ' + f.category).toLowerCase().includes(query.toLowerCase().trim())
@@ -76,6 +80,11 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
   const dayEntries = entries.filter(e => e.date === mealDate);
   const dayNutrition = totals(dayEntries.flatMap(e => e.items));
   const savedNutrition = totals(entries.flatMap(e => e.items));
+  const currentGuide = guideSteps[guideStep];
+  const stepFoods = foods.filter(f => inStep(f, currentGuide.key))
+    .sort((a, b) => foodGuidance(a, conditions).priority - foodGuidance(b, conditions).priority);
+  const guidedChoices = showAllChoices ? stepFoods : stepFoods.filter(f => foodGuidance(f, conditions).priority < 3);
+  const stepSelected = selected.some(i => inStep(lookup.get(i.id)!, currentGuide.key) && i.grams > 0);
 
   function navigate(next: Page) { setPage(next); setNotice(''); window.scrollTo?.(0, 0); }
   function addFood(id: string) {
@@ -90,6 +99,7 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
     const items = selected.filter(i => i.grams > 0).map(i => ({ ...i }));
     setEntries(current => [{ id: Date.now(), meal, date: mealDate, items, totals: totals(items) }, ...current]);
     setSelected([]);
+    setGuideStep(0);
     setNotice('Added to this browser session. Nothing was saved to Firestore.');
     setPage('history');
   }
@@ -97,6 +107,7 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
     setSelected(entry.items.map(i => ({ ...i })));
     setMeal(entry.meal);
     setMealDate(entry.date);
+    setGuideStep(0);
     setNotice('Meal copied into the builder. Edit the portions before adding it.');
     setPage('builder');
   }
@@ -134,6 +145,24 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
             <article className="panel">
               <div className="panel-heading"><h3>Meal details</h3></div>
               <div className="form-row"><label>Meal type<select value={meal} onChange={e => setMeal(e.target.value as MealType)}><option>Breakfast</option><option>Lunch</option><option>Dinner</option><option>Snack</option></select></label><label>Date<input type="date" value={mealDate} onChange={e => setMealDate(e.target.value)} /></label></div>
+            </article>
+            <article className="panel guided-panel">
+              <p className="eyebrow">GUIDED FOOD SELECTION</p>
+              <div className="guide-steps" aria-label="Meal selection order">
+                {guideSteps.map((step, index) => <button key={step.key} type="button" className={'guide-step ' + (guideStep === index ? 'current' : '')} aria-current={guideStep === index ? 'step' : undefined} onClick={() => {setGuideStep(index);setShowAllChoices(false);}}><strong>{index + 1}</strong><span>{step.title}</span></button>)}
+              </div>
+              <h3>{currentGuide.title}</h3><p>{currentGuide.hint} Food sequence is optional and does not replace balanced nutrition.</p>
+              {conditionSummary(conditions).map(t => <p key={t} className="guide-note">{t}</p>)}
+              <div className="guided-foods">
+                {guidedChoices.map(f => <div className="guided-food" key={f.id}>
+                  <div><strong>{f.name}</strong><small>{format(f.values.carbs)} g carbs · {format(f.values.fibre)} g fibre per 100 g</small>
+                    {foodGuidance(f, conditions).note && <small className="guidance-label">{foodGuidance(f, conditions).note}</small>}</div>
+                  <button type="button" className="secondary" onClick={() => addFood(f.id)}>{selected.some(i => i.id === f.id) ? 'Added ✓' : '+ Add'}</button>
+                </div>)}
+              </div>
+              {stepFoods.length > guidedChoices.length && <button type="button" className="text-action" onClick={() => setShowAllChoices(true)}>Show all food options (with guidance)</button>}
+              <div className="guide-actions"><button type="button" className="secondary" disabled={guideStep === 0} onClick={() => setGuideStep(i => Math.max(0, i - 1))}>← Previous</button>
+                {guideStep < 2 && <button type="button" className="primary" onClick={() => { setGuideStep(i => Math.min(2, i + 1)); setShowAllChoices(false);}}>{stepSelected ? 'Next step →' : 'Skip / next →'}</button>}</div>
             </article>
             <article className="panel"><div className="panel-heading"><div><h3>Foods on your plate</h3><p>{selected.length} selected</p></div><button type="button" className="text-action" onClick={() => navigate('foods')}>+ Browse foods</button></div>
               {selected.length ? <div className="selected-list">{selected.map(i => { const f = lookup.get(i.id); if (!f) return null;return <div className="selected-row" key={i.id}><div><strong>{f.name}</strong><small>{format(f.values.kcal * i.grams / 100, 0)} kcal estimated</small></div><div className="amount-control"><label className="sr-only" htmlFor={'portion-' + i.id}>Grams of {f.name}</label><input id={'portion-' + i.id} type="number" min="0" max="2000" step="10" value={i.grams} onChange={e => setGrams(i.id, Number(e.target.value))} /><span>g</span><button type="button" onClick={() => setSelected(items => items.filter(x => x.id !== i.id))} aria-label={'Remove ' + f.name}>×</button></div></div>; })}</div> : <div className="empty-state"><span className="empty-art">🥙</span><strong>Start with a food you enjoy</strong><p>Add foods from the library to begin building your meal.</p><button className="secondary" type="button" onClick={() => navigate('foods')}>Browse foods</button></div>}

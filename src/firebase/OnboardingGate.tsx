@@ -1,4 +1,4 @@
-import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
+import { createContext, useContext, useEffect, useState, type FormEvent, type ReactNode } from 'react';
 import type { User } from 'firebase/auth';
 import { doc, getDocFromServer, serverTimestamp, setDoc } from 'firebase/firestore';
 import { db } from './client';
@@ -8,6 +8,8 @@ const conditionOptions = ['Diabetes', 'High blood pressure', 'Arthritis', 'Thyro
 type Condition = typeof conditionOptions[number];
 type Screen = 'checking' | 'form' | 'ready' | 'error';
 const exclusive = new Set<Condition>(['None', 'Prefer not to share']);
+const ProfileConditions = createContext<readonly string[]>([]);
+export function useProfileConditions() { return useContext(ProfileConditions); }
 
 export function OnboardingGate({ user, logout, children }: { user: User; logout: () => Promise<void>; children: ReactNode }) {
   const [screen, setScreen] = useState<Screen>('checking');
@@ -19,6 +21,7 @@ export function OnboardingGate({ user, logout, children }: { user: User; logout:
   const [weightUnit, setWeightUnit] = useState<'kg' | 'lb'>('kg');
   const [weight, setWeight] = useState('');
   const [conditions, setConditions] = useState<Condition[]>([]);
+  const [savedConditions, setSavedConditions] = useState<string[]>([]);
   const [saving, setSaving] = useState(false);
   const [attempt, setAttempt] = useState(0);
 
@@ -42,6 +45,7 @@ export function OnboardingGate({ user, logout, children }: { user: User; logout:
             && typeof data.weightKg === 'number' && data.weightKg >= 20 && data.weightKg <= 400
             && Array.isArray(data.healthConditions) && data.healthConditions.length > 0
             && data.healthConditions.every((c: unknown) => conditionOptions.includes(c as Condition));
+          if (valid) setSavedConditions(data.healthConditions as string[]);
           setScreen(valid ? 'ready' : 'form');
         }
       } catch (err) {
@@ -103,6 +107,7 @@ export function OnboardingGate({ user, logout, children }: { user: User; logout:
         healthConditions: conditions,
         updatedAt: serverTimestamp(),
       });
+      setSavedConditions([...conditions]);
       setScreen('ready');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Unable to save your profile. Please try again.');
@@ -111,7 +116,7 @@ export function OnboardingGate({ user, logout, children }: { user: User; logout:
     }
   }
 
-  if (screen === 'ready') return <>{children}</>;
+  if (screen === 'ready') return <ProfileConditions.Provider value={savedConditions}>{children}</ProfileConditions.Provider>;
 
   return <main className="onboarding-shell">
     <header className="onboarding-header"><div className="login-brand"><span className="login-brand-mark">✳</span><span>Plate Planner</span></div><button type="button" className="secondary" onClick={() => void logout()}>Log out</button></header>
