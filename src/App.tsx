@@ -116,14 +116,6 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
   function setGrams(id: string, grams: number) {
     setSelected(items => items.map(i => i.id === id ? { ...i, grams: Number.isFinite(grams) ? Math.min(2000, Math.max(0, grams)) : 0, edited: true } : i));
   }
-  function resetToSuggestion(id: string) {
-    setSelected(items => {
-      const portions = categorySuggestions(items.map(item => item.id), foods);
-      return items.map(item => item.id === id ? {
-        ...item, grams: portions.get(id)?.grams ?? item.grams, edited: false,
-      } : item);
-    });
-  }
   function saveDemo() {
     if (!selected.length || !selected.some(i => i.grams > 0)) return;
     const items = selected.filter(i => i.grams > 0).map(i => ({ ...i }));
