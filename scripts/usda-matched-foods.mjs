@@ -29,7 +29,7 @@ export const USDA_MATCHED_FOODS=[
   food('green_peas_cooked','Green peas (boiled, drained)',84,5.36,15.6,0.22,5.5,
     'https://allthenutrients.com/compare/chickpeas-garbanzo-beans-bengal-gram-mature-seeds-cooked-boiled-without-salt/vs/peas-green-cooked-boiled-drained-without-salt/','Green peas boiled, drained without salt'),
   food('soybeans_cooked','Mature soybeans (boiled, without salt)',172,18.21,8.36,8.97,6.0,
-    'https://www.mealyno.com/en/foods/lentils-cooked','Mature soybeans, cooked, boiled without salt',174271),
+    'https://whatyoueat.io/foods/174271','Mature soybeans, cooked, boiled without salt',174271),
   food('tofu_firm','Firm tofu (raw, calcium-set)',144,17.27,2.78,8.72,2.3,
     'https://www.myfoodanalysis.com/food/firm-tofu-raw-172475','Tofu, raw, firm, prepared with calcium sulfate',172475),
   food('edamame_cooked','Edamame (frozen, prepared, shelled)',121,11.9,8.91,5.20,5.2,
