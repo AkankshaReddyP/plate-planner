@@ -13,6 +13,8 @@ export type CatalogFood = {
   nutritionStatus: 'sample' | 'verified' | 'pending';
   cuisine: string;
   aliases: string[];
+  reportedFibreG?: number;
+  crudeFibreG?: number;
   nutritionSource?: {title: string; url: string; basis: string; fibreMethod?: string; variant?: string};
 };
 export type FoodCatalogState = { foods: CatalogFood[]; loading: boolean; error: string | null };
@@ -58,6 +60,8 @@ export function parseFoodDoc(id: string, raw: Record<string, unknown>): CatalogF
     cuisine: typeof raw.cuisine === 'string' ? raw.cuisine : 'Other',
     aliases: Array.isArray(raw.aliases) ? raw.aliases.filter((x): x is string => typeof x === 'string') : [],
     nutritionSource: source,
+    reportedFibreG: typeof raw.reportedFibreG === 'number' && Number.isFinite(raw.reportedFibreG) && raw.reportedFibreG >= 0 ? raw.reportedFibreG : undefined,
+    crudeFibreG: typeof raw.crudeFibreG === 'number' && Number.isFinite(raw.crudeFibreG) && raw.crudeFibreG >= 0 ? raw.crudeFibreG : undefined,
   };
 }
 
