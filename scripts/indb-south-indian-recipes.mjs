@@ -38,6 +38,11 @@ export const INDB_RECIPES=[
   recipe('curd_rice','Curd rice / Perugu annam (INDB recipe)','Grain',195.74,5.75,32.93,4.32,2.13,'curd-rice-dahi-bhaat-dahi-chawal-perugu-annam-daddojanam-thayir-saadam'),
   recipe('lemon_rice','Lemon rice / Chitranna (INDB recipe)','Grain',176.30,4.26,21.62,7.88,2.52,'lemon-rice-pulihora-elumichai-sadam-chitranna'),
   recipe('sprouts_upma','Sprouts upma (INDB recipe)','Grain',316.25,9.50,44.96,10.44,7.16,'sprouts-upma'),
+  recipe('masala_dosa','Masala dosa (INDB recipe)','Grain',164.58,3.29,19.57,7.84,2.52,'masala-dosa'),
+  recipe('avial','Avial (INDB recipe)','Vegetable',124.56,2.46,8.47,8.94,5.44,'avial'),
+  recipe('peanut_chutney','Peanut chutney (INDB recipe)','Protein',258.37,11.80,9.87,19.06,5.73,'peanut-chutney-mungfali-ki-chutney'),
+  recipe('pulihora','Tamarind rice / Pulihora (INDB recipe)','Grain',373.04,7.45,65.08,8.53,5.12,'tamarind-rice-chintapandu-pulihora-puliyodharai-puli-sadam-huli-anna'),
+  recipe('uttapam','Onion tomato uttapam (INDB recipe)','Grain',462.02,1.91,11.32,45.30,1.26,'onion-tomato-uttapam'),
 ];
 export const canApplyINDBUpdate=(existing)=>!!existing&&existing.isActive===true
   && existing.nutritionStatus==='pending'
