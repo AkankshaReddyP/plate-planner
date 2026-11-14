@@ -107,3 +107,8 @@
 .meal-progress-caption{font-size:11px!important;color:#708875!important;margin:9px 0 0!important}
 .guide-step.complete strong{background:#438753;color:#fff}
 @media(prefers-reduced-motion:reduce){.meal-progress-fill{transition:none}}
+
+/* Non-clinical portion suggestions remain secondary to the editable quantity. */
+.suggested-portion{display:block;color:#477858!important;font-size:11px!important;font-weight:600;margin-top:5px;line-height:1.5}
+.portion-reset{display:inline-block;font-size:11px;padding:4px 0}
+.selected-row>div:first-child{min-width:0;flex:1}
