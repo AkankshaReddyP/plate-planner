@@ -4,7 +4,7 @@ import { useAuth } from './firebase/useAuth';
 import { OnboardingGate, useProfileConditions } from './firebase/OnboardingGate';
 import { guideSteps, inStep, foodGuidance, conditionSummary } from './domain/mealGuidance';
 import { categoryProgress } from './domain/categoryProgress';
-import { EXAMPLE_MEAL_FIBRE_GRAMS, suggestWholeMealPortions } from './domain/wholeMealPortions';
+import { EXAMPLE_MEAL_TARGETS, suggestWholeMealPortions, nutrientKeys, nutrientLabels, nutrientUnits, type NutrientKey, type NutritionTargets } from './domain/wholeMealPortions';
 
 type Page = 'home' | 'foods' | 'builder' | 'history' | 'insights' | 'settings';
 type MealType = 'Breakfast' | 'Lunch' | 'Dinner' | 'Snack';
@@ -73,7 +73,7 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
   const [notice, setNotice] = useState('');
   const [guideStep, setGuideStep] = useState(0);
   const [showAllChoices, setShowAllChoices] = useState(false);
-  const [fibreGoal, setFibreGoal] = useState(EXAMPLE_MEAL_FIBRE_GRAMS);
+  const [mealTargets, setMealTargets] = useState<NutritionTargets>({ ...EXAMPLE_MEAL_TARGETS });
   const conditions = useProfileConditions();
   const filteredFoods = useMemo(() => foods.filter(f =>
     (category === 'All' || f.category === category) &&
@@ -84,15 +84,15 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
   const dayNutrition = totals(dayEntries.flatMap(e => e.items));
   const savedNutrition = totals(entries.flatMap(e => e.items));
   const mealProgress = useMemo(() => categoryProgress(selected, foods), [selected]);
-  const recommendedPortions = useMemo(() => suggestWholeMealPortions(selected, foods, fibreGoal), [selected, fibreGoal]);
+  const recommendedPortions = useMemo(() => suggestWholeMealPortions(selected, foods, mealTargets), [selected, mealTargets]);
   const currentGuide = guideSteps[guideStep];
   const stepFoods = foods.filter(f => inStep(f, currentGuide.key))
     .sort((a, b) => foodGuidance(a, conditions).priority - foodGuidance(b, conditions).priority);
   const guidedChoices = showAllChoices ? stepFoods : stepFoods.filter(f => foodGuidance(f, conditions).priority < 3);
 
   function navigate(next: Page) { setPage(next); setNotice(''); window.scrollTo?.(0, 0); }
-  function applySuggestedPortions(items: Item[], goal = fibreGoal): Item[] {
-    const suggestions = suggestWholeMealPortions(items, foods, goal);
+  function applySuggestedPortions(items: Item[], goals = mealTargets): Item[] {
+    const suggestions = suggestWholeMealPortions(items, foods, goals);
     return items.map(item => item.edited ? item : {
       ...item, grams: suggestions.get(item.id) ?? item.grams,
     });
@@ -115,10 +115,12 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
         ...item, grams: Number.isFinite(grams) ? Math.min(2000, Math.max(0, grams)) : 0, edited: true,
       } : item)));
   }
-  function changeFibreGoal(value: number) {
-    const goal = Number.isFinite(value) ? Math.min(30, Math.max(1, value)) : EXAMPLE_MEAL_FIBRE_GRAMS;
-    setFibreGoal(goal);
-    setSelected(current => applySuggestedPortions(current, goal));
+  function changeMealTarget(key: NutrientKey, value: number) {
+    const maximum: NutritionTargets = { kcal: 2500, protein: 150, carbs: 300, fat: 120, fibre: 40 };
+    const target = Number.isFinite(value) ? Math.min(maximum[key], Math.max(1, value)) : EXAMPLE_MEAL_TARGETS[key];
+    const goals = { ...mealTargets, [key]: target };
+    setMealTargets(goals);
+    setSelected(current => applySuggestedPortions(current, goals));
   }
   function saveDemo() {
     if (!selected.length || !selected.some(i => i.grams > 0)) return;
@@ -177,18 +179,19 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
           </div>
           <div className="compact-builder-grid">
             <section className="panel compact-picker" aria-label="Select meal foods">
-              <div className="compact-fibre-goal">
-                <div className="compact-fibre-title"><strong>Fibre for this meal</strong><label>Example goal
-                  <span className="compact-goal-input"><input type="number" aria-label="Example fibre goal in grams per meal" min="1" max="30" step="1" value={fibreGoal} onChange={e => changeFibreGoal(Number(e.target.value))}/> g</span>
-                </label></div>
-                <div className="compact-fibre-stats" aria-live="polite">
-                  <span><strong>{format(calculated.fibre)} g</strong> in selected foods</span>
-                  <span><strong>{format(Math.max(0, fibreGoal-calculated.fibre))} g</strong> remaining</span>
+              <div className="compact-nutrient-goals">
+                <div className="compact-goals-heading"><strong>Nutrition for this meal</strong><span>Example targets · adjustable</span></div>
+                <div className="compact-nutrient-grid">
+                  {nutrientKeys.map(key => <div className="compact-nutrient-card" key={key}>
+                    <label htmlFor={'nutrient-target-' + key}>{nutrientLabels[key]} <span>target</span></label>
+                    <div className="compact-nutrient-value"><strong>{format(calculated[key], key === 'kcal' ? 0 : 1)}</strong><span>/</span>
+                      <input id={'nutrient-target-' + key} type="number" step={key === 'kcal' ? '25' : '1'} min="1"
+                        value={mealTargets[key]} onChange={e => changeMealTarget(key, Number(e.target.value))}
+                        aria-label={nutrientLabels[key] + ' example target'}/><span>{nutrientUnits[key]}</span></div>
+                    <div className="compact-mini-track"><div style={{width: Math.min(100, calculated[key] / mealTargets[key] * 100) + '%'}}/></div>
+                  </div>)}
                 </div>
-                <div className="meal-progress-track compact-fibre-track" role="progressbar" aria-label="Illustrative meal fibre goal progress" aria-valuemin={0} aria-valuemax={fibreGoal} aria-valuenow={Math.min(fibreGoal, Math.max(0, calculated.fibre))}>
-                  <div className="meal-progress-fill" style={{width: Math.min(100, calculated.fibre / fibreGoal * 100) + '%'}}/>
-                </div>
-                <p className="compact-fibre-disclaimer">Adjustable example—not your medically determined fibre requirement. Nutrient values are sample data.</p>
+                <p className="compact-goals-caption">These are illustrative meal references, not individualized nutrition requirements. Sample food data is used; no diagnosis-based limit is inferred.</p>
               </div>
               <div className="compact-progress-head"><strong>Food selection</strong><span aria-live="polite">{mealProgress.percent}% complete</span></div>
               <div className="meal-progress-track" role="progressbar" aria-label="Food group selection progress" aria-valuemin={0} aria-valuemax={100} aria-valuenow={mealProgress.percent} aria-valuetext={`${mealProgress.completed} of 3 food groups selected`}>
@@ -206,7 +209,7 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
                   const chosen = selected.find(i => i.id === f.id);
                   const suggestion = chosen
                     ? recommendedPortions.get(f.id) ?? chosen.grams
-                    : suggestWholeMealPortions([...selected, { id: f.id, grams: 100, edited: false }], foods, fibreGoal).get(f.id) ?? 100;
+                    : suggestWholeMealPortions([...selected, { id: f.id, grams: 100, edited: false }], foods, mealTargets).get(f.id) ?? 100;
                   return <div key={f.id} className={'compact-food-option ' + (chosen ? 'picked' : '')}>
                     <div className="compact-food-details"><strong>{f.name}</strong><small>{format(f.values.kcal, 0)} kcal / 100 g · Suggested {suggestion} g</small></div>
                     {chosen ? <div className="compact-portion">
