@@ -39,3 +39,12 @@ describe('fibre provenance', () => {
     expect(food?.values.fibre).toBe(4);
   });
 });
+
+describe('regional dish tags', () => {
+  it('parses a pending quinoa or ragi food group without inventing nutrition', () => {
+    const quinoa = parseFoodDoc('quinoa_cooked',{...sample,name:'Cooked quinoa',foodGroup:'Quinoa',cuisine:'Everyday / modern'});
+    expect(quinoa?.foodGroup).toBe('Quinoa');
+    expect(quinoa?.nutritionStatus).toBe('pending');
+    expect(quinoa?.values.kcal).toBe(0);
+  });
+});
