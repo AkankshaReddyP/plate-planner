@@ -167,3 +167,22 @@
 @media(max-width:900px){.compact-builder-grid{grid-template-columns:minmax(0,1fr) 250px}.compact-picker,.compact-meal-summary{padding:16px}}
 @media(max-width:760px){.compact-builder-heading{align-items:start;flex-direction:column;gap:10px;margin:2px 0 14px}.compact-meal-controls{width:100%}.compact-meal-controls select,.compact-meal-controls input{max-width:none;flex:1;min-width:0}.compact-builder-grid{grid-template-columns:1fr;gap:12px}.compact-picker,.compact-meal-summary{padding:16px}.compact-food-options{max-height:29vh;min-height:142px}.compact-meal-summary{position:static}.compact-calories{margin:10px 0;padding:12px}.compact-calories strong{font-size:30px}.compact-macros{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px;margin-bottom:12px}.compact-macros span{padding:8px 5px;font-size:9px}.compact-macros strong{font-size:11px}.compact-step-intro h2{font-size:21px}.compact-step-tabs{margin:15px 0}}
 @media(max-width:390px){.compact-food-option{padding:9px;gap:7px}.compact-portion input{width:52px}.compact-step{font-size:11px;gap:4px;padding:9px 3px}.compact-step-number{width:20px;height:20px}.compact-meal-controls input{font-size:11px;padding:10px 6px}}
+
+/* All five illustrative nutrient references visible at the top of the picker. */
+.compact-nutrient-goals{padding:12px 13px;border:1px solid #dceadd;border-radius:12px;background:#f7faf5;margin-bottom:16px}
+.compact-goals-heading{display:flex;align-items:center;justify-content:space-between;gap:9px;color:#3d6248;font-size:12px;margin-bottom:11px}
+.compact-goals-heading span{font-size:10px;color:#829783}
+.compact-nutrient-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}
+.compact-nutrient-card{min-width:0;border:1px solid #e5ebe3;border-radius:8px;padding:7px 6px;background:white}
+.compact-nutrient-card>label{display:flex;gap:3px;align-items:center;justify-content:space-between;color:#52745b;font-size:10px;font-weight:700}
+.compact-nutrient-card>label span{font-size:9px;font-weight:400;color:#9ca99a}
+.compact-nutrient-value{display:flex;align-items:center;gap:3px;white-space:nowrap;margin-top:8px;font-size:10px}
+.compact-nutrient-value strong{font-variant-numeric:tabular-nums;font-size:12px;color:#2f6441}
+.compact-nutrient-value>span{color:#889b8a}
+.compact-nutrient-value input{width:100%;min-width:0;border:1px solid #dce6d9;padding:4px 1px;border-radius:4px;font-size:11px;text-align:center;font-variant-numeric:tabular-nums}
+.compact-mini-track{height:5px;background:#e4ede1;overflow:hidden;border-radius:8px;margin-top:8px}
+.compact-mini-track>div{height:100%;background:#62a075;border-radius:8px;transition:width .2s ease}
+.compact-goals-caption{font-size:10px!important;color:#7f9483!important;line-height:1.5!important;margin:10px 0 0!important}
+@media(max-width:1100px){.compact-nutrient-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:430px){.compact-nutrient-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.compact-goals-heading{align-items:flex-start}}
+@media(prefers-reduced-motion:reduce){.compact-mini-track>div{transition:none}}
