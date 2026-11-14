@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
   "asOf": "2026-11-13",
-  "purpose": "Trace nutrition-pending entries without guessing from names. Completed profiles require exact preparation, 100g basis and source; fibre method must be confirmed separately.",
+  "purpose": "Pending catalogue entries are not automatically assigned nutrient values without preparation and traceable per-100g basis.",
   "totalNewCatalogEntries": 133,
-  "nutritionProfilesAdded": 26,
-  "stillPending": 107,
+  "nutritionProfilesAdded": 27,
+  "stillPending": 106,
   "remaining": [
     {
       "id": "vankaya_kura",
@@ -12,9 +12,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -25,9 +25,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -38,9 +38,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -51,9 +51,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -64,9 +64,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -77,9 +77,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -90,9 +90,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -103,9 +103,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -116,9 +116,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -129,9 +129,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -142,9 +142,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -155,9 +155,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -168,9 +168,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -181,9 +181,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -194,9 +194,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -207,9 +207,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -220,9 +220,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -233,9 +233,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -246,9 +246,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -259,9 +259,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -272,9 +272,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -285,9 +285,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -298,9 +298,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -311,9 +311,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -324,9 +324,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -337,9 +337,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -350,9 +350,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -363,9 +363,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -376,9 +376,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -389,9 +389,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -402,9 +402,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -415,9 +415,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -428,9 +428,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -441,9 +441,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -454,9 +454,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -467,9 +467,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -480,9 +480,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -493,9 +493,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -506,9 +506,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -519,9 +519,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -532,9 +532,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -545,9 +545,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -558,9 +558,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -571,9 +571,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -584,9 +584,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -597,9 +597,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -610,9 +610,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -623,9 +623,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -636,9 +636,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -649,9 +649,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -662,9 +662,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -675,9 +675,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -688,9 +688,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -701,9 +701,9 @@
       "source": "Andhra expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -714,9 +714,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -727,9 +727,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -740,9 +740,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -753,9 +753,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -766,9 +766,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -779,9 +779,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -792,9 +792,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -805,9 +805,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -818,9 +818,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -831,9 +831,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -844,9 +844,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -857,9 +857,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -870,9 +870,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -883,9 +883,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -896,9 +896,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -909,9 +909,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -922,9 +922,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -935,9 +935,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -948,9 +948,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -961,9 +961,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -974,9 +974,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -987,9 +987,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -1000,9 +1000,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -1013,9 +1013,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -1026,9 +1026,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -1039,9 +1039,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -1052,9 +1052,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -1065,9 +1065,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -1078,9 +1078,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -1091,9 +1091,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -1104,9 +1104,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -1117,9 +1117,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -1130,9 +1130,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -1143,9 +1143,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -1156,9 +1156,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -1169,9 +1169,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -1182,9 +1182,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -1195,9 +1195,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -1208,9 +1208,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -1221,9 +1221,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -1234,9 +1234,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -1247,9 +1247,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -1260,9 +1260,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -1273,9 +1273,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -1286,9 +1286,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -1299,9 +1299,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -1312,9 +1312,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -1325,9 +1325,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -1338,9 +1338,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -1351,9 +1351,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -1364,22 +1364,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
-        "kcal protein carbs fat",
-        "fibre analytical method"
-      ]
-    },
-    {
-      "id": "peanuts_roasted",
-      "name": "Roasted peanuts",
-      "source": "Protein expansion",
-      "status": "pending",
-      "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
@@ -1390,9 +1377,9 @@
       "source": "Protein expansion",
       "status": "pending",
       "requires": [
-        "matching food or documented cooked recipe",
-        "100g edible/cooked basis",
-        "source and version",
+        "matching food or defined cooked recipe",
+        "edible/cooked basis",
+        "source URL/version",
         "kcal protein carbs fat",
         "fibre analytical method"
       ]
