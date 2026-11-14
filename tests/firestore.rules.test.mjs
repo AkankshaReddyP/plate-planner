@@ -4,7 +4,7 @@ import {
   initializeTestEnvironment, assertFails, assertSucceeds,
 } from '@firebase/rules-unit-testing';
 import {
-  collection, deleteDoc, doc, getDoc, getDocs, query, setDoc, updateDoc, where,
+  collection, deleteDoc, doc, getDoc, getDocs, query, setDoc, updateDoc, where, serverTimestamp,
 } from 'firebase/firestore';
 
 let env;
@@ -15,6 +15,7 @@ const family = (db, id) => doc(db, 'families', id);
 const plan = (db, id, entry='p1') => doc(db, 'families', id, 'mealPlans', entry);
 const member = (db, id, uid) => doc(db, 'families', id, 'members', uid);
 const account = (db, uid) => doc(db, 'users', uid);
+const privateProfile = (db, uid) => doc(db, 'users', uid, 'private', 'onboarding');
 
 before(async () => {
   env = await initializeTestEnvironment({
@@ -90,4 +91,39 @@ test('all client writes of family health data remain blocked', async () => {
   await assertFails(setDoc(plan(user('adminA'), 'alpha', 'new'), { localDate: '2026-01-02' }));
   await assertFails(updateDoc(plan(user('adminA'), 'alpha'), { localDate: '2026-01-03' }));
   await assertFails(deleteDoc(plan(user('adminA'), 'alpha')));
+});
+
+test('new user can save and update only their own private onboarding', async () => {
+  const db = user('newProfile');
+  const input = { heightCm: 172, weightKg: 71.5, healthConditions: ['None'], updatedAt: serverTimestamp() };
+  await assertSucceeds(setDoc(privateProfile(db, 'newProfile'), input));
+  const result = await assertSucceeds(getDoc(privateProfile(db, 'newProfile')));
+  if (result.data()?.heightCm !== 172) throw new Error('Missing onboarding height');
+  await assertSucceeds(updateDoc(privateProfile(db, 'newProfile'), {
+    weightKg: 72, updatedAt: serverTimestamp(),
+  }));
+  await assertFails(deleteDoc(privateProfile(db, 'newProfile')));
+});
+
+test('private health data cannot be accessed by other accounts, even family admins', async () => {
+  await assertFails(getDoc(privateProfile(user('stranger'), 'newProfile')));
+  await assertFails(getDoc(privateProfile(user('adminA'), 'newProfile')));
+  await assertFails(setDoc(privateProfile(user('stranger'), 'newProfile'), {
+    heightCm: 171, weightKg: 70, healthConditions: ['None'], updatedAt: serverTimestamp(),
+  }));
+  await assertFails(getDocs(collection(user('newProfile'), 'users', 'newProfile', 'private')));
+});
+
+test('onboarding rejects invalid measurements, unknown fields and inconsistent conditions', async () => {
+  const db = user('invalidProfile');
+  const base = { heightCm: 170, weightKg: 70, healthConditions: ['None'], updatedAt: serverTimestamp() };
+  await assertFails(setDoc(privateProfile(db, 'invalidProfile'), { ...base, heightCm: 0 }));
+  await assertFails(setDoc(privateProfile(db, 'invalidProfile'), { ...base, weightKg: 999 }));
+  await assertFails(setDoc(privateProfile(db, 'invalidProfile'), { ...base, healthConditions: [] }));
+  await assertFails(setDoc(privateProfile(db, 'invalidProfile'), { ...base, healthConditions: ['Diabetes', 'None'] }));
+  await assertFails(setDoc(privateProfile(db, 'invalidProfile'), { ...base, healthConditions: ['made-up'] }));
+  await assertFails(setDoc(privateProfile(db, 'invalidProfile'), { ...base, role: 'admin' }));
+  await assertFails(setDoc(privateProfile(db, 'invalidProfile'), {
+    heightCm: 170, weightKg: 70, healthConditions: ['None'], updatedAt: new Date(),
+  }));
 });
