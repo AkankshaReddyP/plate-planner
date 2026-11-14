@@ -1,4 +1,4 @@
-import { useEffect, useState, type ReactNode } from 'react';
+import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
 import type { User } from 'firebase/auth';
 import { doc, getDocFromServer, serverTimestamp, setDoc } from 'firebase/firestore';
 import { db } from './client';
@@ -63,7 +63,7 @@ export function OnboardingGate({ user, logout, children }: { user: User; logout:
     });
   }
 
-  async function complete(event: React.FormEvent<HTMLFormElement>) {
+  async function complete(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (saving || !db) return;
     if (!isValidNumber(height, 50, 250) || !isValidNumber(weight, 20, 400) || !conditions.length) {
