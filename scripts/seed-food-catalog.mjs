@@ -84,4 +84,4 @@ for (const {id,data} of docs) {
     else throw error;
   }
 }
-console.log(`Food catalog seed: ${created} created; ${existing} previously existing; ${docs.length} total seed entries. Pending dishes have no numeric nutrient values.`);
+process.stdout.write(`Food catalog seed: ${created} created; ${existing} previously existing; ${docs.length} total seed entries. Pending dishes have no numeric nutrient values.\n`);
