@@ -11,7 +11,9 @@ describe('Firestore food parsing', () => {
   it('permits complete sample entries and rejects partial or invalid numeric data', () => {
     const values = {kcal:130,protein:3,carbs:28,fibre:0.5,fat:0.3};
     expect(parseFoodDoc('rice',{...sample,nutritionStatus:'sample',values})?.values.carbs).toBe(28);
-    expect(parseFoodDoc('rice',{...sample,nutritionStatus:'verified',values:{...values,fibre:undefined}})).toBeNull();
+    // If total fibre is explicitly claimed, the value must be present.
+    expect(parseFoodDoc('rice',{...sample,nutritionStatus:'verified',nutritionSource:{title:'A',url:'https://example.org',basis:'100g cooked',fibreMethod:'total'},values:{...values,fibre:undefined}})).toBeNull();
+    expect(parseFoodDoc('rice',{...sample,nutritionStatus:'sample',values:{...values,fibre:undefined}})?.values.fibre).toBe(0);
     expect(parseFoodDoc('rice',{...sample,nutritionStatus:'sample',values:{...values,protein:-3}})).toBeNull();
     expect(parseFoodDoc('rice',{...sample,nutritionStatus:'sample',values:{...values,kcal:Infinity}})).toBeNull();
   });
@@ -19,5 +21,21 @@ describe('Firestore food parsing', () => {
     expect(parseFoodDoc('idli',{...sample,isActive:false})).toBeNull();
     expect(parseFoodDoc('idli',{...sample,category:'Unrecognized'})).toBeNull();
     expect(parseFoodDoc('idli',{...sample,name:''})).toBeNull();
+  });
+});
+describe('fibre provenance', () => {
+  it('hides crude fibre while retaining the other research nutrients', () => {
+    const source={title:'Study',url:'https://example.org/article',basis:'100g',fibreMethod:'crude'};
+    const food = parseFoodDoc('idli',{...sample,nutritionStatus:'sample',
+      nutritionSource:source,values:{kcal:120,protein:5,carbs:20,fat:2,fibre:8}});
+    expect(food?.values.kcal).toBe(120);
+    expect(food?.values.fibre).toBe(0);
+    expect(food?.nutritionSource?.fibreMethod).toBe('crude');
+  });
+  it('uses numbers only when a valid source confirms total dietary fibre', () => {
+    const source={title:'Study',url:'https://example.org/article',basis:'100g',fibreMethod:'total'};
+    const food = parseFoodDoc('sambar',{...sample,nutritionStatus:'sample',
+      nutritionSource:source,values:{kcal:76,protein:3,carbs:10,fat:2,fibre:4}});
+    expect(food?.values.fibre).toBe(4);
   });
 });

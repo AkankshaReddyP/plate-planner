@@ -8,7 +8,8 @@
 import { initializeApp, applicationDefault } from 'firebase-admin/app';
 import { getFirestore } from 'firebase-admin/firestore';
 import { stdout } from 'node:process';
-import { RESEARCHED_DISHES, canApplyResearchUpdate } from './researched-south-indian-foods.mjs';
+import { RESEARCHED_DISHES, canApplyResearchUpdate, canMigrateLegacyCrude } from './researched-south-indian-foods.mjs';
+import { INDB_RECIPES, canApplyINDBUpdate } from './indb-south-indian-recipes.mjs';
 
 initializeApp({ credential: applicationDefault(), projectId: 'plate-planner-2bc28' });
 const db = getFirestore();
@@ -88,7 +89,7 @@ for (const {id,data} of docs) {
 }
 stdout.write(`Food catalog seed: ${created} created; ${existing} previously existing; ${docs.length} total seed entries. Pending dishes have no numeric nutrient values.\n`);
 
-let researchCreated=0, researchUpgraded=0, researchPreserved=0;
+let researchCreated=0, researchUpgraded=0, researchMigrated=0, researchPreserved=0;
 for (const research of RESEARCHED_DISHES) {
   const ref = db.collection('foodCatalog').doc(research.id);
   const result = await db.runTransaction(async tx => {
@@ -100,15 +101,43 @@ for (const research of RESEARCHED_DISHES) {
     if (canApplyResearchUpdate(snap.data())) {
       tx.update(ref, {
         name: research.name, subtitle: research.subtitle,
-        values: research.values, nutritionStatus: research.nutritionStatus,
+        values: research.values, crudeFibreG: research.crudeFibreG,
+        nutritionStatus: research.nutritionStatus,
         nutritionSource: research.nutritionSource,
       });
       return 'upgraded';
+    }
+    if (canMigrateLegacyCrude(snap.data(), research)) {
+      tx.update(ref, { values: research.values, crudeFibreG: research.crudeFibreG });
+      return 'migrated';
     }
     return 'preserved';
   });
   if (result === 'created') researchCreated++;
   if (result === 'upgraded') researchUpgraded++;
+  if (result === 'migrated') researchMigrated++;
   if (result === 'preserved') researchPreserved++;
 }
-stdout.write(`Research recipes: ${researchCreated} new, ${researchUpgraded} pending records upgraded, ${researchPreserved} existing reviewed/edited records preserved.\n`);
+stdout.write(`Research recipes: ${researchCreated} new, ${researchUpgraded} pending records upgraded, ${researchMigrated} matching legacy crude records migrated, ${researchPreserved} existing reviewed/edited records preserved.\n`);
+
+let indbCreated=0, indbUpgraded=0, indbPreserved=0;
+for(const record of INDB_RECIPES){
+  const ref=db.collection('foodCatalog').doc(record.id);
+  const result=await db.runTransaction(async transaction=>{
+    const snap=await transaction.get(ref);
+    if(!snap.exists){transaction.create(ref,record);return 'created';}
+    if(canApplyINDBUpdate(snap.data())){
+      transaction.update(ref,{
+        name:record.name,subtitle:record.subtitle,
+        values:record.values,reportedFibreG:record.reportedFibreG,
+        nutritionStatus:record.nutritionStatus,nutritionSource:record.nutritionSource,
+      });
+      return 'upgraded';
+    }
+    return 'preserved';
+  });
+  if(result==='created') indbCreated++;
+  else if(result==='upgraded') indbUpgraded++;
+  else indbPreserved++;
+}
+stdout.write(`INDB recipe batch: ${indbCreated} created, ${indbUpgraded} pending upgraded, ${indbPreserved} existing entries unchanged. Reported fibre is NOT treated as verified total dietary fibre.\n`);

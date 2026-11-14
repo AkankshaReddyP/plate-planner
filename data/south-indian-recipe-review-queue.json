@@ -1,0 +1,212 @@
+{
+  "status": "needs-sourced-recipe-review",
+  "schemaVersion": 1,
+  "notes": "Do not mark as eligible for nutrition-based suggestions until a reviewed prepared recipe has complete energy/protein/carbs/fat and separately characterized total dietary fibre.",
+  "candidateSources": [
+    {
+      "name": "Indian Nutrient Databank (INDB)",
+      "url": "https://www.anuvaad.org.in/indian-nutrient-databank/"
+    },
+    {
+      "name": "ICMR-NIN Indian Food Composition Tables 2017",
+      "url": "https://www.nin.res.in/ebooks/IFCT2017.pdf"
+    }
+  ],
+  "remaining": [
+    {
+      "foodId": "rava_dosa",
+      "dish": "Rava dosa",
+      "category": "Grain",
+      "nutritionStatus": "pending",
+      "needs": [
+        "specific recipe variant",
+        "cooked yield or prepared serving mass",
+        "kcal/protein/carbs/fat per 100g prepared",
+        "traceable source URL and publication",
+        "total dietary fibre methodology"
+      ]
+    },
+    {
+      "foodId": "upma",
+      "dish": "Upma",
+      "category": "Grain",
+      "nutritionStatus": "pending",
+      "needs": [
+        "specific recipe variant",
+        "cooked yield or prepared serving mass",
+        "kcal/protein/carbs/fat per 100g prepared",
+        "traceable source URL and publication",
+        "total dietary fibre methodology"
+      ]
+    },
+    {
+      "foodId": "coconut_rice",
+      "dish": "Coconut rice",
+      "category": "Grain",
+      "nutritionStatus": "pending",
+      "needs": [
+        "specific recipe variant",
+        "cooked yield or prepared serving mass",
+        "kcal/protein/carbs/fat per 100g prepared",
+        "traceable source URL and publication",
+        "total dietary fibre methodology"
+      ]
+    },
+    {
+      "foodId": "ragi_mudde",
+      "dish": "Ragi mudde",
+      "category": "Grain",
+      "nutritionStatus": "pending",
+      "needs": [
+        "specific recipe variant",
+        "cooked yield or prepared serving mass",
+        "kcal/protein/carbs/fat per 100g prepared",
+        "traceable source URL and publication",
+        "total dietary fibre methodology"
+      ]
+    },
+    {
+      "foodId": "tomato_pappu",
+      "dish": "Tomato pappu",
+      "category": "Protein",
+      "nutritionStatus": "pending",
+      "needs": [
+        "specific recipe variant",
+        "cooked yield or prepared serving mass",
+        "kcal/protein/carbs/fat per 100g prepared",
+        "traceable source URL and publication",
+        "total dietary fibre methodology"
+      ]
+    },
+    {
+      "foodId": "palakura_pappu",
+      "dish": "Palakura pappu",
+      "category": "Protein",
+      "nutritionStatus": "pending",
+      "needs": [
+        "specific recipe variant",
+        "cooked yield or prepared serving mass",
+        "kcal/protein/carbs/fat per 100g prepared",
+        "traceable source URL and publication",
+        "total dietary fibre methodology"
+      ]
+    },
+    {
+      "foodId": "pesarapappu",
+      "dish": "Pesarapappu",
+      "category": "Protein",
+      "nutritionStatus": "pending",
+      "needs": [
+        "specific recipe variant",
+        "cooked yield or prepared serving mass",
+        "kcal/protein/carbs/fat per 100g prepared",
+        "traceable source URL and publication",
+        "total dietary fibre methodology"
+      ]
+    },
+    {
+      "foodId": "bendakaya_fry",
+      "dish": "Bendakaya fry",
+      "category": "Vegetable",
+      "nutritionStatus": "pending",
+      "needs": [
+        "specific recipe variant",
+        "cooked yield or prepared serving mass",
+        "kcal/protein/carbs/fat per 100g prepared",
+        "traceable source URL and publication",
+        "total dietary fibre methodology"
+      ]
+    },
+    {
+      "foodId": "beans_poriyal",
+      "dish": "Beans poriyal",
+      "category": "Vegetable",
+      "nutritionStatus": "pending",
+      "needs": [
+        "specific recipe variant",
+        "cooked yield or prepared serving mass",
+        "kcal/protein/carbs/fat per 100g prepared",
+        "traceable source URL and publication",
+        "total dietary fibre methodology"
+      ]
+    },
+    {
+      "foodId": "cabbage_poriyal",
+      "dish": "Cabbage poriyal",
+      "category": "Vegetable",
+      "nutritionStatus": "pending",
+      "needs": [
+        "specific recipe variant",
+        "cooked yield or prepared serving mass",
+        "kcal/protein/carbs/fat per 100g prepared",
+        "traceable source URL and publication",
+        "total dietary fibre methodology"
+      ]
+    },
+    {
+      "foodId": "egg_burji",
+      "dish": "Egg burji",
+      "category": "Protein",
+      "nutritionStatus": "pending",
+      "needs": [
+        "specific recipe variant",
+        "cooked yield or prepared serving mass",
+        "kcal/protein/carbs/fat per 100g prepared",
+        "traceable source URL and publication",
+        "total dietary fibre methodology"
+      ]
+    },
+    {
+      "foodId": "chicken_curry",
+      "dish": "South Indian chicken curry",
+      "category": "Protein",
+      "nutritionStatus": "pending",
+      "needs": [
+        "specific recipe variant",
+        "cooked yield or prepared serving mass",
+        "kcal/protein/carbs/fat per 100g prepared",
+        "traceable source URL and publication",
+        "total dietary fibre methodology"
+      ]
+    },
+    {
+      "foodId": "fish_curry",
+      "dish": "South Indian fish curry",
+      "category": "Protein",
+      "nutritionStatus": "pending",
+      "needs": [
+        "specific recipe variant",
+        "cooked yield or prepared serving mass",
+        "kcal/protein/carbs/fat per 100g prepared",
+        "traceable source URL and publication",
+        "total dietary fibre methodology"
+      ]
+    },
+    {
+      "foodId": "vegetable_kootu",
+      "dish": "Vegetable kootu",
+      "category": "Vegetable",
+      "nutritionStatus": "pending",
+      "needs": [
+        "specific recipe variant",
+        "cooked yield or prepared serving mass",
+        "kcal/protein/carbs/fat per 100g prepared",
+        "traceable source URL and publication",
+        "total dietary fibre methodology"
+      ]
+    },
+    {
+      "foodId": "pachadi",
+      "dish": "Vegetable pachadi",
+      "category": "Vegetable",
+      "nutritionStatus": "pending",
+      "needs": [
+        "specific recipe variant",
+        "cooked yield or prepared serving mass",
+        "kcal/protein/carbs/fat per 100g prepared",
+        "traceable source URL and publication",
+        "total dietary fibre methodology"
+      ]
+    }
+  ]
+}

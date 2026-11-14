@@ -7,10 +7,11 @@ const foods = [
   {id:'egg',category:'Protein',values:{kcal:155,protein:12.6,carbs:1.1,fat:10.6,fibre:0}},
   {id:'rice',category:'Grain',values:{kcal:130,protein:2.7,carbs:28.2,fat:0.3,fibre:0.4}},
 ];
+const sourcedFoods = foods.map(f => ({...f, nutritionSource:{fibreMethod:'total'}}));
 const selected = [{id:'spinach',grams:100},{id:'carrot',grams:100},{id:'dal',grams:150},{id:'egg',grams:50},{id:'rice',grams:100}];
 describe('whole-meal nutrient recommendations', () => {
   it('sums all five nutrients across multiple selected foods', () => {
-    const actual = mealNutrients(selected, foods);
+    const actual = mealNutrients(selected, sourcedFoods);
     expect(actual.fibre).toBeCloseTo(2.4+2.8+8.7+0.4,5);
     expect(actual.protein).toBeCloseTo(3+0.9+10.8+6.3+2.7,5);
     expect(actual.carbs).toBeGreaterThan(60);
@@ -18,25 +19,34 @@ describe('whole-meal nutrient recommendations', () => {
     expect(nutrientKeys).toEqual(['kcal','protein','carbs','fat','fibre']);
   });
   it('updates suggested vegetable and carbohydrate amounts based on meal-wide targets', () => {
-    const basic = suggestWholeMealPortions(selected,foods,EXAMPLE_MEAL_TARGETS);
-    const higherProtein = suggestWholeMealPortions(selected,foods,{...EXAMPLE_MEAL_TARGETS,protein:60});
+    const basic = suggestWholeMealPortions(selected,sourcedFoods,EXAMPLE_MEAL_TARGETS);
+    const higherProtein = suggestWholeMealPortions(selected,sourcedFoods,{...EXAMPLE_MEAL_TARGETS,protein:60});
     expect([...basic.keys()]).toHaveLength(5);
     expect([...higherProtein.values()]).not.toEqual([...basic.values()]);
   });
   it('accounts for other foods in the meal', () => {
     const veg = [{id:'spinach',grams:100},{id:'carrot',grams:100}];
-    const first = suggestWholeMealPortions(veg,foods);
-    const combined = suggestWholeMealPortions([...veg,{id:'dal',grams:150,edited:true}],foods);
+    const first = suggestWholeMealPortions(veg,sourcedFoods);
+    const combined = suggestWholeMealPortions([...veg,{id:'dal',grams:150,edited:true}],sourcedFoods);
     expect([...first.values()]).not.toEqual([...combined.values()].slice(0,2));
     expect(combined.get('dal')).toBe(150);
   });
   it('preserves manually edited quantities', () => {
-    const result = suggestWholeMealPortions([{id:'spinach',grams:173,edited:true},{id:'carrot',grams:100}],foods);
+    const result = suggestWholeMealPortions([{id:'spinach',grams:173,edited:true},{id:'carrot',grams:100}],sourcedFoods);
     expect(result.get('spinach')).toBe(173);
   });
   it('limits automatic servings rather than forcing unattainable targets', () => {
-    const result = suggestWholeMealPortions([{id:'spinach',grams:100}],foods,{kcal:2500,protein:150,carbs:300,fat:120,fibre:40});
+    const result = suggestWholeMealPortions([{id:'spinach',grams:100}],sourcedFoods,{kcal:2500,protein:150,carbs:300,fat:120,fibre:40});
     expect(result.get('spinach')).toBeLessThanOrEqual(200);
-    expect(mealNutrients([{id:'spinach',grams:result.get('spinach')!}],foods).kcal).toBeLessThan(2500);
+    expect(mealNutrients([{id:'spinach',grams:result.get('spinach')!}],sourcedFoods).kcal).toBeLessThan(2500);
+  });
+});
+
+describe('uncomparable fibre', () => {
+  it('excludes crude fibre instead of treating it as total dietary fibre', () => {
+    const mixed = [{...sourcedFoods[0], nutritionSource:{fibreMethod:'crude'}}, ...sourcedFoods.slice(1)];
+    const current = mealNutrients([{id:'spinach',grams:100},{id:'carrot',grams:100}],mixed);
+    expect(current.fibre).toBeCloseTo(2.8,5);
+    expect(current.protein).toBeCloseTo(3.9,5);
   });
 });

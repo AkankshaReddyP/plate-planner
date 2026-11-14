@@ -20,7 +20,9 @@ const recipe = (id, name, kcal, protein, carbs, fat, fibre, detail) => ({
   id, name, category:'Grain', cuisine:'South Indian', isActive:true,
   aliases: [], nutritionStatus:'sample',
   subtitle:'Research recipe · per 100g cooked · fibre is crude',
-  values:{kcal,protein,carbs,fat,fibre},
+  // Crude fibre remains separate: it is not total dietary fibre.
+  values:{kcal,protein,carbs,fat},
+  crudeFibreG:fibre,
   nutritionSource:{...RESEARCH_SOURCE, variant:detail},
 });
 export const RESEARCHED_DISHES = [
@@ -41,3 +43,13 @@ export const canApplyResearchUpdate = existing => !!existing
   && existing.isActive === true
   && existing.nutritionStatus === 'pending'
   && (existing.values === undefined || existing.values === null);
+
+export const canMigrateLegacyCrude = (existing, research) => !!existing
+  && existing.isActive === true
+  && existing.nutritionStatus === 'sample'
+  && existing.nutritionSource?.url === RESEARCH_SOURCE.url
+  && existing.nutritionSource?.fibreMethod === 'crude'
+  && existing.nutritionSource?.variant === research.nutritionSource.variant
+  && Number.isFinite(existing.values?.fibre)
+  && existing.crudeFibreG === undefined
+  && ['kcal','protein','carbs','fat'].every(k => existing.values?.[k] === research.values[k]);
