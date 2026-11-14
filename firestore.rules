@@ -35,6 +35,35 @@ service cloud.firestore {
       allow update, delete: if false;
     }
 
+    // Sensitive onboarding information is accessible only to the signed-in
+    // account holder, not other registered users or family members.
+    match /users/{uid}/private/onboarding {
+      function ownProfile() {
+        return signedIn() && request.auth.uid == uid;
+      }
+      function validProfile() {
+        return request.resource.data.keys().hasOnly(['heightCm', 'weightKg', 'healthConditions', 'updatedAt'])
+          && request.resource.data.keys().hasAll(['heightCm', 'weightKg', 'healthConditions', 'updatedAt'])
+          && request.resource.data.heightCm is number
+          && request.resource.data.heightCm >= 50
+          && request.resource.data.heightCm <= 250
+          && request.resource.data.weightKg is number
+          && request.resource.data.weightKg >= 20
+          && request.resource.data.weightKg <= 400
+          && request.resource.data.healthConditions is list
+          && request.resource.data.healthConditions.size() >= 1
+          && request.resource.data.healthConditions.size() <= 7
+          && request.resource.data.healthConditions.hasOnly(['Diabetes', 'High blood pressure', 'Arthritis', 'Thyroid condition', 'Other', 'None', 'Prefer not to share'])
+          && (!(request.resource.data.healthConditions.hasAny(['None', 'Prefer not to share']))
+              || request.resource.data.healthConditions.size() == 1)
+          && request.resource.data.updatedAt == request.time;
+      }
+      allow get: if ownProfile();
+      allow list: if false;
+      allow create, update: if ownProfile() && validProfile();
+      allow delete: if false;
+    }
+
     match /foodCatalog/{foodId} {
       // Query callers must filter isActive == true. A rule is not a query filter.
       allow get, list: if signedIn() && resource.data.isActive == true;

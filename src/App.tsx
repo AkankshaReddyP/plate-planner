@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { firebaseConfigured } from './firebase/client';
 import { useAuth } from './firebase/useAuth';
+import { OnboardingGate } from './firebase/OnboardingGate';
 
 type Page = 'home' | 'foods' | 'builder' | 'history' | 'insights' | 'settings';
 type MealType = 'Breakfast' | 'Lunch' | 'Dinner' | 'Snack';
@@ -177,7 +178,7 @@ export default function App() {
     return <AuthLanding error={error} busy={false} login={login} configured />;
   }
   // Component unmount on logout discards browser-only meal state.
-  return <SignedInApp key={user.uid} user={user} logout={logout} />;
+  return <OnboardingGate key={user.uid} user={user} logout={logout}><SignedInApp user={user} logout={logout} /></OnboardingGate>;
 }
 
 function AuthLanding({ error, busy, login, configured }: { error: string | null; busy: boolean; configured: boolean; login: () => Promise<void> }) {
