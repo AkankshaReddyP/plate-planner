@@ -217,7 +217,7 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
                 <div className="meal-progress-fill" style={{ width: mealProgress.percent + '%' }} />
               </div>
               <div className="compact-step-tabs" aria-label="Food selection steps">
-                {guideSteps.map((step, index) => <button key={step.key} type="button" className={'compact-step ' + (guideStep === index ? 'active' : '')} aria-current={guideStep === index ? 'step' : undefined} onClick={() => {setGuideStep(index);setShowAllChoices(false);}}><span className="compact-step-number">{mealProgress.checked[index] ? '✓' : index + 1}</span><span>{index === 0 ? 'Fibre' : index === 1 ? 'Protein' : 'Carbs'}</span></button>)}
+                {guideSteps.map((step, index) => <button key={step.key} type="button" className={'compact-step ' + (guideStep === index ? 'active' : '')} aria-current={guideStep === index ? 'step' : undefined} onClick={() => {setGuideStep(index);setShowAllChoices(false);setBuilderSearch('');}}><span className="compact-step-number">{mealProgress.checked[index] ? '✓' : index + 1}</span><span>{index === 0 ? 'Fibre' : index === 1 ? 'Protein' : 'Carbs'}</span></button>)}
               </div>
               <div className="compact-step-intro">
                 <div><p className="eyebrow">STEP {guideStep + 1} OF 3</p><h2>{currentGuide.title}</h2></div>
@@ -269,8 +269,8 @@ function SignedInApp({ user, logout }: { user: { displayName: string | null; ema
               {!showAllChoices && !normalizedBuilderSearch && stepFoods.length > guidedChoices.length && <button type="button" className="text-action compact-show-all" onClick={() => setShowAllChoices(true)}>Show all food choices</button>}
               {conditionSummary(conditions).length > 0 && <details className="compact-guidance"><summary>Food guidance for your profile</summary>{conditionSummary(conditions).map(t => <p key={t}>{t}</p>)}</details>}
               <div className="compact-step-footer">
-                <button type="button" className="secondary" onClick={() => setGuideStep(i => Math.max(0, i - 1))} disabled={guideStep === 0}>← Back</button>
-                {guideStep < 2 ? <button className="primary" type="button" onClick={() => { setGuideStep(i => Math.min(2,i+1));setShowAllChoices(false);}}>Next: {guideStep === 0 ? 'Protein' : 'Carbs'} →</button> : <span className="compact-finish">All steps shown ✓</span>}
+                <button type="button" className="secondary" onClick={() => setGuideStep(i => Math.max(0, i - 1));setBuilderSearch('')} disabled={guideStep === 0}>← Back</button>
+                {guideStep < 2 ? <button className="primary" type="button" onClick={() => { setGuideStep(i => Math.min(2,i+1));setShowAllChoices(false);setBuilderSearch('');}}>Next: {guideStep === 0 ? 'Protein' : 'Carbs'} →</button> : <span className="compact-finish">All steps shown ✓</span>}
               </div>
             </section>
             <aside className="panel compact-meal-summary" aria-label="Live meal summary">
