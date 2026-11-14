@@ -18,11 +18,40 @@ const startingPortions: Record<string, { grams: number; explanation: string }> =
   apple: { grams: 120, explanation: 'An illustrative edible apple portion; fruit sizes differ.' },
 };
 export type SuggestedPortion = { grams: number; explanation: string; status: 'sample' };
-export function suggestedPortion(foodId: string): SuggestedPortion {
+export type PortionFood = { id: string; category: string };
+export function suggestedPortion(foodId: string, sameGroupCount = 1): SuggestedPortion {
   const choice = startingPortions[foodId];
+  const count = Math.max(1, Math.floor(sameGroupCount));
+  // Simple illustrative shared-category starting point, not a dietary target.
+  // Never prescribe quantities on the basis of a self-reported diagnosis.
+  const baseGrams = choice?.grams ?? 100;
+  const grams = count === 1 ? baseGrams : Math.max(10, Math.round(baseGrams / count / 5) * 5);
   return {
-    grams: choice?.grams ?? 100,
-    explanation: choice?.explanation ?? 'Sample portion only; adjust based on your needs.',
+    grams,
+    explanation: count === 1
+      ? (choice?.explanation ?? 'Sample portion only; adjust based on your needs.')
+      : `Sample starting portion when combining ${count} foods from this group; adjust each independently.`,
     status: 'sample',
   };
+}
+export function categorySuggestions(
+  selectedIds: readonly string[],
+  foods: readonly PortionFood[],
+): Map<string, SuggestedPortion> {
+  const byId = new Map(foods.map(food => [food.id, food.category]));
+  const uniqueIds = [...new Set(selectedIds)].filter(id => byId.has(id));
+  const counts = new Map<string, number>();
+  uniqueIds.forEach(id => {
+    const category = byId.get(id)!;
+    // Protein and dairy share a guided step, as do grain and fruit.
+    const group = category === 'Protein' || category === 'Dairy' ? 'protein'
+      : category === 'Grain' || category === 'Fruit' ? 'carbohydrates' : 'vegetables';
+    counts.set(group, (counts.get(group) ?? 0) + 1);
+  });
+  return new Map(uniqueIds.map(id => {
+    const category = byId.get(id)!;
+    const group = category === 'Protein' || category === 'Dairy' ? 'protein'
+      : category === 'Grain' || category === 'Fruit' ? 'carbohydrates' : 'vegetables';
+    return [id, suggestedPortion(id, counts.get(group) ?? 1)];
+  }));
 }
